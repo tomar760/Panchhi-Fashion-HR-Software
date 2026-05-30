@@ -1,85 +1,94 @@
-// Profile and Modal Toggles
-function openProfile() {
-    document.getElementById('profilePanel').classList.add('open');
-    document.getElementById('overlay').classList.add('show');
+// =========================================================
+// PANCHHI HR - MASTER BACKEND ENGINE & UI LOGIC
+// =========================================================
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwfvr9L7BHbJxKaKkxnj1pXd_RjfI8Aw7iQZBJZvj5bperM19RlQuWs6PoPEvKLUSch/exec";
+
+// 1. Dynamic Greeting Logic
+function updateGreeting() {
+    const greetingElement = document.getElementById('dynamicGreeting');
+    if (!greetingElement) return;
+
+    const hour = new Date().getHours();
+    let greeting = 'Good Evening';
+    let icon = '<i class="fas fa-moon text-indigo-200 mr-2"></i>';
+
+    if (hour >= 5 && hour < 12) {
+        greeting = 'Good Morning';
+        icon = '<i class="fas fa-sun text-amber-400 mr-2"></i>';
+    } else if (hour >= 12 && hour < 17) {
+        greeting = 'Good Afternoon';
+        icon = '<i class="fas fa-cloud-sun text-orange-400 mr-2"></i>';
+    }
+
+    greetingElement.innerHTML = `${icon} ${greeting}, Aditya!`;
 }
 
-function openAddModal() {
-    document.getElementById('addModal').classList.add('show');
-    document.getElementById('overlay').classList.add('show');
+// 2. Under Construction / Coming Soon Alert
+function showComingSoon(moduleName) {
+    const modal = document.getElementById('constructionModal');
+    const text = document.getElementById('constructionText');
+    if (modal && text) {
+        text.innerText = moduleName;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
 }
 
-function closeAll() {
-    const profilePanel = document.getElementById('profilePanel');
-    const addModal = document.getElementById('addModal');
-    const overlay = document.getElementById('overlay');
-    
-    if(profilePanel) profilePanel.classList.remove('open');
-    if(addModal) addModal.classList.remove('show');
-    if(overlay) overlay.classList.remove('show');
-    
-    document.querySelectorAll('.custom-select-dropdown').forEach(el => el.classList.remove('show'));
+function closeComingSoon() {
+    const modal = document.getElementById('constructionModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
 }
 
-// Custom Tabs Logic
-function switchTab(tabId, btn, groupClass) {
-    document.querySelectorAll('.' + groupClass + '-tab').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    
-    let btnParent = btn.parentElement;
-    btnParent.querySelectorAll('.tab-btn').forEach(el => {
-        if(groupClass === 'prof') {
-            el.classList.remove('active', 'text-white', 'border-white');
-            el.classList.add('text-indigo-200', 'border-transparent');
+// 3. Universal API Sync Function
+async function syncToCloud(payload, buttonElement) {
+    const originalText = buttonElement.innerHTML;
+    buttonElement.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Syncing...`;
+    buttonElement.classList.add("opacity-70", "cursor-not-allowed");
+    buttonElement.disabled = true;
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+        
+        const result = await response.json();
+        
+        buttonElement.innerHTML = `<i class="fas fa-check-double mr-2"></i> Synced!`;
+        buttonElement.classList.replace("from-indigo-600", "from-emerald-500");
+        buttonElement.classList.replace("to-purple-600", "to-teal-500");
+        
+        setTimeout(() => {
+            buttonElement.innerHTML = originalText;
+            buttonElement.classList.remove("opacity-70", "cursor-not-allowed");
+            buttonElement.classList.replace("from-emerald-500", "from-indigo-600");
+            buttonElement.classList.replace("to-teal-500", "to-purple-600");
+            buttonElement.disabled = false;
+        }, 3000);
+
+        if (result.status === "success") {
+            console.log("Cloud Sync Successful:", result.message);
+            return true;
         } else {
-            el.classList.remove('active', 'text-indigo-600', 'border-indigo-600');
-            el.classList.add('text-gray-500', 'border-transparent');
+            alert("❌ Server Error: " + result.message);
+            return false;
         }
-    });
-    
-    if(groupClass === 'prof') {
-        btn.classList.remove('text-indigo-200', 'border-transparent');
-        btn.classList.add('active', 'text-white', 'border-white');
-    } else {
-        btn.classList.remove('text-gray-500', 'border-transparent');
-        btn.classList.add('active', 'text-indigo-600', 'border-indigo-600');
+    } catch (error) {
+        buttonElement.innerHTML = originalText;
+        buttonElement.disabled = false;
+        alert("❌ Network Error: Could not connect to Panchhi Master DB.");
+        console.error("API Error:", error);
+        return false;
     }
 }
 
-// Custom Smart Dropdown Logic
-function toggleDropdown(dropdownId) {
-    document.getElementById(dropdownId).classList.toggle('show');
-}
-
-function selectValue(inputId, val, dropdownId) {
-    document.getElementById(inputId).value = val;
-    document.getElementById(dropdownId).classList.remove('show');
-}
-
-function addNewValue(inputId, listId, dropdownId) {
-    let val = document.getElementById(inputId).value.trim();
-    if(val !== '') {
-        let div = document.createElement('div');
-        div.className = 'dropdown-item'; 
-        div.innerText = val;
-        div.onclick = function() { selectValue(inputId, val, dropdownId); };
-        document.getElementById(listId).appendChild(div);
-        selectValue(inputId, val, dropdownId);
-    }
-}
-
-function filterDropdown(inputId, dropdownId, listId) {
-    let input = document.getElementById(inputId).value.toLowerCase();
-    let items = document.getElementById(listId).getElementsByClassName('dropdown-item');
-    document.getElementById(dropdownId).classList.add('show');
-    for(let i=0; i < items.length; i++) {
-        items[i].style.display = items[i].innerText.toLowerCase().includes(input) ? "" : "none";
-    }
-}
-
-// Close dropdown if clicked outside
-document.addEventListener('click', function(e) {
-    if(!e.target.closest('.custom-select-wrapper')) {
-        document.querySelectorAll('.custom-select-dropdown').forEach(el => el.classList.remove('show'));
-    }
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateGreeting();
+    // Update time every minute just in case they leave tab open
+    setInterval(updateGreeting, 60000); 
 });
