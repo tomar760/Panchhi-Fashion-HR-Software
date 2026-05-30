@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee Directory - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="bg-gray-50">
-    <div class="main-area p-8">
+    <div class="p-8">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900">Employee Master (MIS)</h2>
                 <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
             </div>
-            <button onclick="alert('Bulk Import Module Loading...')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700">Bulk Upload MIS</button>
+            <button onclick="alert('Bulk Import Ready. Just paste MIS to Google Sheet!')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700">Bulk Upload MIS</button>
         </div>
         <div class="bg-white rounded-2xl border shadow-sm overflow-hidden">
             <table class="w-full">
@@ -23,7 +22,7 @@
                 <tbody>
                     <tr class="hover:bg-gray-50/50">
                         <td class="font-mono text-indigo-600 font-bold">PF/STC/035</td>
-                        <td><p class="font-bold">Vijay K. Rathod</p><p class="text-xs text-gray-500">9998887776</p></td>
+                        <td><p class="font-bold">Vijay K. Rathod</p></td>
                         <td>Stitching</td>
                         <td><span class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full text-xs font-bold">ACTIVE</span></td>
                     </tr>
@@ -31,6 +30,6 @@
             </table>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
