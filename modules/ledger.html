@@ -4,39 +4,36 @@
     <meta charset="UTF-8">
     <title>Ledger - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="bg-gray-50">
-    <div class="main-area p-8">
+    <div class="p-8">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900">Advance & Loan Ledger</h2>
                 <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
             </div>
-            <button onclick="document.getElementById('ledgerModal').classList.remove('hidden')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700">Issue New Credit</button>
+            <button onclick="document.getElementById('ledgerModal').classList.remove('hidden')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg">Issue New Credit</button>
         </div>
         <div class="bg-white rounded-2xl border shadow-sm overflow-hidden">
             <table class="w-full">
                 <thead class="bg-gray-50"><tr><th>Employee</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
-                <tbody><tr class="hover:bg-gray-50"><td class="font-bold">MIS Sync Pending</td><td>-</td><td>-</td><td>-</td></tr></tbody>
+                <tbody><tr><td class="font-bold">MIS Sync Pending</td><td>-</td><td>-</td><td>-</td></tr></tbody>
             </table>
         </div>
     </div>
+    
     <div id="ledgerModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
             <h2 class="text-lg font-bold">Issue Advance / Loan</h2>
             <input type="text" placeholder="E-Code" class="w-full p-2.5 border rounded-lg text-sm">
-            <div class="grid grid-cols-2 gap-4">
-                <input type="number" id="amt" placeholder="Amount (₹)" class="p-2.5 border rounded-lg text-sm" oninput="if(this.value>10000) document.getElementById('err').classList.remove('hidden'); else document.getElementById('err').classList.add('hidden');">
-                <select class="p-2.5 border rounded-lg text-sm"><option>Advance</option><option>Loan</option></select>
-            </div>
-            <p id="err" class="text-xs text-rose-600 hidden font-bold">⚠️ Amount exceeds 50% CTC limit!</p>
+            <input type="number" placeholder="Amount (₹)" class="w-full p-2.5 border rounded-lg text-sm">
             <div class="flex justify-end gap-2 mt-4">
-                <button onclick="document.getElementById('ledgerModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm font-bold">Cancel</button>
-                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-bold">Save</button>
+                <button onclick="document.getElementById('ledgerModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg font-bold text-sm">Cancel</button>
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-sm">Save</button>
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
