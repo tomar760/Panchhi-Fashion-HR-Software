@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Panchhi HR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col hidden md:flex">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">P</div>
+            <div>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-200/60 text-[11px] font-medium tracking-wide">Enterprise Suite</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-5 space-y-1">
+            <a href="dashboard.html" class="nav-item active"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+            <a href="employees.html" class="nav-item"><i class="fas fa-users"></i> <span>Employees</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-clock"></i> <span>Attendance</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-id-badge"></i> <span>Gate Pass</span></a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex items-center gap-3 text-white/80">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">AD</div>
+                <div>
+                    <p class="text-sm font-medium text-white">Admin</p>
+                    <a href="../index.html" class="text-[11px] text-rose-400 hover:text-rose-300">Logout</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-area" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-lg border-b border-gray-100/60 p-4 px-8 flex justify-between items-center sticky top-0 z-30">
+            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / <span class="font-medium text-gray-800">Dashboard</span></div>
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">AD</div>
+        </header>
+
+        <main class="p-8 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Good morning, Admin 👋</h2>
+                <p class="text-gray-500 text-sm mt-1">Here is the quick overview of your HR system.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Total Employees</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-1">132</p>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl"><i class="fas fa-users"></i></div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Present Today</p>
+                        <p class="text-3xl font-bold text-emerald-600 mt-1">118</p>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl"><i class="fas fa-check-circle"></i></div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">On Leave</p>
+                        <p class="text-3xl font-bold text-rose-600 mt-1">14</p>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl"><i class="fas fa-calendar-minus"></i></div>
+                </div>
+            </div>
+
+            <h3 class="text-lg font-bold text-gray-900 mt-8 mb-4">Quick Actions</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="employees.html" class="bg-white p-5 rounded-2xl border border-gray-100 text-center hover:shadow-lg transition cursor-pointer">
+                    <div class="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-user-plus text-xl"></i></div>
+                    <p class="font-medium text-sm text-gray-900">Add Employee</p>
+                </a>
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center hover:shadow-lg transition cursor-pointer">
+                    <div class="w-12 h-12 mx-auto bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-clock text-xl"></i></div>
+                    <p class="font-medium text-sm text-gray-900">Mark Attendance</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center hover:shadow-lg transition cursor-pointer">
+                    <div class="w-12 h-12 mx-auto bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-id-badge text-xl"></i></div>
+                    <p class="font-medium text-sm text-gray-900">Create Gate Pass</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center hover:shadow-lg transition cursor-pointer">
+                    <div class="w-12 h-12 mx-auto bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-file-pdf text-xl"></i></div>
+                    <p class="font-medium text-sm text-gray-900">Experience Letter</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
