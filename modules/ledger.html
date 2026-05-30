@@ -1,123 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advance & Loan Ledger - Panchhi HR</title>
+    <meta charset="UTF-8">
+    <title>Ledger - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-gray-50">
-
-    <div class="main-area">
-        <main class="p-8 space-y-6">
-            
-            <div class="flex justify-between items-center">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900">Advance & Loan Ledger</h2>
-                    <p class="text-gray-500 text-sm mt-1">Manage employee credits, EMIs, and emergency adjustments.</p>
-                </div>
-                <button onclick="openLedgerModal()" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 flex items-center gap-2">
-                    <i class="fas fa-plus"></i> Issue New Credit
-                </button>
+    <div class="main-area p-8">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Advance & Loan Ledger</h2>
+                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
             </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th>Employee</th>
-                            <th>Credit Type</th>
-                            <th>Total Amount</th>
-                            <th>Monthly EMI</th>
-                            <th>Remaining</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ledgerBody">
-                        <tr class="hover:bg-gray-50/50">
-                            <td>
-                                <p class="font-bold text-gray-900">Vijay K. Rathod</p>
-                                <p class="text-[11px] text-gray-500">PF/STC/035</p>
-                            </td>
-                            <td><span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-[10px] font-bold">LOAN</span></td>
-                            <td class="font-bold">₹ 20,000</td>
-                            <td>₹ 2,000</td>
-                            <td class="text-rose-600 font-bold">₹ 12,000</td>
-                            <td><span class="text-[10px] font-bold text-emerald-600">Active</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
-    </div>
-
-    <div id="ledgerModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 space-y-4">
-            <h2 class="text-lg font-bold">Issue Advance / Loan</h2>
-            
-            <select id="empSelect" class="w-full p-2.5 border rounded-lg text-sm" onchange="checkSalaryLimit()">
-                <option value="">Select Employee</option>
-                </select>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <input type="number" id="amount" placeholder="Amount (₹)" class="p-2.5 border rounded-lg text-sm" oninput="checkSalaryLimit()">
-                <select id="creditType" class="p-2.5 border rounded-lg text-sm" onchange="toggleLoanOptions()">
-                    <option value="ADVANCE">Advance (Instant Cut)</option>
-                    <option value="LOAN">Loan (EMI Based)</option>
-                </select>
-            </div>
-
-            <div id="loanOptions" class="hidden space-y-4">
-                <input type="number" placeholder="Monthly EMI Amount" class="w-full p-2.5 border rounded-lg text-sm">
-                <label class="flex items-center gap-2">
-                    <input type="checkbox" id="sirOverride">
-                    <span class="text-xs font-bold text-amber-700">Sir's Emergency Override (Manual Adjustment)</span>
-                </label>
-            </div>
-
-            <p id="limitError" class="text-xs text-rose-600 hidden font-bold">⚠️ Warning: Amount exceeds 50% salary limit!</p>
-
-            <button onclick="saveLedger()" class="w-full py-3 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700">
-                Submit Transaction
-            </button>
+            <button onclick="document.getElementById('ledgerModal').classList.remove('hidden')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700">Issue New Credit</button>
+        </div>
+        <div class="bg-white rounded-2xl border shadow-sm overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50"><tr><th>Employee</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
+                <tbody><tr class="hover:bg-gray-50"><td class="font-bold">MIS Sync Pending</td><td>-</td><td>-</td><td>-</td></tr></tbody>
+            </table>
         </div>
     </div>
-
-    <script src="../assets/js/app.js"></script>
-    <script>
-        function openLedgerModal() { document.getElementById('ledgerModal').classList.remove('hidden'); }
-        
-        function toggleLoanOptions() {
-            const type = document.getElementById('creditType').value;
-            document.getElementById('loanOptions').classList.toggle('hidden', type === 'ADVANCE');
-        }
-
-        function checkSalaryLimit() {
-            // Logic to fetch user's fixed CTC and compare with amount input
-            const amount = document.getElementById('amount').value;
-            const limitError = document.getElementById('limitError');
-            // Simplified validation: 50% of CTC
-            if(amount > 10000) { // Example logic
-                limitError.classList.remove('hidden');
-            } else {
-                limitError.classList.add('hidden');
-            }
-        }
-
-        async function saveLedger() {
-            const btn = event.target;
-            const payload = {
-                action: "saveLedger",
-                employee: document.getElementById('empSelect').value,
-                amount: document.getElementById('amount').value,
-                type: document.getElementById('creditType').value
-            };
-            
-            const success = await syncToCloud(payload, btn);
-            if(success) document.getElementById('ledgerModal').classList.add('hidden');
-        }
-    </script>
+    <div id="ledgerModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
+            <h2 class="text-lg font-bold">Issue Advance / Loan</h2>
+            <input type="text" placeholder="E-Code" class="w-full p-2.5 border rounded-lg text-sm">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="number" id="amt" placeholder="Amount (₹)" class="p-2.5 border rounded-lg text-sm" oninput="if(this.value>10000) document.getElementById('err').classList.remove('hidden'); else document.getElementById('err').classList.add('hidden');">
+                <select class="p-2.5 border rounded-lg text-sm"><option>Advance</option><option>Loan</option></select>
+            </div>
+            <p id="err" class="text-xs text-rose-600 hidden font-bold">⚠️ Amount exceeds 50% CTC limit!</p>
+            <div class="flex justify-end gap-2 mt-4">
+                <button onclick="document.getElementById('ledgerModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm font-bold">Cancel</button>
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-bold">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
