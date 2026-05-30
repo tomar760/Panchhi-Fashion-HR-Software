@@ -2,34 +2,288 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee Directory - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
-<body class="bg-gray-50">
-    <div class="p-8">
-        <div class="flex justify-between items-center mb-6">
+<body class="bg-slate-50">
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Employee Master (MIS)</h2>
-                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
             </div>
-            <button onclick="alert('Bulk Import Ready. Just paste MIS to Google Sheet!')" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700">Bulk Upload MIS</button>
         </div>
-        <div class="bg-white rounded-2xl border shadow-sm overflow-hidden">
-            <table class="w-full">
-                <thead class="bg-gray-50"><tr><th>E-Code</th><th>Employee Details</th><th>Department</th><th>Status</th></tr></thead>
-                <tbody>
-                    <tr class="hover:bg-gray-50/50">
-                        <td class="font-mono text-indigo-600 font-bold">PF/STC/035</td>
-                        <td><p class="font-bold">Vijay K. Rathod</p></td>
-                        <td>Stitching</td>
-                        <td><span class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full text-xs font-bold">ACTIVE</span></td>
-                    </tr>
-                </tbody>
-            </table>
+        
+        <nav class="flex-1 py-5 space-y-1 overflow-y-auto custom-scrollbar">
+            <a href="dashboard.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5"></i> <span class="text-sm">Overview</span></a>
+            
+            <div class="px-6 mt-6 mb-2">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">HR & Payroll Engine</p>
+            </div>
+            <a href="employees.html" class="nav-item active px-6 py-2.5 flex items-center gap-3 text-white bg-indigo-600/20 border-r-4 border-indigo-500"><i class="fas fa-users w-5"></i> <span class="text-sm font-medium">Employee Directory</span></a>
+            <a href="attendance.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-user-clock w-5"></i> <span class="text-sm">Attendance & Leaves</span></a>
+            <a href="ledger.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-hand-holding-usd w-5"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
+            <a href="payroll.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-file-invoice-dollar w-5"></i> <span class="text-sm">Generate Salary</span></a>
+            
+            <div class="px-6 mt-6 mb-2">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Core Operations</p>
+            </div>
+            <a href="gatepass.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
+            <a href="store.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
+            <a href="settings.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5"></i> <span class="text-sm">Settings</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-area min-h-screen" style="margin-left: 260px;">
+        
+        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
+            <div>
+                <h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2>
+                <p class="text-xs text-gray-500 font-medium mt-0.5">Manage staff, master MIS records, and cloud onboarding.</p>
+            </div>
+            
+            <div class="flex items-center">
+                <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl mr-6 shadow-sm">
+                    <div class="flex items-center gap-1.5 text-indigo-600"><i class="far fa-calendar-alt text-sm"></i><span id="liveDate" class="text-xs font-bold uppercase">--</span></div>
+                    <span class="text-gray-300">|</span>
+                    <div class="flex items-center gap-1.5 text-amber-600"><i class="far fa-clock text-sm"></i><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div>
+                </div>
+                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Dashboard</a>
+            </div>
+        </header>
+
+        <main class="p-8 space-y-8">
+            
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <div>
+                    <h3 class="font-bold text-gray-900 text-lg">Staff Control Center</h3>
+                    <p class="text-xs text-gray-500">Add employees manually or upload bulk MIS sheets.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="openBulkUploadModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-sm font-bold flex items-center gap-2 transition">
+                        <i class="fas fa-file-excel text-emerald-600"></i> Bulk Upload MIS
+                    </button>
+                    <button onclick="openManualAddModal()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 flex items-center gap-2 transition">
+                        <i class="fas fa-user-plus"></i> Add Employee (Manual)
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+                    <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wider">Active Staff Database</h3>
+                    <input type="text" placeholder="Quick Filter Staff..." class="text-xs border px-3 py-1.5 rounded-xl outline-none w-48 focus:border-indigo-500 bg-white">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>E-Code</th>
+                                <th>Employee Details</th>
+                                <th>Department & Role</th>
+                                <th>Salary (CTC)</th>
+                                <th>Special Flags</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                            <tr class="hover:bg-gray-50/50">
+                                <td class="font-mono text-indigo-600 font-bold">PF/STC/035</td>
+                                <td>
+                                    <p class="font-bold text-gray-900">Vijay K. Rathod</p>
+                                    <p class="text-xs text-gray-500"><i class="fas fa-phone text-[10px] mr-1"></i>9998887776</p>
+                                </td>
+                                <td>
+                                    <p class="font-medium text-gray-800">Stitching</p>
+                                    <p class="text-[11px] text-gray-400">Master Tailor</p>
+                                </td>
+                                <td class="font-bold text-gray-900">₹ 21,000</td>
+                                <td>
+                                    <div class="flex gap-1">
+                                        <span class="bg-amber-50 text-amber-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-200">3-HR VIP</span>
+                                        <span class="bg-blue-50 text-blue-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-blue-200">31-DAY BONUS</span>
+                                    </div>
+                                </td>
+                                <td><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full text-xs font-bold border border-emerald-100">ACTIVE</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="manualAddModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 space-y-4 relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h2 class="text-xl font-black text-gray-900"><i class="fas fa-user-edit text-indigo-500 mr-2"></i>New Employee Onboarding</h2>
+                <button onclick="closeManualAddModal()" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Employee E-Code *</label>
+                    <input type="text" id="empEcode" placeholder="E.g., PF/STC/102" class="w-full p-2.5 border rounded-xl text-sm font-mono font-bold bg-gray-50 outline-none focus:border-indigo-500 focus:bg-white transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Full Name *</label>
+                    <input type="text" id="empName" placeholder="Enter Full Name" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Mobile Number *</label>
+                    <input type="text" id="empMobile" placeholder="10 Digit Number" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Department *</label>
+                    <select id="empDept" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                        <option value="Stitching">Stitching</option>
+                        <option value="Checking">Checking</option>
+                        <option value="Finishing">Finishing</option>
+                        <option value="Packing">Packing</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Designation</label>
+                    <input type="text" id="empDesig" placeholder="E.g., Helper, Master" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Date of Joining</label>
+                    <input type="date" id="empDoj" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Monthly Fixed CTC (Salary) *</label>
+                    <input type="number" id="empSalary" placeholder="Amount in ₹" class="w-full p-2.5 border rounded-xl text-sm font-bold outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Bank Account Number</label>
+                    <input type="text" id="empBank" placeholder="Account Number" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Bank IFSC Code</label>
+                    <input type="text" id="empIfsc" placeholder="IFSC Code" class="w-full p-2.5 border rounded-xl text-sm uppercase outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Aadhar Card Number</label>
+                    <input type="text" id="empAadhar" placeholder="12 Digit Card Number" class="w-full p-2.5 border rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+            </div>
+
+            <div class="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100 space-y-3">
+                <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wide"><i class="fas fa-star mr-1"></i> Special Criteria Settings</h4>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="empVip3hr" class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+                        <span class="text-xs text-gray-700 font-bold">Apply 3-Hour Short Gatepass Rule</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="empVip31day" class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+                        <span class="text-xs text-gray-700 font-bold">Eligible for 31-Day Attendance Bonus</span>
+                    </label>
+                </div>
+            </div>
+
+            <button onclick="submitManualEmployee(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 transition">
+                Save & Onboard Employee
+            </button>
         </div>
     </div>
+
+    <div id="bulkUploadModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 text-center relative overflow-hidden">
+            <button onclick="closeBulkUploadModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+            
+            <div class="w-16 h-16 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-file-excel text-2xl text-emerald-500"></i>
+            </div>
+            
+            <h2 class="text-xl font-black text-gray-900 mb-1">Bulk MIS Sheet Upload</h2>
+            <p class="text-xs text-gray-500 mb-6">Select your master excel or CSV file to sync records.</p>
+            
+            <div class="border-2 border-dashed border-gray-200 rounded-2xl p-6 bg-gray-50 hover:bg-gray-100/70 transition relative mb-4">
+                <input type="file" id="misFileInput" accept=".csv, .xlsx, .xls" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                <p class="text-sm font-bold text-gray-700">Click or Drag MIS File Here</p>
+                <p class="text-[10px] text-gray-400 mt-1">Supports .XLSX, .XLS, .CSV formats</p>
+            </div>
+
+            <div class="text-left bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-800 mb-4 font-medium">
+                <i class="fas fa-info-circle mr-1"></i> **Note:** Columns order must exactly match Google Sheet format (E-Code, Name, Mobile, Dept, Salary, Bank Accounts, etc.).
+            </div>
+
+            <button onclick="processBulkUpload(this)" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-100 transition">
+                Start Bulk Parsing & Sync
+            </button>
+        </div>
+    </div>
+
+    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 text-center relative overflow-hidden">
+            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+            <h2 class="text-xl font-black mb-2">Under Construction</h2>
+            <p class="text-sm text-gray-500 mb-6"><span id="constructionText" class="font-bold text-indigo-600">Module</span> is in Phase 2 development.</p>
+        </div>
+    </div>
+
     <script src="../assets/js/app.js"></script>
+    <script>
+        function openManualAddModal() { document.getElementById('manualAddModal').classList.replace('hidden', 'flex'); }
+        function closeManualAddModal() { document.getElementById('manualAddModal').classList.replace('flex', 'hidden'); }
+        
+        function openBulkUploadModal() { document.getElementById('bulkUploadModal').classList.replace('hidden', 'flex'); }
+        function closeBulkUploadModal() { document.getElementById('bulkUploadModal').classList.replace('flex', 'hidden'); }
+
+        async function submitManualEmployee(btn) {
+            const eCode = document.getElementById('empEcode').value;
+            const name = document.getElementById('empName').value;
+            const mobile = document.getElementById('empMobile').value;
+            const salary = document.getElementById('empSalary').value;
+            
+            if(!eCode || !name || !mobile || !salary) {
+                alert("🚨 Please fill all mandatory (*) fields!");
+                return;
+            }
+
+            const payload = {
+                action: "addEmployee",
+                eCode: eCode,
+                fullName: name,
+                mobile: mobile,
+                department: document.getElementById('empDept').value,
+                designation: document.getElementById('empDesig').value,
+                doj: document.getElementById('empDoj').value,
+                salary: salary,
+                bankAcc: document.getElementById('empBank').value,
+                ifsc: document.getElementById('empIfsc').value,
+                aadhar: document.getElementById('empAadhar').value,
+                pan: "",
+                status: "ACTIVE",
+                vip3Hr: document.getElementById('empVip3hr').checked ? "YES" : "NO",
+                vip31Day: document.getElementById('empVip31day').checked ? "YES" : "NO"
+            };
+
+            const success = await syncToCloud(payload, btn);
+            if(success) {
+                alert("🎉 Employee Onboarded Successfully!");
+                closeManualAddModal();
+                window.location.reload();
+            }
+        }
+
+        function processBulkUpload(btn) {
+            const fileInput = document.getElementById('misFileInput');
+            if(!fileInput.files.length) {
+                alert("🚨 Please select an Excel/CSV file first!");
+                return;
+            }
+            alert("Parsing File data... For safe production, you can directly copy-paste rows into your Google Sheet Master Tab!");
+            closeBulkUploadModal();
+        }
+    </script>
 </body>
 </html>
