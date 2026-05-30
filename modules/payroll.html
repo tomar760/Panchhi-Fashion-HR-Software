@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payroll Engine - Panchhi HR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="bg-gray-50">
+
+    <div class="main-area">
+        <main class="p-8 space-y-6">
+            
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Payroll Engine</h2>
+                    <p class="text-gray-500 text-sm mt-1">Generate automated salary sheets & PDF slips.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="calculateSalary()" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-indigo-700 flex items-center gap-2">
+                        <i class="fas fa-calculator"></i> Run Payroll Calculation
+                    </button>
+                    <button onclick="downloadExcel()" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-emerald-700 flex items-center gap-2">
+                        <i class="fas fa-file-excel"></i> Export Final Sheet
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th>E-Code</th>
+                            <th>Employee Name</th>
+                            <th>Fixed CTC</th>
+                            <th>Payable Days</th>
+                            <th>Deductions</th>
+                            <th>Net Salary</th>
+                            <th>Payslip</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payrollBody">
+                        <tr class="hover:bg-gray-50/50">
+                            <td class="font-mono font-bold text-indigo-600">PF/STC/035</td>
+                            <td>Vijay K. Rathod</td>
+                            <td>₹ 21,000</td>
+                            <td>28</td>
+                            <td class="text-rose-600 font-bold">- ₹ 2,000</td>
+                            <td class="font-black text-emerald-600">₹ 19,000</td>
+                            <td><button class="text-indigo-600 hover:underline text-xs font-bold">Generate PDF</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 border-dashed">
+                <h4 class="text-sm font-bold text-gray-500 uppercase mb-4">Statutory Modules (Coming Soon)</h4>
+                <div class="grid grid-cols-3 gap-4 opacity-50 pointer-events-none">
+                    <div class="p-3 border rounded-xl bg-gray-50 text-center"><i class="fas fa-shield-alt text-gray-400 block mb-2"></i><span class="text-xs font-bold">PF (12%)</span></div>
+                    <div class="p-3 border rounded-xl bg-gray-50 text-center"><i class="fas fa-briefcase-medical text-gray-400 block mb-2"></i><span class="text-xs font-bold">ESIC (0.75%)</span></div>
+                    <div class="p-3 border rounded-xl bg-gray-50 text-center"><i class="fas fa-clock text-gray-400 block mb-2"></i><span class="text-xs font-bold">Overtime (OT)</span></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        function calculateSalary() {
+            // This pulls from Master DB, calculates days, deducts loans, adds bonuses
+            alert("Payroll calculation running... Syncing logic with Attendance & Ledger modules.");
+        }
+    </script>
+</body>
+</html>
