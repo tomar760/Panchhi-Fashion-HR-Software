@@ -6,7 +6,6 @@
     <title>Gate Pass - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    
     <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
@@ -43,46 +42,14 @@
         </header>
 
         <main class="p-8 space-y-6">
-            
             <div class="flex justify-between items-center gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900">Gate Pass Management</h2>
-                    <p class="text-gray-500 text-sm mt-1">Track employee movement and calculate early going hours</p>
+                    <p class="text-gray-500 text-sm mt-1">Track employee movement, Actual In-Time, and total time out.</p>
                 </div>
                 <button onclick="openAddModal()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-sm font-medium text-white hover:from-indigo-700 shadow-lg flex items-center gap-2">
                     <i class="fas fa-plus"></i> Create Gate Pass
                 </button>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Total Passes</p>
-                        <p class="text-2xl font-bold text-gray-900 mt-1">12</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><i class="fas fa-ticket-alt"></i></div>
-                </div>
-                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Currently Out</p>
-                        <p class="text-2xl font-bold text-amber-500 mt-1">4</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center"><i class="fas fa-sign-out-alt"></i></div>
-                </div>
-                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Returned</p>
-                        <p class="text-2xl font-bold text-emerald-500 mt-1">8</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center"><i class="fas fa-undo"></i></div>
-                </div>
-                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Short Leave Alert</p>
-                        <p class="text-2xl font-bold text-rose-500 mt-1">2</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center"><i class="fas fa-exclamation-circle"></i></div>
-                </div>
             </div>
 
             <div class="table-wrap">
@@ -92,37 +59,12 @@
                             <th>GP No.</th>
                             <th>Employee Details</th>
                             <th>Type / Reason</th>
-                            <th>Timing & Early Going</th>
+                            <th>Out Time & Actual In Time</th>
                             <th>Status</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="font-mono text-sm text-indigo-600 font-bold">GP-1042</td>
-                            <td>
-                                <p class="font-medium text-gray-900">Vijay K. Rathod</p>
-                                <p class="text-xs text-gray-500">PF/STC/035 • Stiching</p>
-                            </td>
-                            <td>
-                                <span class="bg-sky-50 text-sky-700 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide">Official Work</span>
-                                <p class="text-xs text-gray-600 mt-1.5 line-clamp-1">Bank deposit</p>
-                            </td>
-                            <td>
-                                <div class="text-sm">
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 15:00 (3 PM)</span>
-                                </div>
-                                <div class="text-[11px] font-medium text-rose-500 bg-rose-50 px-2 py-0.5 rounded mt-1 inline-block">
-                                    <i class="fas fa-clock mr-1"></i> 4 hrs early (Shift end: 19:00)
-                                </div>
-                            </td>
-                            <td><span class="status-badge bg-amber-50 text-amber-700 border border-amber-200">Currently Out</span></td>
-                            <td class="text-right">
-                                <button onclick="alert('Printing Gate Pass GP-1042...')" class="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-indigo-600 transition inline-flex items-center justify-center mr-1"><i class="fas fa-print"></i></button>
-                                <button onclick="alert('Marked as Returned!')" class="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-emerald-600 transition inline-flex items-center justify-center"><i class="fas fa-check-circle"></i></button>
-                            </td>
-                        </tr>
-
                         <tr>
                             <td class="font-mono text-sm text-indigo-600 font-bold">GP-1041</td>
                             <td>
@@ -135,17 +77,40 @@
                             </td>
                             <td>
                                 <div class="text-sm">
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 09:15</span>
-                                    <span class="text-gray-500 mx-1">|</span>
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-left text-emerald-400 text-xs mr-1"></i> In: 11:10</span>
+                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 09:15 AM</span>
+                                    <span class="text-gray-300 mx-1">|</span>
+                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-left text-emerald-400 text-xs mr-1"></i> In: 11:10 AM</span>
                                 </div>
-                                <div class="text-[11px] font-medium text-gray-500 mt-1">
-                                    Total out time: 1 hr 55 mins
+                                <div class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-1 inline-block">
+                                    <i class="fas fa-stopwatch mr-1"></i> Total Out: 1 hr 55 mins
                                 </div>
                             </td>
                             <td><span class="status-badge bg-emerald-50 text-emerald-700 border border-emerald-200">Returned</span></td>
                             <td class="text-right">
-                                <button class="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-indigo-600 transition inline-flex items-center justify-center"><i class="fas fa-print"></i></button>
+                                <button class="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-indigo-600 transition inline-flex items-center justify-center"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="font-mono text-sm text-indigo-600 font-bold">GP-1042</td>
+                            <td>
+                                <p class="font-medium text-gray-900">Vijay K. Rathod</p>
+                                <p class="text-xs text-gray-500">PF/STC/035 • Stiching</p>
+                            </td>
+                            <td>
+                                <span class="bg-sky-50 text-sky-700 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide">Official Work</span>
+                                <p class="text-xs text-gray-600 mt-1.5 line-clamp-1">Bank deposit</p>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 03:00 PM</span>
+                                    <span class="text-gray-300 mx-1">|</span>
+                                    <span class="text-gray-400 font-medium italic"><i class="fas fa-clock text-gray-300 text-xs mr-1"></i> Waiting for In...</span>
+                                </div>
+                            </td>
+                            <td><span class="status-badge bg-amber-50 text-amber-700 border border-amber-200">Currently Out</span></td>
+                            <td class="text-right">
+                                <button onclick="alert('Marking In Time...')" class="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 hover:text-emerald-700 transition inline-flex items-center justify-center" title="Mark In-Time"><i class="fas fa-sign-in-alt"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -160,14 +125,13 @@
     <div id="addModal" class="p-0 max-w-xl">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-20">
             <div>
-                <h2 class="text-xl font-bold text-gray-900">Create Gate Pass</h2>
-                <p class="text-xs text-gray-500">Early going / Short leave will be calculated automatically.</p>
+                <h2 class="text-xl font-bold text-gray-900">Manage Gate Pass</h2>
+                <p class="text-xs text-gray-500">Create new pass or update Actual In-Time.</p>
             </div>
             <button onclick="closeAll()" class="text-gray-400 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
         </div>
 
-        <form class="p-6 space-y-5" onsubmit="event.preventDefault(); alert('Gate Pass Created Successfully!'); closeAll();">
-            
+        <form class="p-6 space-y-5" onsubmit="event.preventDefault(); showSyncStatus();">
             <div class="custom-select-wrapper">
                 <label class="data-label block mb-1">Search Employee</label>
                 <div class="relative">
@@ -176,8 +140,8 @@
                 </div>
                 <div id="empDrop" class="custom-select-dropdown">
                     <div id="empListUI">
-                        <div class="dropdown-item" onclick="selectEmployee('PF/STC/035 - Vijay Kamleshbhai Rathod', '19:00')">PF/STC/035 - Vijay Kamleshbhai Rathod (Shift: 10AM - 7PM)</div>
-                        <div class="dropdown-item" onclick="selectEmployee('PF/ADM/005 - Pursottam Rajbhar', '18:00')">PF/ADM/005 - Pursottam Rajbhar (Shift: 9AM - 6PM)</div>
+                        <div class="dropdown-item" onclick="selectValue('empSearch', 'PF/STC/035 - Vijay Kamleshbhai Rathod', 'empDrop')">PF/STC/035 - Vijay Kamleshbhai Rathod</div>
+                        <div class="dropdown-item" onclick="selectValue('empSearch', 'PF/ADM/005 - Pursottam Rajbhar', 'empDrop')">PF/ADM/005 - Pursottam Rajbhar</div>
                     </div>
                 </div>
             </div>
@@ -185,94 +149,67 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="data-label block mb-1">Pass Type</label>
-                    <select class="w-full border border-gray-200 rounded-xl p-2.5 text-sm bg-white outline-none focus:border-indigo-500">
+                    <select class="w-full border border-gray-200 rounded-xl p-2.5 text-sm bg-white outline-none">
                         <option>Official Work</option>
                         <option>Personal Work</option>
-                        <option>Short Leave / Early Going</option>
+                        <option>Short Leave</option>
                     </select>
                 </div>
                 <div>
                     <label class="data-label block mb-1">Date</label>
-                    <input type="date" id="gpDate" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm outline-none focus:border-indigo-500">
+                    <input type="date" id="gpDate" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm outline-none">
                 </div>
             </div>
 
             <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 space-y-4">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="data-label block mb-1 text-indigo-600">Actual Out Time</label>
-                        <input type="time" id="outTime" onchange="calculateEarlyGoing()" class="w-full border border-indigo-200 rounded-lg p-2.5 text-sm outline-none focus:border-indigo-500 bg-white shadow-sm" required>
+                        <label class="data-label block mb-1 text-rose-500">Out Time</label>
+                        <input type="time" class="w-full border border-rose-200 rounded-lg p-2.5 text-sm outline-none focus:border-rose-500 bg-white" required>
                     </div>
                     <div>
-                        <label class="data-label block mb-1">Shift End Time (Auto-filled)</label>
-                        <input type="time" id="shiftEndTime" onchange="calculateEarlyGoing()" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none text-gray-500 bg-gray-100" readonly>
-                    </div>
-                </div>
-
-                <div id="earlyGoingAlert" class="hidden flex items-center gap-3 bg-rose-50 border border-rose-100 p-3 rounded-lg">
-                    <div class="w-8 h-8 rounded-full bg-white text-rose-500 flex items-center justify-center shadow-sm">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold text-rose-600 uppercase tracking-wide">Early Going Calculated</p>
-                        <p class="text-sm font-medium text-gray-900 mt-0.5" id="earlyGoingResult">0 hours 0 mins early</p>
+                        <label class="data-label block mb-1 text-emerald-600">Actual In Time (Return)</label>
+                        <input type="time" class="w-full border border-emerald-200 rounded-lg p-2.5 text-sm outline-none focus:border-emerald-500 bg-white" placeholder="Fill when returned">
                     </div>
                 </div>
             </div>
 
             <div>
                 <label class="data-label block mb-1">Reason / Remarks</label>
-                <textarea rows="2" placeholder="Enter the exact reason..." class="w-full border border-gray-200 rounded-xl p-3 text-sm outline-none focus:border-indigo-500 resize-none" required></textarea>
+                <textarea rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm outline-none focus:border-indigo-500 resize-none" required></textarea>
             </div>
 
-            <div class="pt-2">
-                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-indigo-200 hover:scale-[1.01] transition flex items-center justify-center gap-2">
-                    <i class="fas fa-print"></i> Generate & Print Gate Pass
+            <div class="pt-2 text-center">
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-indigo-200 hover:scale-[1.01] transition">
+                    Save 
                 </button>
+                
+                <p id="syncStatus" class="hidden text-xs font-bold text-emerald-600 mt-3 transition-all duration-300 opacity-0 transform translate-y-2">
+                    <i class="fas fa-check-circle mr-1"></i> Google Sheet updated successfully.
+                </p>
             </div>
         </form>
     </div>
 
     <script src="../assets/js/app.js"></script>
-    
     <script>
-        // Set today's date automatically
         document.getElementById('gpDate').valueAsDate = new Date();
 
-        // Select employee and mock auto-filling their shift end time
-        function selectEmployee(name, shiftEnd) {
-            document.getElementById('empSearch').value = name;
-            document.getElementById('shiftEndTime').value = shiftEnd;
-            document.getElementById('empDrop').classList.remove('show');
-            calculateEarlyGoing();
-        }
+        function showSyncStatus() {
+            const statusBox = document.getElementById('syncStatus');
+            statusBox.classList.remove('hidden');
+            
+            // Animation trick for tailwind
+            setTimeout(() => {
+                statusBox.classList.remove('opacity-0', 'translate-y-2');
+                statusBox.classList.add('opacity-100', 'translate-y-0');
+            }, 50);
 
-        // Calculate Time Difference
-        function calculateEarlyGoing() {
-            const outTimeVal = document.getElementById('outTime').value;
-            const shiftEndVal = document.getElementById('shiftEndTime').value;
-            const alertBox = document.getElementById('earlyGoingAlert');
-            const resultText = document.getElementById('earlyGoingResult');
-
-            if (outTimeVal && shiftEndVal) {
-                // Convert to Date objects to calculate difference
-                const outDate = new Date(`1970-01-01T${outTimeVal}:00`);
-                const shiftDate = new Date(`1970-01-01T${shiftEndVal}:00`);
-
-                // If out time is before shift end time
-                if (outDate < shiftDate) {
-                    const diffMs = shiftDate - outDate;
-                    const diffHrs = Math.floor(diffMs / 3600000);
-                    const diffMins = Math.floor((diffMs % 3600000) / 60000);
-                    
-                    resultText.innerText = `${diffHrs} hours and ${diffMins} mins early`;
-                    alertBox.classList.remove('hidden');
-                } else {
-                    alertBox.classList.add('hidden');
-                }
-            } else {
-                alertBox.classList.add('hidden');
-            }
+            // Hide modal automatically after showing success
+            setTimeout(() => {
+                closeAll();
+                statusBox.classList.add('hidden', 'opacity-0', 'translate-y-2'); // Reset for next time
+            }, 2500);
         }
     </script>
 </body>
