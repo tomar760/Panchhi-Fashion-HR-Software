@@ -3,213 +3,152 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gate Pass - Panchhi HR</title>
+    <title>Gate Pass Tracker - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-slate-50">
 
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col hidden md:flex">
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40">
         <div class="p-6 border-b border-white/10 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/20">P</div>
-            <div>
-                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
-                <p class="text-indigo-200/60 text-[11px] font-medium tracking-wide">Enterprise Suite</p>
-            </div>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">P</div>
+            <div><h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1></div>
         </div>
-        <nav class="flex-1 py-5 space-y-1">
-            <a href="dashboard.html" class="nav-item"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
-            <a href="employees.html" class="nav-item"><i class="fas fa-users"></i> <span>Employees</span></a>
-            <a href="#" class="nav-item"><i class="fas fa-clock"></i> <span>Attendance</span></a>
-            <a href="gatepass.html" class="nav-item active"><i class="fas fa-id-badge"></i> <span>Gate Pass</span></a>
+        <nav class="flex-1 py-5 space-y-1 custom-scrollbar overflow-y-auto">
+            <a href="dashboard.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-chart-pie w-5"></i> <span class="text-sm">Overview</span></a>
+            <div class="px-6 mt-6 mb-2"><p class="text-[10px] font-bold text-slate-500 uppercase">HR & Payroll Engine</p></div>
+            <a href="employees.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-users w-5"></i> <span class="text-sm">Employee Directory</span></a>
+            <a href="attendance.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-user-clock w-5"></i> <span class="text-sm">Attendance & Leaves</span></a>
+            <a href="ledger.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-hand-holding-usd w-5"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
+            <a href="payroll.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-file-invoice-dollar w-5"></i> <span class="text-sm">Generate Salary</span></a>
+            <div class="px-6 mt-6 mb-2"><p class="text-[10px] font-bold text-slate-500 uppercase">Core Operations</p></div>
+            <a href="gatepass.html" class="nav-item active px-6 py-2.5 flex items-center gap-3 text-white bg-indigo-600/20 border-r-4 border-indigo-500"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
+            <a href="javascript:void(0)" onclick="showComingSoon('Store & Inventory')" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
         </nav>
-        <div class="p-4 border-t border-white/10">
-            <div class="flex items-center gap-3 text-white/80">
-                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">AD</div>
-                <div>
-                    <p class="text-sm font-medium text-white">Admin</p>
-                    <a href="../index.html" class="text-[11px] text-rose-400 hover:text-rose-300">Logout</a>
-                </div>
-            </div>
-        </div>
     </aside>
 
-    <div class="main-area" style="margin-left: 260px;">
-        <header class="bg-white/80 backdrop-blur-lg border-b border-gray-100/60 p-4 px-8 flex justify-between items-center sticky top-0 z-30">
-            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / HR / <span class="font-medium text-gray-800">Gate Pass</span></div>
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">AD</div>
+    <div class="main-area min-h-screen" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900 flex items-center"><i class="fas fa-id-badge text-indigo-500 mr-2"></i> Gate Pass Register</h2>
+                <p class="text-xs text-gray-500 font-medium mt-0.5">Issue and track real-time employee exit passes.</p>
+            </div>
+            <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Back to Dashboard</a>
         </header>
 
-        <main class="p-8 space-y-6">
-            <div class="flex justify-between items-center gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900">Gate Pass Management</h2>
-                    <p class="text-gray-500 text-sm mt-1">Track employee movement, Actual In-Time, and total time out.</p>
+        <main class="p-8 grid grid-cols-1 xl:grid-cols-3 gap-8">
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-4 h-fit">
+                <div class="border-b border-gray-100 pb-3">
+                    <h3 class="text-lg font-bold text-gray-900">New Gate Pass</h3>
+                    <p class="text-xs text-gray-500">Fill details to auto-sync with live monitor sheet.</p>
                 </div>
-                <button onclick="openAddModal()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-sm font-medium text-white hover:from-indigo-700 shadow-lg flex items-center gap-2">
-                    <i class="fas fa-plus"></i> Create Gate Pass
+                
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Employee E-Code</label>
+                    <input type="text" id="gpEcode" placeholder="E.g., PF/STC/035" class="w-full p-3 border border-gray-200 bg-gray-50/50 font-mono font-bold rounded-xl text-sm outline-none focus:border-indigo-500 transition">
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Reason for Leaving</label>
+                    <textarea id="gpReason" rows="3" placeholder="Personal work, Medical emergency, Client visit..." class="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition resize-none"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Out Time</label>
+                        <input type="time" id="gpOutTime" class="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 bg-white transition">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 block mb-1 uppercase">Expected Return</label>
+                        <input type="time" id="gpInTime" class="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 bg-white transition">
+                    </div>
+                </div>
+
+                <button onclick="issueGatePass(this)" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 hover:scale-[1.01] transition flex items-center justify-center gap-2">
+                    <i class="fas fa-print"></i> Generate & Issue Pass
                 </button>
             </div>
 
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>GP No.</th>
-                            <th>Employee Details</th>
-                            <th>Type / Reason</th>
-                            <th>Out Time & Actual In Time</th>
-                            <th>Status</th>
-                            <th class="text-right">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="font-mono text-sm text-indigo-600 font-bold">GP-1041</td>
-                            <td>
-                                <p class="font-medium text-gray-900">Pursottam Rajbhar</p>
-                                <p class="text-xs text-gray-500">PF/ADM/005 • Admin</p>
-                            </td>
-                            <td>
-                                <span class="bg-purple-50 text-purple-700 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide">Personal</span>
-                                <p class="text-xs text-gray-600 mt-1.5 line-clamp-1">Medical emergency</p>
-                            </td>
-                            <td>
-                                <div class="text-sm">
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 09:15 AM</span>
-                                    <span class="text-gray-300 mx-1">|</span>
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-left text-emerald-400 text-xs mr-1"></i> In: 11:10 AM</span>
-                                </div>
-                                <div class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-1 inline-block">
-                                    <i class="fas fa-stopwatch mr-1"></i> Total Out: 1 hr 55 mins
-                                </div>
-                            </td>
-                            <td><span class="status-badge bg-emerald-50 text-emerald-700 border border-emerald-200">Returned</span></td>
-                            <td class="text-right">
-                                <button class="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-indigo-600 transition inline-flex items-center justify-center"><i class="fas fa-edit"></i></button>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td class="font-mono text-sm text-indigo-600 font-bold">GP-1042</td>
-                            <td>
-                                <p class="font-medium text-gray-900">Vijay K. Rathod</p>
-                                <p class="text-xs text-gray-500">PF/STC/035 • Stiching</p>
-                            </td>
-                            <td>
-                                <span class="bg-sky-50 text-sky-700 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide">Official Work</span>
-                                <p class="text-xs text-gray-600 mt-1.5 line-clamp-1">Bank deposit</p>
-                            </td>
-                            <td>
-                                <div class="text-sm">
-                                    <span class="text-gray-900 font-medium"><i class="fas fa-arrow-right text-rose-400 text-xs mr-1"></i> Out: 03:00 PM</span>
-                                    <span class="text-gray-300 mx-1">|</span>
-                                    <span class="text-gray-400 font-medium italic"><i class="fas fa-clock text-gray-300 text-xs mr-1"></i> Waiting for In...</span>
-                                </div>
-                            </td>
-                            <td><span class="status-badge bg-amber-50 text-amber-700 border border-amber-200">Currently Out</span></td>
-                            <td class="text-right">
-                                <button onclick="alert('Marking In Time...')" class="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 hover:text-emerald-700 transition inline-flex items-center justify-center" title="Mark In-Time"><i class="fas fa-sign-in-alt"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="xl:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                <div class="p-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                    <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider">Active Passes Today</h3>
+                    <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-amber-200"><i class="fas fa-circle text-[6px] mr-1 fa-pulse"></i> Live Tracking</span>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Staff Details</th>
+                                <th>Reason</th>
+                                <th>Out/In Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gatepassBody">
+                            <tr class="hover:bg-gray-50/50">
+                                <td>
+                                    <p class="font-bold text-gray-900">Pursottam</p>
+                                    <p class="text-[11px] font-mono text-indigo-600 font-bold mt-0.5">PF/ADM/005</p>
+                                </td>
+                                <td class="text-gray-600 max-w-[180px] truncate">Personal work (Bank)</td>
+                                <td>
+                                    <p class="text-xs font-bold text-gray-800">Out: 11:30 AM</p>
+                                    <p class="text-[11px] text-gray-400 font-medium">Exp: 01:00 PM</p>
+                                </td>
+                                <td>
+                                    <span class="bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-1 rounded-full text-[10px] font-bold"><i class="fas fa-walking mr-1"></i> OUTSIDE</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </main>
     </div>
 
-    <div id="overlay" onclick="closeAll()"></div>
-
-    <div id="addModal" class="p-0 max-w-xl">
-        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-20">
-            <div>
-                <h2 class="text-xl font-bold text-gray-900">Manage Gate Pass</h2>
-                <p class="text-xs text-gray-500">Create new pass or update Actual In-Time.</p>
-            </div>
-            <button onclick="closeAll()" class="text-gray-400 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
+    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 text-center relative overflow-hidden">
+            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+            <div class="w-16 h-16 rounded-full bg-amber-50 border-4 border-amber-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-hard-hat text-2xl text-amber-500"></i></div>
+            <h2 class="text-xl font-black mb-2">Under Construction</h2>
+            <p class="text-sm text-gray-500 mb-6"><span id="constructionText" class="font-bold text-indigo-600">Module</span> is in Phase 2 development.</p>
         </div>
-
-        <form class="p-6 space-y-5" onsubmit="event.preventDefault(); showSyncStatus();">
-            <div class="custom-select-wrapper">
-                <label class="data-label block mb-1">Search Employee</label>
-                <div class="relative">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-300 text-sm"></i>
-                    <input type="text" id="empSearch" placeholder="E.g., Vijay or PF/STC/035" autocomplete="off" onkeyup="filterDropdown('empSearch', 'empDrop', 'empListUI')" class="w-full border border-gray-200 rounded-xl pl-9 pr-4 py-2.5 text-sm outline-none focus:border-indigo-500 cursor-pointer" onclick="toggleDropdown('empDrop')">
-                </div>
-                <div id="empDrop" class="custom-select-dropdown">
-                    <div id="empListUI">
-                        <div class="dropdown-item" onclick="selectValue('empSearch', 'PF/STC/035 - Vijay Kamleshbhai Rathod', 'empDrop')">PF/STC/035 - Vijay Kamleshbhai Rathod</div>
-                        <div class="dropdown-item" onclick="selectValue('empSearch', 'PF/ADM/005 - Pursottam Rajbhar', 'empDrop')">PF/ADM/005 - Pursottam Rajbhar</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="data-label block mb-1">Pass Type</label>
-                    <select class="w-full border border-gray-200 rounded-xl p-2.5 text-sm bg-white outline-none">
-                        <option>Official Work</option>
-                        <option>Personal Work</option>
-                        <option>Short Leave</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="data-label block mb-1">Date</label>
-                    <input type="date" id="gpDate" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm outline-none">
-                </div>
-            </div>
-
-            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="data-label block mb-1 text-rose-500">Out Time</label>
-                        <input type="time" class="w-full border border-rose-200 rounded-lg p-2.5 text-sm outline-none focus:border-rose-500 bg-white" required>
-                    </div>
-                    <div>
-                        <label class="data-label block mb-1 text-emerald-600">Actual In Time (Return)</label>
-                        <input type="time" class="w-full border border-emerald-200 rounded-lg p-2.5 text-sm outline-none focus:border-emerald-500 bg-white" placeholder="Fill when returned">
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <label class="data-label block mb-1">Reason / Remarks</label>
-                <textarea rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm outline-none focus:border-indigo-500 resize-none" required></textarea>
-            </div>
-
-            <div class="pt-2 text-center">
-                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-indigo-200 hover:scale-[1.01] transition">
-                    Save 
-                </button>
-                
-                <p id="syncStatus" class="hidden text-xs font-bold text-emerald-600 mt-3 transition-all duration-300 opacity-0 transform translate-y-2">
-                    <i class="fas fa-check-circle mr-1"></i> Google Sheet updated successfully.
-                </p>
-            </div>
-        </form>
     </div>
 
-    <script src="../assets/js/app.js"></script>
+    <script src="app.js"></script>
     <script>
-        document.getElementById('gpDate').valueAsDate = new Date();
+        async function issueGatePass(btn) {
+            const eCode = document.getElementById('gpEcode').value;
+            const reason = document.getElementById('gpReason').value;
+            const outTime = document.getElementById('gpOutTime').value;
+            const inTime = document.getElementById('gpInTime').value;
 
-        function showSyncStatus() {
-            const statusBox = document.getElementById('syncStatus');
-            statusBox.classList.remove('hidden');
-            
-            // Animation trick for tailwind
-            setTimeout(() => {
-                statusBox.classList.remove('opacity-0', 'translate-y-2');
-                statusBox.classList.add('opacity-100', 'translate-y-0');
-            }, 50);
+            if(!eCode || !reason || !outTime) {
+                alert("Please fill E-Code, Reason, and Out Time!");
+                return;
+            }
 
-            // Hide modal automatically after showing success
-            setTimeout(() => {
-                closeAll();
-                statusBox.classList.add('hidden', 'opacity-0', 'translate-y-2'); // Reset for next time
-            }, 2500);
+            const payload = {
+                action: "saveGatePass",
+                eCode: eCode,
+                reason: reason,
+                outTime: outTime,
+                inTime: inTime,
+                status: "OUTSIDE"
+            };
+
+            const success = await syncToCloud(payload, btn);
+            if(success) {
+                alert("Gate Pass Synced to Cloud Database Successfully!");
+                document.getElementById('gpEcode').value = '';
+                document.getElementById('gpReason').value = '';
+                document.getElementById('gpOutTime').value = '';
+                document.getElementById('gpInTime').value = '';
+            }
         }
     </script>
 </body>
