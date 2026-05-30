@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="bg-slate-50">
     <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40">
@@ -23,41 +23,25 @@
             <a href="ledger.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-hand-holding-usd w-5"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
             <a href="payroll.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-file-invoice-dollar w-5"></i> <span class="text-sm">Generate Salary</span></a>
             <div class="px-6 mt-6 mb-2"><p class="text-[10px] font-bold text-slate-500 uppercase">Core Operations</p></div>
-            <a href="javascript:void(0)" onclick="showComingSoon('Gate Pass')" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
-            <a href="javascript:void(0)" onclick="showComingSoon('Store & Inventory')" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
+            <a href="gatepass.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
+            <a href="store.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
+            <a href="settings.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-cog w-5"></i> <span class="text-sm">Settings</span></a>
         </nav>
     </aside>
 
     <div class="main-area min-h-screen" style="margin-left: 260px;">
         <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-            <div>
-                <h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2>
-            </div>
+            <div><h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2></div>
             <div class="flex items-center">
                 <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl mr-6 shadow-sm">
                     <div class="flex items-center gap-1.5 text-indigo-600"><i class="far fa-calendar-alt text-sm"></i><span id="liveDate" class="text-xs font-bold uppercase">--</span></div>
                     <span class="text-gray-300">|</span>
                     <div class="flex items-center gap-1.5 text-amber-600"><i class="far fa-clock text-sm"></i><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div>
                 </div>
-                <div class="flex items-center gap-3 border-l border-gray-200 pl-6">
-                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md">AD</div>
-                    <div><p class="text-sm font-bold text-gray-800 leading-none">Aditya Tomar</p><p class="text-[10px] text-gray-500 font-medium mt-1 uppercase">System Admin</p></div>
-                </div>
             </div>
         </header>
 
         <main class="p-8 space-y-8">
-            <div class="flex items-center gap-4 bg-gradient-to-r from-indigo-900 via-slate-800 to-indigo-900 rounded-2xl p-6 shadow-xl relative overflow-hidden">
-                <div class="flex-1 z-10">
-                    <p class="text-indigo-200 text-sm font-medium mb-1"><i class="fas fa-bolt text-amber-400 mr-1"></i> Quick Launch</p>
-                    <h3 class="text-white text-xl font-bold">Fast Action Center</h3>
-                </div>
-                <div class="flex gap-3 z-10">
-                    <a href="employees.html" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white text-sm font-medium transition"><i class="fas fa-user-plus mr-2"></i> Add Staff</a>
-                    <a href="attendance.html" class="px-4 py-2.5 bg-white text-indigo-900 hover:bg-gray-50 rounded-xl text-sm font-bold shadow-lg transition"><i class="fas fa-clock mr-2"></i> Sync Attendance</a>
-                </div>
-            </div>
-
             <div class="grid grid-cols-4 gap-6">
                 <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm module-card"><p class="text-xs font-bold text-gray-400 uppercase">Active Workforce</p><h4 class="text-3xl font-black mt-1">132</h4></div>
                 <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm module-card"><p class="text-xs font-bold text-gray-400 uppercase">Absent / Leave</p><h4 class="text-3xl font-black mt-1 text-rose-600">08</h4></div>
@@ -67,7 +51,7 @@
 
             <div class="grid grid-cols-3 gap-6">
                 <div class="col-span-2 bg-white rounded-2xl border shadow-sm p-6">
-                    <h3 class="text-lg font-bold mb-4">Workforce & Payroll Analytics</h3>
+                    <h3 class="text-lg font-bold mb-4">Workforce Analytics</h3>
                     <div class="w-full h-72"><canvas id="analyticsChart"></canvas></div>
                 </div>
                 <div class="bg-white rounded-2xl border shadow-sm p-6 flex flex-col">
@@ -82,14 +66,13 @@
 
     <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 text-center relative overflow-hidden">
-            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
-            <div class="w-16 h-16 rounded-full bg-amber-50 border-4 border-amber-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-hard-hat text-2xl text-amber-500"></i></div>
+            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
             <h2 class="text-xl font-black mb-2">Under Construction</h2>
             <p class="text-sm text-gray-500 mb-6"><span id="constructionText" class="font-bold text-indigo-600">Module</span> is in Phase 2 development.</p>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             new Chart(document.getElementById('analyticsChart').getContext('2d'), {
