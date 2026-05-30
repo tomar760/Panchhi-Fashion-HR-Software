@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employees Directory - Panchhi HR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col hidden md:flex">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">P</div>
+            <div>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-200/60 text-[11px] font-medium tracking-wide">Enterprise Suite</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-5 space-y-1">
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+            <a href="employees.html" class="nav-item active"><i class="fas fa-users"></i> <span>Employees</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-clock"></i> <span>Attendance</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-id-badge"></i> <span>Gate Pass</span></a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex items-center gap-3 text-white/80">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">AD</div>
+                <div>
+                    <p class="text-sm font-medium text-white">Admin</p>
+                    <a href="../index.html" class="text-[11px] text-rose-400 hover:text-rose-300">Logout</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-area" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-lg border-b border-gray-100/60 p-4 px-8 flex justify-between items-center sticky top-0 z-30">
+            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / HR / <span class="font-medium text-gray-800">Directory</span></div>
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">AD</div>
+        </header>
+
+        <main class="p-8 space-y-6">
+            <div class="flex justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Employees Directory</h2>
+                    <p class="text-gray-500 text-sm mt-1">Showing data points from MIS 2026-27</p>
+                </div>
+                <button onclick="openAddModal()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl text-sm font-medium text-white hover:from-indigo-700 shadow-lg flex items-center gap-2">
+                    <i class="fas fa-user-plus"></i> Add Employee
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>E-Code</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="openProfile()">
+                            <td class="font-mono text-sm text-indigo-600 font-medium">PF/STC/035</td>
+                            <td class="font-medium">Vijay Kamleshbhai Rathod</td>
+                            <td><span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-lg text-xs font-medium">Stiching</span></td>
+                            <td class="text-sm text-gray-600">Stitching Executive</td>
+                            <td><span class="status-badge bg-emerald-50 text-emerald-700 border border-emerald-200">Active</span></td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="overlay" onclick="closeAll()"></div>
+
+    <div id="profilePanel">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 pb-0 relative">
+            <button onclick="closeAll()" class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full text-white flex justify-center items-center"><i class="fas fa-times"></i></button>
+            <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center text-2xl font-bold text-indigo-600 shadow-lg mb-4">VK</div>
+            <h2 class="text-2xl font-bold text-white">Vijay Kamleshbhai Rathod</h2>
+            <p class="text-indigo-100 mt-1">Stitching Executive • PF/STC/035</p>
+            
+            <div class="flex gap-4 mt-6 overflow-x-auto">
+                <button class="tab-btn active text-white border-white" onclick="switchTab('prof-personal', this, 'prof')">Personal</button>
+                <button class="tab-btn text-indigo-200 border-transparent hover:text-white" onclick="switchTab('prof-job', this, 'prof')">Employment</button>
+                <button class="tab-btn text-indigo-200 border-transparent hover:text-white" onclick="switchTab('prof-bank', this, 'prof')">Bank & CTC</button>
+                <button class="tab-btn text-indigo-200 border-transparent hover:text-white" onclick="switchTab('prof-pf', this, 'prof')">Statutory</button>
+            </div>
+        </div>
+
+        <div class="p-6 flex-1 overflow-y-auto bg-gray-50">
+            <div id="prof-personal" class="tab-content active prof-tab space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="data-box"><p class="data-label">First Name</p><p class="data-value">Vijay</p></div>
+                    <div class="data-box"><p class="data-label">Last Name</p><p class="data-value">Rathod</p></div>
+                    <div class="data-box"><p class="data-label">Father/Husband Name</p><p class="data-value">Kamleshbhai</p></div>
+                    <div class="data-box"><p class="data-label">Employee Full Name</p><p class="data-value">Vijay Kamleshbhai Rathod</p></div>
+                    <div class="data-box"><p class="data-label">DOB / Age</p><p class="data-value">25/08/1996 (29 Yrs)</p></div>
+                    <div class="data-box"><p class="data-label">Gender / Marital</p><p class="data-value">Male / Married</p></div>
+                    <div class="data-box"><p class="data-label">Personal Contact No</p><p class="data-value">7069164944</p></div>
+                    <div class="data-box"><p class="data-label">Alternate Mobile</p><p class="data-value">-</p></div>
+                </div>
+                <h3 class="text-xs font-bold text-gray-400 mt-4 mb-2">Address & Emergency</h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="data-box"><p class="data-label">Current Address</p><p class="data-value">Gaytri Nagar, Shampura, Kamrej, Surat - 394330</p></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div class="data-box"><p class="data-label">Emergency Person Name</p><p class="data-value">Rakesh</p></div>
+                    <div class="data-box"><p class="data-label">Emergency Number</p><p class="data-value">9638468437</p></div>
+                </div>
+            </div>
+
+            <div id="prof-job" class="tab-content prof-tab space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="data-box"><p class="data-label">E-Code</p><p class="data-value font-mono text-indigo-600">PF/STC/035</p></div>
+                    <div class="data-box"><p class="data-label">Active/Inactive</p><p class="data-value text-emerald-600">ACTIVE</p></div>
+                    <div class="data-box"><p class="data-label">Department</p><p class="data-value">Stiching</p></div>
+                    <div class="data-box"><p class="data-label">Designation</p><p class="data-value">Stitching Executive</p></div>
+                    <div class="data-box"><p class="data-label">Joining Date</p><p class="data-value">07-03-2026</p></div>
+                    <div class="data-box"><p class="data-label">Reporting Person Name</p><p class="data-value">Sagar Borse</p></div>
+                </div>
+            </div>
+
+            <div id="prof-bank" class="tab-content prof-tab space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="data-box"><p class="data-label">Fix CTC</p><p class="data-value font-bold">₹21,000</p></div>
+                    <div class="data-box"><p class="data-label">Payment Mode</p><p class="data-value">ONLINE</p></div>
+                </div>
+                <h3 class="text-xs font-bold text-gray-400 mt-4 mb-2">Bank Details</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="data-box"><p class="data-label">Bank Name</p><p class="data-value">BOB BANK</p></div>
+                    <div class="data-box"><p class="data-label">Account Number</p><p class="data-value font-mono">07458100000814</p></div>
+                    <div class="data-box col-span-2"><p class="data-label">IFSC Code</p><p class="data-value font-mono">BARB0VIHANX</p></div>
+                </div>
+            </div>
+
+            <div id="prof-pf" class="tab-content prof-tab space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="data-box"><p class="data-label">Aadhar Card No</p><p class="data-value font-mono">649450000000</p></div>
+                    <div class="data-box"><p class="data-label">PF Applicable</p><p class="data-value">NOT APPLICABLE</p></div>
+                    <div class="data-box"><p class="data-label">ESIC Applicable</p><p class="data-value">NOT APPLICABLE</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addModal">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-20">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">Add New Employee</h2>
+                <p class="text-xs text-gray-500">Fill all MIS columns easily via tabs.</p>
+            </div>
+            <button onclick="closeAll()" class="text-gray-400 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
+        </div>
+
+        <div class="flex px-6 border-b border-gray-100 bg-white">
+            <button class="tab-btn active text-indigo-600 border-indigo-600" onclick="switchTab('form-personal', this, 'form')">1. Personal Info</button>
+            <button class="tab-btn" onclick="switchTab('form-job', this, 'form')">2. Job Details</button>
+            <button class="tab-btn" onclick="switchTab('form-bank', this, 'form')">3. Salary & Bank</button>
+            <button class="tab-btn" onclick="switchTab('form-pf', this, 'form')">4. Statutory</button>
+        </div>
+
+        <form class="flex-1 overflow-y-auto p-6 space-y-6" onsubmit="event.preventDefault(); alert('All 50 Fields Saved!'); closeAll();">
+            
+            <div id="form-personal" class="tab-content active form-tab">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div><label class="data-label block mb-1">First Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Last Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Father/Husband Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div class="col-span-3"><label class="data-label block mb-1">Employee Full Name (As per Aadhar)</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    
+                    <div><label class="data-label block mb-1">DOB</label><input type="date" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Age</label><input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div>
+                        <label class="data-label block mb-1">Gender</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>MALE</option><option>FEMALE</option></select>
+                    </div>
+                    <div>
+                        <label class="data-label block mb-1">Marital Status</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>MARRIED</option><option>SINGLE</option></select>
+                    </div>
+                    
+                    <div><label class="data-label block mb-1">Personal Contact No</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Alternate Mobile</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    
+                    <div class="col-span-3"><label class="data-label block mb-1">Current Address</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Current PIN Code</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    
+                    <div class="col-span-3 pt-2 border-t border-gray-100"></div>
+                    <div><label class="data-label block mb-1">Emergency Person Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Relation of Employee</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Emergency Contact No</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                </div>
+            </div>
+
+            <div id="form-job" class="tab-content form-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="data-label block mb-1">New E-Code</label><input type="text" placeholder="PF/..." class="w-full border border-gray-200 rounded-lg p-2 text-sm font-mono"></div>
+                    <div>
+                        <label class="data-label block mb-1">Active/Inactive</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>ACTIVE</option><option>INACTIVE</option></select>
+                    </div>
+
+                    <div class="custom-select-wrapper">
+                        <label class="data-label block mb-1">Department</label>
+                        <input type="text" id="deptInputNew" onkeyup="filterDropdown('deptInputNew', 'deptDrop', 'deptListUI')" class="w-full border border-gray-200 rounded-lg p-2 text-sm" onclick="toggleDropdown('deptDrop')">
+                        <div id="deptDrop" class="custom-select-dropdown">
+                            <div id="deptListUI">
+                                <div class="dropdown-item" onclick="selectValue('deptInputNew', 'Admin', 'deptDrop')">Admin</div>
+                                <div class="dropdown-item" onclick="selectValue('deptInputNew', 'Stiching', 'deptDrop')">Stiching</div>
+                            </div>
+                            <div class="add-new-btn" onclick="addNewValue('deptInputNew', 'deptListUI', 'deptDrop')">+ Add New</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select-wrapper">
+                        <label class="data-label block mb-1">Designation</label>
+                        <input type="text" id="desigInputNew" onkeyup="filterDropdown('desigInputNew', 'desDrop', 'desListUI')" class="w-full border border-gray-200 rounded-lg p-2 text-sm" onclick="toggleDropdown('desDrop')">
+                        <div id="desDrop" class="custom-select-dropdown">
+                            <div id="desListUI">
+                                <div class="dropdown-item" onclick="selectValue('desigInputNew', 'Security', 'desDrop')">Security</div>
+                                <div class="dropdown-item" onclick="selectValue('desigInputNew', 'Stitching Executive', 'desDrop')">Stitching Executive</div>
+                            </div>
+                            <div class="add-new-btn" onclick="addNewValue('desigInputNew', 'desListUI', 'desDrop')">+ Add New</div>
+                        </div>
+                    </div>
+
+                    <div><label class="data-label block mb-1">Joining Date</label><input type="date" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Reporting Person Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                </div>
+            </div>
+
+            <div id="form-bank" class="tab-content form-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="data-label block mb-1">Fix CTC</label><input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div>
+                        <label class="data-label block mb-1">Payment Mode</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>ONLINE</option><option>CASH</option></select>
+                    </div>
+                    <div class="col-span-2 pt-2 border-t border-gray-100"></div>
+                    <div class="col-span-2"><label class="data-label block mb-1">Name (As per Bank Details)</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Bank Name</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Bank Account Number</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">Bank IFSC Code</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                </div>
+            </div>
+
+            <div id="form-pf" class="tab-content form-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="data-label block mb-1">Aadhar Card No</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    <div><label class="data-label block mb-1">PAN Card Number</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    
+                    <div class="col-span-2 pt-2 border-t border-gray-100"></div>
+                    <div>
+                        <label class="data-label block mb-1">PF Applicable</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>APPLICABLE</option><option>NOT APPLICABLE</option></select>
+                    </div>
+                    <div class="col-span-2"><label class="data-label block mb-1">UAN Number</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                    
+                    <div class="col-span-2 pt-2 border-t border-gray-100"></div>
+                    <div>
+                        <label class="data-label block mb-1">ESIC Applicable</label>
+                        <select class="w-full border border-gray-200 rounded-lg p-2 text-sm bg-white"><option>APPLICABLE</option><option>NOT APPLICABLE</option></select>
+                    </div>
+                    <div class="col-span-2"><label class="data-label block mb-1">ESIC Number</label><input type="text" class="w-full border border-gray-200 rounded-lg p-2 text-sm"></div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-gray-100">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-emerald-200 hover:scale-[1.01] transition">
+                        <i class="fas fa-check-circle mr-1"></i> Save Full Employee Data
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>
