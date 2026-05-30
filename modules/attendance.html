@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Attendance Sync - Panchhi HR</title>
+    <title>Attendance Manager - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <style>
+        .tab-btn.active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,7 +36,7 @@
 
     <div class="main-area" style="margin-left: 260px;">
         <header class="bg-white/80 backdrop-blur-lg border-b border-gray-100/60 p-4 px-8 flex justify-between items-center sticky top-0 z-30">
-            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / HR / <span class="font-medium text-gray-800">Attendance Logger</span></div>
+            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / HR / <span class="font-medium text-gray-800">Attendance Manager</span></div>
             <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">AD</div>
         </header>
 
@@ -38,134 +44,181 @@
             
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900">Biometric Attendance Manager</h2>
-                    <p class="text-gray-500 text-sm mt-1">Upload files to review tabular anomalies and sync with Google Sheets.</p>
+                    <h2 class="text-2xl font-bold text-gray-900">Attendance & Smart Follow-up</h2>
+                    <p class="text-gray-500 text-sm mt-1">Upload daily sheet, add reasons, and explore the History Vault.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <div class="border-2 border-dashed border-indigo-200 rounded-xl bg-indigo-50/30 flex flex-col items-center justify-center p-6 relative hover:bg-indigo-50 transition cursor-pointer" id="uploadZone">
-                    <input type="file" id="bioFile" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileUpload()">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-sm mb-2">
-                        <i class="fas fa-cloud-upload-alt text-xl"></i>
+            <div class="flex items-center gap-6 border-b border-gray-200">
+                <button onclick="switchTab('dailyTab')" id="btn-dailyTab" class="tab-btn active pb-3 px-2 text-sm font-medium text-gray-500 hover:text-indigo-600 transition">
+                    <i class="fas fa-calendar-day mr-2"></i> Daily Follow-up & Sync
+                </button>
+                <button onclick="switchTab('historyTab')" id="btn-historyTab" class="tab-btn pb-3 px-2 text-sm font-medium text-gray-500 hover:text-indigo-600 transition">
+                    <i class="fas fa-archive mr-2"></i> History Vault
+                </button>
+            </div>
+
+            <div id="dailyTab" class="space-y-6">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6" id="uploadCard">
+                    <div class="border-2 border-dashed border-indigo-200 rounded-xl bg-indigo-50/30 flex flex-col items-center justify-center p-8 relative hover:bg-indigo-50 transition cursor-pointer" id="uploadZone">
+                        <input type="file" id="bioFile" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileUpload()">
+                        <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-sm mb-3">
+                            <i class="fas fa-cloud-upload-alt text-2xl"></i>
+                        </div>
+                        <p class="text-base font-bold text-gray-900" id="uploadText">Upload Daily Biometric Sheet</p>
+                        <p class="text-xs text-gray-500 mt-1">System will auto-match MIS data and fetch contact numbers.</p>
                     </div>
-                    <p class="text-sm font-bold text-gray-800" id="uploadText">Upload Daily Biometric Punch Sheet</p>
-                    <p class="text-[11px] text-gray-400 mt-0.5">Accepts exported data formats directly</p>
                 </div>
 
-                <div id="processBtnContainer" class="hidden mt-4 flex justify-between items-center border-t border-gray-50 pt-4">
-                    <p class="text-xs text-emerald-600 font-medium"><i class="fas fa-info-circle"></i> File loaded. Ready to parse records.</p>
-                    <button onclick="processAttendance()" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-indigo-200 hover:scale-[1.01] transition flex items-center gap-2">
-                        <i class="fas fa-calculator"></i> Analyze & Generate Tables
-                    </button>
+                <div id="smartPreviewSection" class="hidden space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900"><i class="fas fa-phone-alt text-indigo-500 mr-2"></i> Smart Follow-up Desk</h3>
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-100">MIS Data Matched Successfully</span>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="table-wrap m-0 border-0">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th>Employee Details</th>
+                                        <th>Status / Anomaly</th>
+                                        <th>Contact No.</th>
+                                        <th class="w-1/3">Reason / Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50/50">
+                                        <td>
+                                            <p class="font-bold text-gray-900">Pursottam Rajbhar</p>
+                                            <p class="text-[11px] text-gray-500">PF/ADM/005 • Admin</p>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200"><i class="fas fa-clock mr-1"></i> 45 Mins Late (10:45 AM)</span>
+                                        </td>
+                                        <td>
+                                            <a href="tel:+919876543210" class="text-sm font-bold text-indigo-600 hover:underline flex items-center gap-1.5"><i class="fas fa-phone-square-alt text-lg"></i> +91 98765 43210</a>
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="Type reason here after calling..." class="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:border-indigo-500 bg-white">
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50">
+                                        <td>
+                                            <p class="font-bold text-gray-900">Vijay K. Rathod</p>
+                                            <p class="text-[11px] text-gray-500">PF/STC/035 • Stiching</p>
+                                        </td>
+                                        <td>
+                                            <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200"><i class="fas fa-user-slash mr-1"></i> Absent (Missing IN)</span>
+                                        </td>
+                                        <td>
+                                            <a href="tel:+919876543211" class="text-sm font-bold text-indigo-600 hover:underline flex items-center gap-1.5"><i class="fas fa-phone-square-alt text-lg"></i> +91 98765 43211</a>
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="Type reason here after calling..." class="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:border-indigo-500 bg-white">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 border-t border-gray-100 flex items-center justify-between">
+                            <p class="text-xs text-gray-500"><i class="fas fa-info-circle mr-1"></i> Data will be securely saved to Google Drive (5TB) with timestamps.</p>
+                            <button onclick="generateAndSync()" class="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-emerald-200 hover:scale-[1.01] transition flex items-center gap-2">
+                                <i class="fas fa-sync-alt"></i> Save to Drive & Get WA Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="successSection" class="hidden bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+                    <div class="flex items-center gap-3 text-emerald-600">
+                        <i class="fas fa-check-circle text-3xl"></i>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900">Data Synced Successfully</h3>
+                            <p class="text-xs text-gray-500" id="timestampText">Saved on: --</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 relative">
+                        <p class="text-xs font-bold text-gray-500 uppercase mb-2">WhatsApp Summary Generated</p>
+                        <textarea id="waCompactText" readonly class="w-full h-24 bg-transparent text-sm text-gray-800 outline-none resize-none font-mono border-none p-0"></textarea>
+                        <button onclick="copyWA()" class="absolute top-4 right-4 px-3 py-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 rounded-lg text-xs font-bold transition shadow-sm">
+                            <i class="fab fa-whatsapp text-green-500 text-sm mr-1"></i> Copy for WA
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div id="resultsSection" class="hidden space-y-6">
+            <div id="historyTab" class="hidden space-y-6">
                 
-                <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <button onclick="syncWithGoogleSheets()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md shadow-emerald-100 transition flex items-center gap-2">
-                            <i class="fas fa-cloud-upload-alt"></i> Sync All to Google Sheet
+                <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div>
+                            <label class="text-xs font-bold text-gray-500 uppercase block mb-1">Filter Records</label>
+                            <select class="border border-gray-200 rounded-lg p-2 text-sm bg-gray-50 outline-none focus:border-indigo-500">
+                                <option>Today</option>
+                                <option>Yesterday</option>
+                                <option selected>Last 7 Days</option>
+                                <option>This Month</option>
+                                <option>Custom Date...</option>
+                            </select>
+                        </div>
+                        <button class="mt-5 w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition">
+                            <i class="fas fa-search"></i>
                         </button>
-                        <button onclick="copyWACompactSummary()" class="px-4 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-sm font-bold transition flex items-center gap-2">
-                            <i class="fab fa-whatsapp"></i> Copy Short WA Status
+                    </div>
+
+                    <div class="flex gap-3 mt-5 sm:mt-0">
+                        <button onclick="alert('Generating Premium PDF...')" class="px-4 py-2 bg-white border border-rose-200 text-rose-600 hover:bg-rose-50 rounded-lg text-sm font-bold shadow-sm transition flex items-center gap-2">
+                            <i class="fas fa-file-pdf"></i> Download PDF
+                        </button>
+                        <button onclick="alert('Exporting to High-Quality Excel Format...')" class="px-4 py-2 bg-white border border-emerald-200 text-emerald-600 hover:bg-emerald-50 rounded-lg text-sm font-bold shadow-sm transition flex items-center gap-2">
+                            <i class="fas fa-file-excel"></i> Export Excel
                         </button>
                     </div>
-                    <p id="syncStatus" class="hidden text-xs font-bold text-emerald-600 transition-all"><i class="fas fa-check-double mr-1"></i> Logs successfully appended to Central Database Sheet.</p>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between px-2">
-                        <h3 class="text-base font-bold text-gray-800 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Late Timing Exception Register
-                        </h3>
-                        <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full">3 Flags Found</span>
-                    </div>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>E-Code</th>
-                                    <th>Employee Name</th>
-                                    <th>Department</th>
-                                    <th>Shift / Rules</th>
-                                    <th>Actual In</th>
-                                    <th>Late Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="font-mono text-xs font-bold text-indigo-600">PF/ADM/005</td>
-                                    <td class="font-medium text-gray-900">Pursottam Rajbhar</td>
-                                    <td><span class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-medium">Admin</span></td>
-                                    <td class="text-xs text-gray-500">10:00 - 19:00</td>
-                                    <td class="font-medium text-gray-900">10:45 AM</td>
-                                    <td><span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full"><i class="fas fa-clock mr-1"></i>45 Mins Late</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-mono text-xs font-bold text-indigo-600">PF/STC/035</td>
-                                    <td class="font-medium text-gray-900">Vijay Kamleshbhai Rathod</td>
-                                    <td><span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-xs font-medium">Stiching</span></td>
-                                    <td class="text-xs text-gray-500">10:00 - 19:00</td>
-                                    <td class="font-medium text-gray-900">11:15 AM</td>
-                                    <td><span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full"><i class="fas fa-clock mr-1"></i>1 Hr 15 Mins Late</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-mono text-xs font-bold text-indigo-600">PF/DSP/005</td>
-                                    <td class="font-medium text-gray-900">Pratik Gamit</td>
-                                    <td><span class="bg-sky-50 text-sky-700 px-2 py-0.5 rounded text-xs font-medium">Development</span></td>
-                                    <td class="text-xs text-gray-500">10:00 - 19:00</td>
-                                    <td class="font-medium text-gray-900">10:20 AM</td>
-                                    <td><span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full"><i class="fas fa-clock mr-1"></i>20 Mins Late</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden table-wrap m-0">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th>Sync Date & Time</th>
+                                <th>Employee Details</th>
+                                <th>Status</th>
+                                <th>Logged Reason</th>
+                                <th>Saved By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50/50">
+                                <td>
+                                    <p class="font-bold text-gray-900">29 May 2026</p>
+                                    <p class="text-[10px] text-gray-500">Sync: 11:05 AM</p>
+                                </td>
+                                <td>
+                                    <p class="font-bold text-gray-900">Pratik Gamit</p>
+                                    <p class="text-[11px] text-gray-500">PF/DSP/005</p>
+                                </td>
+                                <td><span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">20 Mins Late</span></td>
+                                <td class="text-sm text-gray-700 italic">"Traffic block at highway circle"</td>
+                                <td><span class="text-xs text-gray-500 font-medium"><i class="fas fa-user-shield text-indigo-400 mr-1"></i> Admin</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50">
+                                <td>
+                                    <p class="font-bold text-gray-900">28 May 2026</p>
+                                    <p class="text-[10px] text-gray-500">Sync: 10:45 AM</p>
+                                </td>
+                                <td>
+                                    <p class="font-bold text-gray-900">Priya Pandey</p>
+                                    <p class="text-[11px] text-gray-500">PF/HR/001</p>
+                                </td>
+                                <td><span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">Absent</span></td>
+                                <td class="text-sm text-gray-700 italic">"Medical emergency, CL applied"</td>
+                                <td><span class="text-xs text-gray-500 font-medium"><i class="fas fa-user-shield text-indigo-400 mr-1"></i> Admin</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between px-2">
-                        <h3 class="text-base font-bold text-gray-800 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Absentee & Discrepancy Log
-                        </h3>
-                        <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full">2 Flags Found</span>
-                    </div>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>E-Code</th>
-                                    <th>Employee Name</th>
-                                    <th>Designation</th>
-                                    <th>Identified Error / Log Status</th>
-                                    <th>Manual Overrule</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-rose-50/20">
-                                    <td class="font-mono text-xs font-bold text-gray-500">PF/HR/001</td>
-                                    <td class="font-medium text-gray-900">Priya Pandey</td>
-                                    <td class="text-xs text-gray-600">HR Manager</td>
-                                    <td><span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-lg"><i class="fas fa-fingerprint mr-1"></i>Missing IN-Punch Data</span></td>
-                                    <td>
-                                        <select class="border border-gray-200 rounded-lg p-1 text-xs bg-white outline-none"><option>Leave Pending</option><option>Mark Present</option><option>Paid Leave (PL)</option></select>
-                                    </td>
-                                </tr>
-                                <tr class="bg-rose-50/20">
-                                    <td class="font-mono text-xs font-bold text-gray-500">PF/STC/036</td>
-                                    <td class="font-medium text-gray-900">Prajapati Nareshbhai</td>
-                                    <td class="text-xs text-gray-600">Stitching Executive</td>
-                                    <td><span class="text-xs font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-lg"><i class="fas fa-user-slash mr-1"></i>Completely Absent</span></td>
-                                    <td>
-                                        <select class="border border-gray-200 rounded-lg p-1 text-xs bg-white outline-none"><option>Absent Logged</option><option>Mark Present</option></select>
-                                    </td>
-                                end	</tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
 
         </main>
@@ -173,44 +226,63 @@
 
     <script src="../assets/js/app.js"></script>
     <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.getElementById('dailyTab').classList.add('hidden');
+            document.getElementById('historyTab').classList.add('hidden');
+            
+            document.getElementById('btn-dailyTab').classList.remove('active');
+            document.getElementById('btn-historyTab').classList.remove('active');
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // File Upload Logic
         function handleFileUpload() {
             const fileInput = document.getElementById('bioFile');
             const uploadText = document.getElementById('uploadText');
-            const processBtnContainer = document.getElementById('processBtnContainer');
+            const previewSection = document.getElementById('smartPreviewSection');
 
             if (fileInput.files.length > 0) {
                 uploadText.innerHTML = `<span class="text-emerald-600 font-medium"><i class="fas fa-check-circle"></i> Biometric Data File Loaded</span>`;
-                processBtnContainer.classList.remove('hidden');
+                // Reveal the Follow-up desk smoothly
+                previewSection.classList.remove('hidden');
+                previewSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        function processAttendance() {
-            const resultsSection = document.getElementById('resultsSection');
-            resultsSection.classList.remove('hidden');
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function syncWithGoogleSheets() {
-            const status = document.getElementById('syncStatus');
-            status.classList.remove('hidden');
-            alert('Syncing records safely to Central Attendance Google Sheet...');
-        }
-
-        // WhatsApp Compact Summary Logic (THE JUGAD!)
-        function copyWACompactSummary() {
-            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        // Generate Report & Sync Logic
+        function generateAndSync() {
+            const successSection = document.getElementById('successSection');
+            const timeText = document.getElementById('timestampText');
+            const waText = document.getElementById('waCompactText');
             
-            // Ultra short text layout that never gets long or messy!
-            const summaryText = `📊 *DAILY ATTENDANCE SUMMARY*
-📅 Date: ${today}
+            // Generate Timestamp
+            const now = new Date();
+            const timestamp = now.toLocaleDateString('en-GB') + ' at ' + now.toLocaleTimeString();
+            timeText.innerText = 'Saved securely to Google Drive on: ' + timestamp;
+
+            // Generate Compact WA Text
+            waText.value = `📊 *ATTENDANCE SYNC REPORT*
+📅 Date: ${now.toLocaleDateString('en-GB')}
 ➖➖➖➖➖➖➖➖➖➖
-🔴 *Late Coming:* 3 Employees Total
-❌ *Absent/Missing:* 2 Employees Total
+🔴 Late: 1 (Reason Logged)
+❌ Absent: 1 (Reason Logged)
 
-👉 _Full tabular breakdown and error logs have been successfully synced to Google Sheets for your review._`;
+👉 _Full records & reasons saved to History Vault & Google Drive._`;
 
-            navigator.clipboard.writeText(summaryText);
-            alert('Compact micro-summary copied! You can now paste it directly on WhatsApp.');
+            // Hide table, show success
+            document.getElementById('smartPreviewSection').classList.add('hidden');
+            document.getElementById('uploadCard').classList.add('hidden');
+            successSection.classList.remove('hidden');
+        }
+
+        function copyWA() {
+            const waText = document.getElementById('waCompactText');
+            waText.select();
+            navigator.clipboard.writeText(waText.value);
+            alert('WhatsApp report copied! You can paste it directly to Sir.');
         }
     </script>
 </body>
