@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Sync - Panchhi HR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col hidden md:flex">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/20">P</div>
+            <div>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-200/60 text-[11px] font-medium tracking-wide">Enterprise Suite</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-5 space-y-1">
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+            <a href="employees.html" class="nav-item"><i class="fas fa-users"></i> <span>Employees</span></a>
+            <a href="attendance.html" class="nav-item active"><i class="fas fa-clock"></i> <span>Attendance</span></a>
+            <a href="gatepass.html" class="nav-item"><i class="fas fa-id-badge"></i> <span>Gate Pass</span></a>
+            <a href="store.html" class="nav-item"><i class="fas fa-boxes"></i> <span>Store</span></a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex items-center gap-3 text-white/80">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">AD</div>
+                <div>
+                    <p class="text-sm font-medium text-white">Admin</p>
+                    <a href="../index.html" class="text-[11px] text-rose-400 hover:text-rose-300">Logout</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-area" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-lg border-b border-gray-100/60 p-4 px-8 flex justify-between items-center sticky top-0 z-30">
+            <div class="text-sm text-gray-500"><i class="fas fa-home text-indigo-400"></i> / HR / <span class="font-medium text-gray-800">Attendance Sync</span></div>
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">AD</div>
+        </header>
+
+        <main class="p-8 space-y-6">
+            
+            <div class="flex justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Biometric Auto-Sync & Reports</h2>
+                    <p class="text-gray-500 text-sm mt-1">Upload rptDtAttendance sheet to generate instant WhatsApp reports.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wide mb-4">Step 1: Upload Biometric Sheet</h3>
+                
+                <div class="border-2 border-dashed border-indigo-200 rounded-xl bg-indigo-50/50 flex flex-col items-center justify-center p-8 relative hover:bg-indigo-50 hover:border-indigo-400 transition cursor-pointer" id="uploadZone">
+                    <input type="file" id="bioFile" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept=".csv, .xls, .xlsx" onchange="handleFileUpload()">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-md mb-3">
+                        <i class="fas fa-file-excel text-2xl"></i>
+                    </div>
+                    <p class="text-base font-bold text-gray-900" id="uploadText">Drag & Drop or Click to Upload 'rptDtAttendance'</p>
+                    <p class="text-xs font-medium text-gray-500 mt-1">Supports CSV, XLS, XLSX</p>
+                </div>
+
+                <div id="processBtnContainer" class="hidden mt-4 text-right">
+                    <button onclick="processAttendance()" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-sm font-bold text-white shadow-lg shadow-indigo-200 hover:scale-[1.01] transition flex items-center gap-2 ml-auto">
+                        <i class="fas fa-cogs"></i> Process & Generate Reports
+                    </button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="hidden space-y-6">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Perfect Punches</p>
+                            <p class="text-2xl font-bold text-emerald-600 mt-1">112</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl"><i class="fas fa-check-double"></i></div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 border border-amber-100 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Late Arrivals</p>
+                            <p class="text-2xl font-bold text-amber-500 mt-1" id="lateCount">4</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl"><i class="fas fa-user-clock"></i></div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 border border-rose-100 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Absent / Missing Punch</p>
+                            <p class="text-2xl font-bold text-rose-500 mt-1" id="absentCount">6</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl"><i class="fas fa-user-times"></i></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden">
+                        <div class="bg-amber-50 p-4 border-b border-amber-100 flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-amber-800"><i class="fas fa-clock mr-2"></i>Late Timing Report</h3>
+                            <button onclick="copyToClipboard('lateReportText', this)" class="px-3 py-1.5 bg-white border border-amber-200 text-amber-700 hover:bg-amber-100 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fab fa-whatsapp text-green-500 text-sm"></i> Copy for WA
+                            </button>
+                        </div>
+                        <div class="p-4 flex-1 bg-gray-50/50">
+                            <textarea id="lateReportText" readonly class="w-full h-64 bg-white border border-gray-200 rounded-xl p-4 text-sm text-gray-700 outline-none resize-none font-mono"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden">
+                        <div class="bg-rose-50 p-4 border-b border-rose-100 flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-rose-800"><i class="fas fa-user-slash mr-2"></i>Absent & Missing Punch Report</h3>
+                            <button onclick="copyToClipboard('absentReportText', this)" class="px-3 py-1.5 bg-white border border-rose-200 text-rose-700 hover:bg-rose-100 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fab fa-whatsapp text-green-500 text-sm"></i> Copy for WA
+                            </button>
+                        </div>
+                        <div class="p-4 flex-1 bg-gray-50/50">
+                            <textarea id="absentReportText" readonly class="w-full h-64 bg-white border border-gray-200 rounded-xl p-4 text-sm text-gray-700 outline-none resize-none font-mono"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Formatter function to create the new premium WhatsApp text
+        function generateLateReport() {
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            return `🔴 *LATE ARRIVAL REPORT*
+📅 Date: ${today}
+➖➖➖➖➖➖➖➖➖➖
+🏢 *Admin Department*
+1. Pursottam Rajbhar (PF/ADM/005)
+⏰ In-Time: 10:45 AM | ⏳ 45 Mins Late
+
+🧵 *Stitching Department*
+2. Vijay K. Rathod (PF/STC/035)
+⏰ In-Time: 11:15 AM | ⏳ 1 Hr 15 Mins Late
+
+💻 *Development*
+3. Pratik Gamit (PF/DSP/005)
+⏰ In-Time: 10:20 AM | ⏳ 20 Mins Late
+➖➖➖➖➖➖➖➖➖➖
+*Generated via Panchhi HR*`;
+        }
+
+        function generateAbsentReport() {
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            return `❌ *ABSENTEE & MISSING PUNCH REPORT*
+📅 Date: ${today}
+➖➖➖➖➖➖➖➖➖➖
+1. Priya Pandey (PF/HR/001) - HR Manager
+   ⚠️ *Reason: No IN-Punch found*
+
+2. Prajapati Nareshbhai (PF/STC/036) - Stitching
+   ⚠️ *Reason: Completely Absent*
+➖➖➖➖➖➖➖➖➖➖
+*Kindly update CL/PL/SL accordingly.*`;
+        }
+
+        function handleFileUpload() {
+            const fileInput = document.getElementById('bioFile');
+            const uploadText = document.getElementById('uploadText');
+            const processBtnContainer = document.getElementById('processBtnContainer');
+
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                uploadText.innerHTML = `<span class="text-emerald-600"><i class="fas fa-check-circle"></i> File Selected: ${fileName}</span>`;
+                document.getElementById('uploadZone').classList.add('border-emerald-400', 'bg-emerald-50');
+                
+                // Show Process Button
+                processBtnContainer.classList.remove('hidden');
+                
+                // Hide results if they were open from previous upload
+                document.getElementById('resultsSection').classList.add('hidden');
+            }
+        }
+
+        function processAttendance() {
+            // In a real app, this will parse the Excel/CSV file (rptDtAttendance)
+            // Here we simulate the processing of the file data to generate WhatsApp reports
+            
+            // Show processing animation on button
+            const btn = document.querySelector('#processBtnContainer button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing Data...`;
+            
+            setTimeout(() => {
+                // Show results section
+                document.getElementById('resultsSection').classList.remove('hidden');
+                
+                // Populate the textareas with our new premium format
+                document.getElementById('lateReportText').value = generateLateReport();
+                document.getElementById('absentReportText').value = generateAbsentReport();
+                
+                // Reset button
+                btn.innerHTML = originalText;
+                
+                // Smooth scroll down to results
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+                
+            }, 800); // Fake delay for UX
+        }
+
+        function copyToClipboard(elementId, btnElement) {
+            const copyText = document.getElementById(elementId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            navigator.clipboard.writeText(copyText.value);
+            
+            // Visual feedback on button
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = `<i class="fas fa-check text-emerald-600"></i> Copied!`;
+            btnElement.classList.replace('text-amber-700', 'text-emerald-700');
+            btnElement.classList.replace('text-rose-700', 'text-emerald-700');
+            
+            setTimeout(() => {
+                btnElement.innerHTML = originalHTML;
+                btnElement.classList.replace('text-emerald-700', elementId.includes('late') ? 'text-amber-700' : 'text-rose-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
