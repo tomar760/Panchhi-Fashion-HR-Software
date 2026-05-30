@@ -4,31 +4,24 @@
     <meta charset="UTF-8">
     <title>Payroll Engine - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="bg-gray-50">
-    <div class="main-area p-8">
+    <div class="p-8">
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900">Payroll Engine</h2>
-                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline">Back to Dashboard</a>
             </div>
             <div class="flex gap-3">
                 <button class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg">Run Payroll</button>
-                <button class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg">Export Excel</button>
             </div>
-        </div>
-        <div class="bg-white rounded-2xl border shadow-sm overflow-hidden mb-6">
-            <table class="w-full">
-                <thead class="bg-gray-50"><tr><th>E-Code</th><th>Name</th><th>CTC</th><th>Days</th><th>Deductions</th><th>Net Salary</th></tr></thead>
-                <tbody><tr><td colspan="6" class="text-center py-6 text-gray-500">Run Calculation to generate preview.</td></tr></tbody>
-            </table>
         </div>
         <div class="bg-white p-6 border border-dashed rounded-xl opacity-50">
             <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Statutory Modules (Disabled)</h4>
             <div class="flex gap-4 text-xs font-bold text-gray-600"><span>[OFF] PF 12%</span><span>[OFF] ESIC 0.75%</span><span>[OFF] OT</span></div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
