@@ -6,9 +6,9 @@
     <title>Master Dashboard - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <style>
-        /* Custom scrollbar for Activity Feed */
         .feed-scroll::-webkit-scrollbar { width: 4px; }
         .feed-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .module-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.15); }
@@ -61,11 +61,24 @@
                 <p class="text-xs text-gray-500 font-medium mt-0.5">Here is what's happening at Panchhi today.</p>
             </div>
             
-            <div class="flex items-center gap-6">
-                <div class="relative hidden md:block w-64">
+            <div class="flex items-center">
+                <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl mr-6 shadow-sm">
+                    <div class="flex items-center gap-1.5 text-indigo-600">
+                        <i class="far fa-calendar-alt text-sm"></i>
+                        <span id="liveDate" class="text-xs font-bold tracking-wide uppercase">--</span>
+                    </div>
+                    <span class="text-gray-300">|</span>
+                    <div class="flex items-center gap-1.5 text-amber-600">
+                        <i class="far fa-clock text-sm"></i>
+                        <span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span>
+                    </div>
+                </div>
+
+                <div class="relative hidden md:block w-64 mr-6">
                     <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
                     <input type="text" placeholder="Search employee, E-Code..." class="w-full bg-gray-100/50 border border-gray-200 rounded-full pl-9 pr-4 py-2 text-sm outline-none focus:border-indigo-500 focus:bg-white transition focus:ring-4 focus:ring-indigo-500/10">
                 </div>
+                
                 <div class="flex items-center gap-3 border-l border-gray-200 pl-6">
                     <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md ring-2 ring-white">AD</div>
                     <div class="hidden sm:block">
@@ -80,7 +93,6 @@
             
             <div class="flex flex-wrap items-center gap-4 bg-gradient-to-r from-indigo-900 via-slate-800 to-indigo-900 rounded-2xl p-6 shadow-xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-                
                 <div class="flex-1 z-10">
                     <p class="text-indigo-200 text-sm font-medium mb-1"><i class="fas fa-bolt text-amber-400 mr-1"></i> Quick Launch</p>
                     <h3 class="text-white text-xl font-bold">Fast Action Center</h3>
@@ -138,27 +150,20 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
-                <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden">
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative">
                     <div class="flex items-center justify-between mb-6">
                         <div>
                             <h3 class="text-lg font-bold text-gray-900">Workforce & Payroll Analytics</h3>
                             <p class="text-xs text-gray-500 mt-0.5">Estimated expense vs active attendance trends.</p>
                         </div>
-                        <select class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 outline-none font-medium text-gray-600">
+                        <select class="text-xs border border-gray-200 rounded-lg px-3 py-1.5 outline-none font-bold text-indigo-700 bg-indigo-50">
                             <option>This Month</option>
                             <option>Last Month</option>
                         </select>
                     </div>
                     
-                    <div class="h-64 w-full flex items-end justify-between gap-2 px-2 relative border-b border-l border-gray-100 pb-2 pl-2">
-                        <div class="absolute w-full h-[1px] bg-gray-50 bottom-1/4 left-0"></div>
-                        <div class="absolute w-full h-[1px] bg-gray-50 bottom-2/4 left-0"></div>
-                        <div class="absolute w-full h-[1px] bg-gray-50 bottom-3/4 left-0"></div>
-                        
-                        <div class="w-full bg-indigo-50 hover:bg-indigo-100 transition rounded-t-sm h-[40%] relative group"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-indigo-600 opacity-0 group-hover:opacity-100 transition">Week 1</span></div>
-                        <div class="w-full bg-indigo-50 hover:bg-indigo-100 transition rounded-t-sm h-[65%] relative group"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-indigo-600 opacity-0 group-hover:opacity-100 transition">Week 2</span></div>
-                        <div class="w-full bg-indigo-500 hover:bg-indigo-600 transition rounded-t-sm h-[85%] relative group shadow-lg shadow-indigo-200"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-indigo-600 opacity-0 group-hover:opacity-100 transition">Week 3</span></div>
-                        <div class="w-full bg-indigo-50 hover:bg-indigo-100 transition rounded-t-sm h-[50%] relative group"><span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-indigo-600 opacity-0 group-hover:opacity-100 transition">Week 4</span></div>
+                    <div class="w-full h-72">
+                        <canvas id="payrollAnalyticsChart"></canvas>
                     </div>
                 </div>
 
@@ -184,10 +189,9 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 h-[230px] flex flex-col">
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 h-[240px] flex flex-col">
                         <h3 class="text-sm font-bold text-gray-900 mb-3 flex items-center"><i class="fas fa-bolt text-amber-500 mr-2"></i> Live Activity Feed</h3>
                         <div class="flex-1 overflow-y-auto feed-scroll pr-2 space-y-4">
-                            
                             <div class="flex gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0"></div>
                                 <div>
@@ -195,7 +199,6 @@
                                     <p class="text-[10px] text-gray-400 mt-0.5">10 minutes ago</p>
                                 </div>
                             </div>
-                            
                             <div class="flex gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></div>
                                 <div>
@@ -203,7 +206,6 @@
                                     <p class="text-[10px] text-gray-400 mt-0.5">1 hour ago</p>
                                 </div>
                             </div>
-                            
                             <div class="flex gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></div>
                                 <div>
@@ -211,7 +213,6 @@
                                     <p class="text-[10px] text-gray-400 mt-0.5">Yesterday, 10:45 AM</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -224,20 +225,16 @@
     <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 opacity-100 transition-opacity">
         <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center relative overflow-hidden transform scale-100">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-amber-400 to-orange-500"></div>
-            
             <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-200 transition">
                 <i class="fas fa-times"></i>
             </button>
-            
             <div class="w-20 h-20 rounded-full bg-amber-50 border-4 border-amber-100 flex items-center justify-center mx-auto mb-5">
                 <i class="fas fa-hard-hat text-3xl text-amber-500"></i>
             </div>
-            
             <h2 class="text-2xl font-black text-gray-900 mb-2">Module Under Construction</h2>
             <p class="text-sm text-gray-500 mb-6 leading-relaxed">
                 We are currently building out the <span id="constructionText" class="font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">Module</span> section. This will be available in Phase 2 of the ERP rollout.
             </p>
-            
             <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center justify-between text-left">
                 <div class="flex items-center gap-3">
                     <i class="fas fa-rocket text-indigo-500 text-lg"></i>
@@ -248,7 +245,6 @@
                 </div>
                 <span class="text-[10px] font-bold text-white bg-indigo-500 px-2.5 py-1 rounded-full shadow-sm">In Progress</span>
             </div>
-            
             <button onclick="closeComingSoon()" class="mt-6 w-full py-3 bg-gray-900 hover:bg-black text-white rounded-xl text-sm font-bold transition shadow-lg shadow-gray-900/20">
                 Got it, take me back
             </button>
@@ -256,5 +252,81 @@
     </div>
 
     <script src="../assets/js/app.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('payrollAnalyticsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [
+                        {
+                            label: 'Active Attendance',
+                            data: [125, 130, 128, 132],
+                            type: 'line',
+                            borderColor: '#f59e0b', /* Amber color */
+                            backgroundColor: '#f59e0b',
+                            tension: 0.4,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#f59e0b',
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Estimated Expense (₹)',
+                            data: [650000, 720000, 680000, 800000],
+                            backgroundColor: 'rgba(79, 70, 229, 0.85)', /* Indigo color */
+                            hoverBackgroundColor: 'rgba(79, 70, 229, 1)',
+                            borderRadius: 6,
+                            borderSkipped: false,
+                            yAxisID: 'y'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            position: 'left',
+                            grid: { color: '#f3f4f6', drawBorder: false },
+                            ticks: { font: { size: 10 }, color: '#9ca3af' }
+                        },
+                        y1: { 
+                            type: 'linear', 
+                            position: 'right', 
+                            beginAtZero: true, 
+                            grid: { display: false },
+                            ticks: { font: { size: 10 }, color: '#9ca3af' }
+                        },
+                        x: {
+                            grid: { display: false, drawBorder: false },
+                            ticks: { font: { size: 11, weight: 'bold' }, color: '#6b7280' }
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            position: 'top', 
+                            align: 'end',
+                            labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, weight: 'bold' }, padding: 20 } 
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 12 },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
