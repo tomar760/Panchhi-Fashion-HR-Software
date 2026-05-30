@@ -1,85 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
     <title>Settings - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
-<body class="bg-slate-50">
-
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40">
-        <div class="p-6 border-b border-white/10 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg">P</div>
-            <div><h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1></div>
+<body class="bg-gray-50">
+    <div class="p-8">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Settings</h2>
+            <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline">Back to Dashboard</a>
         </div>
-        <nav class="flex-1 py-5 space-y-1 custom-scrollbar overflow-y-auto">
-            <a href="dashboard.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-chart-pie w-5"></i> <span class="text-sm">Overview</span></a>
-            <div class="px-6 mt-6 mb-2"><p class="text-[10px] font-bold text-slate-500 uppercase">HR & Payroll Engine</p></div>
-            <a href="employees.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-users w-5"></i> <span class="text-sm">Employee Directory</span></a>
-            <a href="attendance.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-user-clock w-5"></i> <span class="text-sm">Attendance & Leaves</span></a>
-            <a href="ledger.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-hand-holding-usd w-5"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
-            <a href="payroll.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-file-invoice-dollar w-5"></i> <span class="text-sm">Generate Salary</span></a>
-            <div class="px-6 mt-6 mb-2"><p class="text-[10px] font-bold text-slate-500 uppercase">Core Operations</p></div>
-            <a href="gatepass.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
-            <a href="store.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
-        </nav>
-    </aside>
-
-    <div class="main-area min-h-screen" style="margin-left: 260px;">
-        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-            <div>
-                <h2 class="text-xl font-bold text-gray-900 flex items-center"><i class="fas fa-cog text-indigo-500 mr-2"></i> System Configurations</h2>
-            </div>
-            <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Back to Dashboard</a>
-        </header>
-
-        <main class="p-8 max-w-4xl mx-auto space-y-6">
-            
-            <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-6">
-                <div>
-                    <h3 class="text-lg font-bold border-b pb-2 mb-4">Statutory Rules (Future Proofing)</h3>
-                    <p class="text-sm text-gray-500 mb-6">Enable these features when company policy updates. This will automatically affect Payroll Engine calculations.</p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between p-4 border rounded-xl bg-gray-50/50">
-                            <div>
-                                <p class="font-bold text-gray-900">Enable PF Deduction (12%)</p>
-                                <p class="text-xs text-gray-500">Deduct standard Provident Fund from basic salary.</p>
-                            </div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-not-allowed opacity-60">
-                                <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between p-4 border rounded-xl bg-gray-50/50">
-                            <div>
-                                <p class="font-bold text-gray-900">Enable ESIC Deduction (0.75%)</p>
-                                <p class="text-xs text-gray-500">Deduct employee state insurance contribution.</p>
-                            </div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-not-allowed opacity-60">
-                                <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between p-4 border rounded-xl bg-gray-50/50">
-                            <div>
-                                <p class="font-bold text-gray-900">Enable Overtime (OT) Pay</p>
-                                <p class="text-xs text-gray-500">Calculate single/double pay for extra hours logged in Attendance.</p>
-                            </div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-not-allowed opacity-60">
-                                <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </main>
+        <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4 max-w-2xl">
+            <h3 class="font-bold border-b pb-2">Statutory Rules</h3>
+            <div class="flex justify-between p-4 border rounded-xl bg-gray-50"><p class="font-bold">Enable PF (12%)</p><span class="text-gray-400">Disabled</span></div>
+            <div class="flex justify-between p-4 border rounded-xl bg-gray-50"><p class="font-bold">Enable ESIC (0.75%)</p><span class="text-gray-400">Disabled</span></div>
+            <div class="flex justify-between p-4 border rounded-xl bg-gray-50"><p class="font-bold">Enable Overtime</p><span class="text-gray-400">Disabled</span></div>
+        </div>
     </div>
-
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
