@@ -24,7 +24,19 @@ function updateGreeting() {
     greetingElement.innerHTML = `${icon} ${greeting}, Aditya!`;
 }
 
-// 2. Under Construction / Coming Soon Alert
+// 2. Live Date and Time Logic
+function updateClock() {
+    const dateEl = document.getElementById('liveDate');
+    const timeEl = document.getElementById('liveTime');
+    if(!dateEl || !timeEl) return;
+
+    const now = new Date();
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    dateEl.innerText = now.toLocaleDateString('en-US', options);
+    timeEl.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+// 3. Under Construction / Coming Soon Alert
 function showComingSoon(moduleName) {
     const modal = document.getElementById('constructionModal');
     const text = document.getElementById('constructionText');
@@ -43,7 +55,7 @@ function closeComingSoon() {
     }
 }
 
-// 3. Universal API Sync Function
+// 4. Universal API Sync Function
 async function syncToCloud(payload, buttonElement) {
     const originalText = buttonElement.innerHTML;
     buttonElement.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Syncing...`;
@@ -89,6 +101,7 @@ async function syncToCloud(payload, buttonElement) {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     updateGreeting();
-    // Update time every minute just in case they leave tab open
+    updateClock();
     setInterval(updateGreeting, 60000); 
+    setInterval(updateClock, 1000); // Ticks every second
 });
