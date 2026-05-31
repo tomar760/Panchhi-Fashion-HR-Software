@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee Directory - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -11,7 +10,8 @@
 </head>
 <body class="bg-slate-50">
 
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40">
+    <!-- MASTER SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40 shadow-2xl">
         <div class="p-6 border-b border-white/10 flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
             <div>
@@ -19,42 +19,51 @@
                 <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
             </div>
         </div>
-        
-        <nav class="flex-1 py-5 space-y-1 overflow-y-auto custom-scrollbar">
-            <a href="dashboard.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5"></i> <span class="text-sm">Overview</span></a>
-            
-            <div class="px-6 mt-6 mb-2">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">HR & Payroll Engine</p>
+        <nav class="flex-1 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+            <a href="dashboard.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5 text-center text-lg"></i> <span class="text-sm font-bold">Analytics</span></a>
+            <div>
+                <button onclick="toggleMenu('hrMenu')" class="w-full nav-item bg-indigo-600/20 border-r-4 border-indigo-500 px-6 py-3 flex items-center justify-between text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-users-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">HR & Payroll</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 rotate-180" id="hrMenu-icon"></i>
+                </button>
+                <div id="hrMenu" class="bg-slate-950/50 py-2 border-l-2 border-indigo-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="employees.html" class="block px-10 py-2 text-xs font-bold text-indigo-400">Employee Directory</a>
+                    <a href="attendance.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Attendance & Leaves</a>
+                    <a href="ledger.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Advance & Loan Ledger</a>
+                    <a href="payroll.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Salary Engine</a>
+                </div>
             </div>
-            <a href="employees.html" class="nav-item active px-6 py-2.5 flex items-center gap-3 text-white bg-indigo-600/20 border-r-4 border-indigo-500"><i class="fas fa-users w-5"></i> <span class="text-sm font-medium">Employee Directory</span></a>
-            <a href="attendance.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-user-clock w-5"></i> <span class="text-sm">Attendance & Leaves</span></a>
-            <a href="ledger.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-hand-holding-usd w-5"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
-            <a href="payroll.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-file-invoice-dollar w-5"></i> <span class="text-sm">Generate Salary</span></a>
-            
-            <div class="px-6 mt-6 mb-2">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Core Operations</p>
+            <div>
+                <button onclick="toggleMenu('coreMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-building w-5 text-center text-lg"></i> <span class="text-sm font-bold">Core Operations</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="coreMenu-icon"></i>
+                </button>
+                <div id="coreMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-emerald-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="gatepass.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Gate Pass Tracker</a>
+                    <a href="store.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Store & Inventory</a>
+                </div>
             </div>
-            <a href="gatepass.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-id-badge w-5"></i> <span class="text-sm">Gate Pass</span></a>
-            <a href="store.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-boxes w-5"></i> <span class="text-sm">Store & Inventory</span></a>
-            <a href="settings.html" class="nav-item px-6 py-2.5 flex items-center gap-3 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5"></i> <span class="text-sm">Settings</span></a>
+            <a href="javascript:void(0)" onclick="showComingSoon('Sales Analytics')" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-line w-5 text-center text-lg"></i> <span class="text-sm font-bold">Sales Analytics</span></a>
+            <a href="settings.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">Settings</span></a>
         </nav>
+        <div class="p-4 border-t border-white/10 bg-slate-900/50">
+            <a href="profile.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/10 transition group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-2 border-slate-700 flex items-center justify-center text-white font-bold shadow-md">AD</div>
+                <div class="flex-1"><p class="text-sm font-bold text-white group-hover:text-indigo-300 transition">Aditya Tomar</p><p class="text-[10px] text-slate-400">View Profile</p></div>
+                <i class="fas fa-angle-right text-slate-500 text-xs"></i>
+            </a>
+        </div>
     </aside>
 
     <div class="main-area min-h-screen" style="margin-left: 260px;">
-        
         <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-            <div>
-                <h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2>
-                <p class="text-xs text-gray-500 font-medium mt-0.5">Manage staff, master MIS records, and cloud onboarding.</p>
-            </div>
-            
+            <div><h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2></div>
             <div class="flex items-center">
-                <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl mr-6 shadow-sm">
+                <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl shadow-sm">
                     <div class="flex items-center gap-1.5 text-indigo-600"><i class="far fa-calendar-alt text-sm"></i><span id="liveDate" class="text-xs font-bold uppercase">--</span></div>
                     <span class="text-gray-300">|</span>
                     <div class="flex items-center gap-1.5 text-amber-600"><i class="far fa-clock text-sm"></i><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div>
                 </div>
-                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Dashboard</a>
             </div>
         </header>
 
@@ -62,46 +71,24 @@
             <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                 <div>
                     <h3 class="font-bold text-gray-900 text-lg">Staff Control Center</h3>
-                    <p class="text-xs text-gray-500">Add employees manually or upload bulk MIS sheets.</p>
+                    <p class="text-xs text-gray-500">Manage directory, VIP flags, and Bulk MIS sync.</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="openBulkUploadModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-sm font-bold flex items-center gap-2 transition">
-                        <i class="fas fa-file-excel text-emerald-600"></i> Bulk Upload MIS
-                    </button>
-                    <button onclick="openManualAddModal()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 flex items-center gap-2 transition">
-                        <i class="fas fa-user-plus"></i> Add Employee (Manual)
-                    </button>
+                    <button onclick="document.getElementById('bulkUploadModal').classList.replace('hidden', 'flex')" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-sm font-bold flex items-center gap-2 transition"><i class="fas fa-file-excel text-emerald-600"></i> Bulk Upload MIS</button>
+                    <button onclick="document.getElementById('manualAddModal').classList.replace('hidden', 'flex')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 flex items-center gap-2 transition"><i class="fas fa-user-plus"></i> Add Employee (Manual)</button>
                 </div>
             </div>
 
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div class="p-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                     <h3 class="font-bold text-slate-700 text-sm uppercase tracking-wider">Active Staff Database</h3>
+                    <input type="text" placeholder="Quick Search..." class="text-xs border px-3 py-1.5 rounded-xl outline-none w-48 focus:border-indigo-500">
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                        <thead>
-                            <tr>
-                                <th>E-Code</th>
-                                <th>Employee Details</th>
-                                <th>Department & Role</th>
-                                <th>Salary (CTC)</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="employeeTableBody">
-                            <tr class="hover:bg-gray-50/50">
-                                <td class="font-mono text-indigo-600 font-bold">PF/STC/035</td>
-                                <td>
-                                    <p class="font-bold text-gray-900">Vijay K. Rathod</p>
-                                    <p class="text-xs text-gray-500"><i class="fas fa-phone text-[10px] mr-1"></i>9998887776</p>
-                                </td>
-                                <td>
-                                    <p class="font-medium text-gray-800">Stitching</p>
-                                </td>
-                                <td class="font-bold text-gray-900">₹ 21,000</td>
-                                <td><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full text-xs font-bold border border-emerald-100">ACTIVE</span></td>
-                            </tr>
+                        <thead><tr><th>E-Code</th><th>Employee Details</th><th>Dept & Role</th><th>Fixed Salary</th><th>VIP Flags</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td colspan="6" class="text-center py-8 text-gray-500"><i class="fas fa-database text-2xl text-gray-300 mb-2 block"></i> Waiting for MIS data... Upload your Excel or add manually.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -109,11 +96,12 @@
         </main>
     </div>
 
+    <!-- Modals (Manual Form & Bulk) -->
     <div id="manualAddModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 space-y-4 relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex justify-between items-center border-b pb-3">
                 <h2 class="text-xl font-black text-gray-900"><i class="fas fa-user-edit text-indigo-500 mr-2"></i>New Employee Onboarding</h2>
-                <button onclick="closeManualAddModal()" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+                <button onclick="document.getElementById('manualAddModal').classList.replace('flex', 'hidden')" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">E-Code *</label><input type="text" id="empEcode" class="w-full p-2.5 border rounded-xl text-sm font-mono font-bold bg-gray-50 outline-none"></div>
@@ -121,128 +109,75 @@
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">Mobile *</label><input type="text" id="empMobile" class="w-full p-2.5 border rounded-xl text-sm outline-none"></div>
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">Department *</label><select id="empDept" class="w-full p-2.5 border rounded-xl text-sm outline-none"><option>Stitching</option><option>Checking</option><option>Finishing</option><option>Packing</option><option>Admin</option></select></div>
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">Designation</label><input type="text" id="empDesig" class="w-full p-2.5 border rounded-xl text-sm outline-none"></div>
-                <div><label class="text-xs font-bold text-gray-600 block mb-1">Monthly Salary *</label><input type="number" id="empSalary" class="w-full p-2.5 border rounded-xl text-sm font-bold outline-none"></div>
+                <div><label class="text-xs font-bold text-gray-600 block mb-1">Fixed Monthly CTC (₹) *</label><input type="number" id="empSalary" class="w-full p-2.5 border rounded-xl text-sm font-bold outline-none"></div>
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">Bank Account</label><input type="text" id="empBank" class="w-full p-2.5 border rounded-xl text-sm outline-none"></div>
                 <div><label class="text-xs font-bold text-gray-600 block mb-1">IFSC Code</label><input type="text" id="empIfsc" class="w-full p-2.5 border rounded-xl text-sm outline-none uppercase"></div>
             </div>
-            <button onclick="submitManualEmployee(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg transition">Save Employee</button>
+            <div class="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100 space-y-3">
+                <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wide"><i class="fas fa-star mr-1"></i> Special Criteria Settings</h4>
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="empVip3hr" class="rounded text-indigo-600 w-4 h-4"><span class="text-xs text-gray-700 font-bold">Apply 3-Hour Short Gatepass Rule</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="empVip31day" class="rounded text-indigo-600 w-4 h-4"><span class="text-xs text-gray-700 font-bold">Eligible for 31-Day Bonus</span></label>
+                </div>
+            </div>
+            <button onclick="submitManualEmployee(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-lg transition">Save & Onboard Employee</button>
         </div>
     </div>
 
     <div id="bulkUploadModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 text-center relative overflow-hidden">
-            <button onclick="closeBulkUploadModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
+            <button onclick="document.getElementById('bulkUploadModal').classList.replace('flex', 'hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
             <div class="w-16 h-16 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-file-excel text-2xl text-emerald-500"></i></div>
-            <h2 class="text-xl font-black text-gray-900 mb-1">Bulk MIS Sheet Upload</h2>
-            <p class="text-xs text-gray-500 mb-6">Select your Excel (.xlsx) file to upload.</p>
-            
-            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50 hover:bg-gray-100 transition relative mb-4">
+            <h2 class="text-xl font-black text-gray-900 mb-1">Bulk MIS Upload</h2>
+            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50 hover:bg-gray-100 transition relative mb-4 mt-4">
                 <input type="file" id="misFileInput" accept=".csv, .xlsx, .xls" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateFileName()">
                 <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                <p id="fileNameDisplay" class="text-sm font-bold text-gray-700">Click to Select MIS File</p>
-                <p class="text-[10px] text-gray-400 mt-1">Make sure column names are proper (E-Code, Name, Salary, etc.)</p>
+                <p id="fileNameDisplay" class="text-sm font-bold text-gray-700">Click to Select MIS Excel File</p>
             </div>
+            <button onclick="processBulkUpload(this)" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-lg transition"><i class="fas fa-sync"></i> Upload & Sync to Cloud</button>
+        </div>
+    </div>
 
-            <button onclick="processBulkUpload(this)" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-lg transition flex items-center justify-center gap-2">
-                <i class="fas fa-sync"></i> Upload & Sync Data
-            </button>
+    <!-- Construction Modal -->
+    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 text-center relative overflow-hidden">
+            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50"><i class="fas fa-times"></i></button>
+            <div class="w-16 h-16 rounded-full bg-amber-50 border-4 border-amber-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-hard-hat text-2xl text-amber-500"></i></div>
+            <h2 class="text-xl font-black mb-2">Under Construction</h2>
+            <p class="text-sm text-gray-500 mb-6"><span id="constructionText" class="font-bold text-indigo-600">Module</span> is in Phase 2 development.</p>
         </div>
     </div>
 
     <script src="../assets/js/app.js"></script>
     <script>
-        function openManualAddModal() { document.getElementById('manualAddModal').classList.replace('hidden', 'flex'); }
-        function closeManualAddModal() { document.getElementById('manualAddModal').classList.replace('flex', 'hidden'); }
-        function openBulkUploadModal() { document.getElementById('bulkUploadModal').classList.replace('hidden', 'flex'); }
-        function closeBulkUploadModal() { document.getElementById('bulkUploadModal').classList.replace('flex', 'hidden'); }
-
         function updateFileName() {
             const input = document.getElementById('misFileInput');
-            const display = document.getElementById('fileNameDisplay');
-            if (input.files.length > 0) {
-                display.innerText = "File Selected: " + input.files[0].name;
-                display.classList.replace('text-gray-700', 'text-emerald-600');
-            }
+            if (input.files.length > 0) { document.getElementById('fileNameDisplay').innerText = "File Selected: " + input.files[0].name; document.getElementById('fileNameDisplay').classList.replace('text-gray-700', 'text-emerald-600'); }
         }
-
         async function submitManualEmployee(btn) {
-            const eCode = document.getElementById('empEcode').value;
-            const name = document.getElementById('empName').value;
-            const mobile = document.getElementById('empMobile').value;
-            const salary = document.getElementById('empSalary').value;
-            
+            const eCode = document.getElementById('empEcode').value; const name = document.getElementById('empName').value; const mobile = document.getElementById('empMobile').value; const salary = document.getElementById('empSalary').value;
             if(!eCode || !name || !mobile || !salary) { alert("🚨 Fill all mandatory (*) fields!"); return; }
-
             const payload = {
-                action: "addEmployee", eCode: eCode, fullName: name, mobile: mobile, department: document.getElementById('empDept').value,
-                designation: document.getElementById('empDesig').value, doj: "", salary: salary, bankAcc: document.getElementById('empBank').value,
-                ifsc: document.getElementById('empIfsc').value, aadhar: "", pan: "", status: "ACTIVE", vip3Hr: "NO", vip31Day: "NO"
+                action: "addEmployee", eCode: eCode, fullName: name, mobile: mobile, department: document.getElementById('empDept').value, designation: document.getElementById('empDesig').value, doj: "", salary: salary, bankAcc: document.getElementById('empBank').value, ifsc: document.getElementById('empIfsc').value, aadhar: "", pan: "", status: "ACTIVE", vip3Hr: document.getElementById('empVip3hr').checked ? "YES" : "NO", vip31Day: document.getElementById('empVip31day').checked ? "YES" : "NO"
             };
-
             const success = await syncToCloud(payload, btn);
-            if(success) { alert("🎉 Employee Saved!"); closeManualAddModal(); }
+            if(success) { alert("🎉 Employee Saved to Cloud!"); document.getElementById('manualAddModal').classList.replace('flex', 'hidden'); }
         }
-
-        // REAL MAGIC: Reading Excel in Browser and Syncing!
         async function processBulkUpload(btn) {
             const fileInput = document.getElementById('misFileInput');
-            if(!fileInput.files.length) {
-                alert("🚨 Please select an Excel file first!");
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            // Ye file ko padhne ke baad ka process hai
+            if(!fileInput.files.length) { alert("🚨 Please select an Excel file!"); return; }
+            const file = fileInput.files[0]; const reader = new FileReader();
             reader.onload = async function(e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, {type: 'array'});
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const jsonData = XLSX.utils.sheet_to_json(firstSheet); // Excel to JSON convert ho gaya
-
-                if(jsonData.length === 0) {
-                    alert("Your Excel sheet is empty!");
-                    return;
-                }
-
-                // Data format karna taaki backend ko samajh aaye
-                // Yahan Excel ke Column Headers match karne hote hain
-                const formattedRecords = jsonData.map(row => ({
-                    eCode: row['E-Code'] || row['ECode'] || row['Emp Code'] || '',
-                    fullName: row['Name'] || row['Full Name'] || row['Employee Name'] || '',
-                    mobile: row['Mobile'] || row['Phone'] || '',
-                    department: row['Department'] || row['Dept'] || '',
-                    designation: row['Designation'] || '',
-                    doj: row['DOJ'] || row['Date of Joining'] || '',
-                    salary: row['Salary'] || row['CTC'] || row['Basic'] || '',
-                    bankAcc: row['Bank A/c'] || row['Account Number'] || '',
-                    ifsc: row['IFSC'] || '',
-                    aadhar: row['Aadhar'] || '',
-                    pan: row['PAN'] || '',
-                    status: 'ACTIVE',
-                    vip3Hr: 'NO',
-                    vip31Day: 'NO'
+                const data = new Uint8Array(e.target.result); const workbook = XLSX.read(data, {type: 'array'});
+                const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+                if(jsonData.length === 0) { alert("Excel sheet is empty!"); return; }
+                const records = jsonData.map(row => ({
+                    eCode: row['E-Code'] || row['ECode'] || row['Emp Code'] || '', fullName: row['Name'] || row['Full Name'] || '', mobile: row['Mobile'] || '', department: row['Department'] || '', designation: row['Designation'] || '', doj: row['DOJ'] || '', salary: row['Salary'] || row['CTC'] || '', bankAcc: row['Bank A/c'] || '', ifsc: row['IFSC'] || '', aadhar: '', pan: '', status: 'ACTIVE', vip3Hr: 'NO', vip31Day: 'NO'
                 }));
-
-                const payload = {
-                    action: "bulkAddEmployees",
-                    records: formattedRecords
-                };
-
-                const originalBtnText = btn.innerHTML;
-                btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Uploading Data...`;
-                
-                // Cloud me sync bhej diya
-                const success = await syncToCloud(payload, btn);
-                if(success) {
-                    alert(`🎉 MIS Uploaded Successfully! ${formattedRecords.length} records added to the Cloud Database.`);
-                    closeBulkUploadModal();
-                } else {
-                    btn.innerHTML = originalBtnText;
-                }
+                const originalBtnText = btn.innerHTML; btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Syncing to Cloud...`;
+                const success = await syncToCloud({action: "bulkAddEmployees", records: records}, btn);
+                if(success) { alert(`🎉 Successfully Synced ${records.length} Employees to Master Sheet!`); document.getElementById('bulkUploadModal').classList.replace('flex', 'hidden'); } else { btn.innerHTML = originalBtnText; }
             };
-
             reader.readAsArrayBuffer(file);
         }
     </script>
