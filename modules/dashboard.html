@@ -3,137 +3,258 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - Panchhi HR</title>
+    <title>Master Dashboard - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow: hidden; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .stat-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    </style>
 </head>
-<body class="bg-slate-50">
+<body class="flex h-screen">
 
-    <!-- CLEAN 5-POINT SIDEBAR -->
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40 shadow-2xl">
-        <div class="p-6 border-b border-white/10 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
+    <!-- SIDEBAR -->
+    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full shrink-0">
+        <div class="h-20 flex items-center px-6 border-b border-gray-100">
+            <div class="w-10 h-10 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3">P</div>
             <div>
-                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
-                <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
+                <h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1>
+                <p class="text-gray-400 text-[10px] tracking-widest uppercase">Enterprise Suite</p>
             </div>
         </div>
-        
-        <nav class="flex-1 py-4 space-y-1 overflow-y-auto custom-scrollbar">
-            <!-- 1. Analytics -->
-            <a href="dashboard.html" class="nav-item bg-indigo-600/20 border-r-4 border-indigo-500 px-6 py-3 flex items-center gap-4 text-white transition"><i class="fas fa-chart-pie w-5 text-center text-lg"></i> <span class="text-sm font-bold">Analytics</span></a>
-
-            <!-- 2. HR & Payroll Dropdown -->
-            <div>
-                <button onclick="toggleMenu('hrMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
-                    <div class="flex items-center gap-4"><i class="fas fa-users-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">HR & Payroll</span></div>
-                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="hrMenu-icon"></i>
-                </button>
-                <div id="hrMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-indigo-500 ml-6 mr-4 rounded-r-lg space-y-1">
-                    <a href="employees.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Employee Directory</a>
-                    <a href="attendance.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Attendance & Leaves</a>
-                    <a href="ledger.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Advance & Loan Ledger</a>
-                    <a href="payroll.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Salary Engine</a>
-                </div>
-            </div>
-            
-            <!-- 3. Core Operations Dropdown -->
-            <div>
-                <button onclick="toggleMenu('coreMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
-                    <div class="flex items-center gap-4"><i class="fas fa-building w-5 text-center text-lg"></i> <span class="text-sm font-bold">Core Operations</span></div>
-                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="coreMenu-icon"></i>
-                </button>
-                <div id="coreMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-emerald-500 ml-6 mr-4 rounded-r-lg space-y-1">
-                    <a href="gatepass.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Gate Pass Tracker</a>
-                    <a href="store.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Store & Inventory</a>
-                </div>
-            </div>
-
-            <!-- 4. Sales Analytics -->
-            <a href="javascript:void(0)" onclick="showComingSoon('Sales Analytics')" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-line w-5 text-center text-lg"></i> <span class="text-sm font-bold">Sales Analytics</span></a>
-
-            <!-- 5. Settings -->
-            <a href="settings.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">Settings</span></a>
-        </nav>
-
-        <!-- Profile Bottom -->
-        <div class="p-4 border-t border-white/10 bg-slate-900/50">
-            <a href="profile.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/10 transition group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-2 border-slate-700 flex items-center justify-center text-white font-bold shadow-md">AD</div>
-                <div class="flex-1">
-                    <p class="text-sm font-bold text-white group-hover:text-indigo-300 transition">Aditya Tomar</p>
-                    <p class="text-[10px] text-slate-400">View Profile</p>
-                </div>
-                <i class="fas fa-angle-right text-slate-500 text-xs"></i>
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1 custom-scrollbar">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold">
+                <i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm">Dashboard</span>
             </a>
-        </div>
+            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">HR & Payroll</p></div>
+            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
+                <i class="fas fa-users w-5 text-center"></i> <span class="text-sm font-medium">Employee Directory</span>
+            </a>
+            <a href="attendance.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
+                <i class="fas fa-user-clock w-5 text-center"></i> <span class="text-sm font-medium">Attendance & Leaves</span>
+            </a>
+            <a href="gatepass.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
+                <i class="fas fa-id-badge w-5 text-center"></i> <span class="text-sm font-medium">Gate Pass Tracker</span>
+            </a>
+            <a href="ledger.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
+                <i class="fas fa-file-invoice-dollar w-5 text-center"></i> <span class="text-sm font-medium">Advance & Ledger</span>
+            </a>
+            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">Operations</p></div>
+            <a href="store.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
+                <i class="fas fa-boxes w-5 text-center"></i> <span class="text-sm font-medium">Store & Inventory</span>
+            </a>
+        </nav>
     </aside>
 
-    <div class="main-area min-h-screen" style="margin-left: 260px;">
-        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-            <div>
-                <h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2>
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col h-full relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+            <div class="flex items-center text-sm font-medium text-gray-500">
+                <i class="fas fa-home text-indigo-600 mr-2"></i> / <span class="text-gray-800 ml-1">Overview</span>
             </div>
-            <div class="flex items-center">
-                <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-gray-200 px-4 py-2 rounded-xl shadow-sm">
-                    <div class="flex items-center gap-1.5 text-indigo-600"><i class="far fa-calendar-alt text-sm"></i><span id="liveDate" class="text-xs font-bold uppercase">--</span></div>
-                    <span class="text-gray-300">|</span>
-                    <div class="flex items-center gap-1.5 text-amber-600"><i class="far fa-clock text-sm"></i><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold text-gray-900">Admin Portal</p>
+                    <p class="text-[10px] font-medium text-emerald-500"><i class="fas fa-circle text-[8px] mr-1"></i> System Online</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold border border-indigo-200 cursor-pointer">
+                    A
                 </div>
             </div>
         </header>
 
-        <main class="p-8 space-y-8">
-            <div class="grid grid-cols-4 gap-6">
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:-translate-y-1 transition duration-300"><p class="text-xs font-bold text-gray-400 uppercase">Active Workforce</p><h4 class="text-3xl font-black mt-1 text-gray-900">--</h4></div>
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:-translate-y-1 transition duration-300"><p class="text-xs font-bold text-gray-400 uppercase">Absent / Leave</p><h4 class="text-3xl font-black mt-1 text-rose-600">--</h4></div>
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:-translate-y-1 transition duration-300"><p class="text-xs font-bold text-gray-400 uppercase">Advance Dist.</p><h4 class="text-3xl font-black mt-1 text-amber-600">--</h4></div>
-                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:-translate-y-1 transition duration-300"><p class="text-xs font-bold text-gray-400 uppercase">Est. Payroll</p><h4 class="text-3xl font-black mt-1 text-indigo-600">--</h4></div>
+        <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+            
+            <div class="mb-8 flex justify-between items-end">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Welcome back, Admin</h2>
+                    <p class="text-sm text-gray-500 mt-1">Here is what's happening in Panchhi HR today.</p>
+                </div>
+                <button onclick="fetchDashboardData()" class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-bold shadow-sm hover:bg-gray-50 transition flex items-center gap-2">
+                    <i class="fas fa-sync-alt text-indigo-500"></i> Sync Dashboard
+                </button>
             </div>
 
-            <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Expense vs Attendance Trend</h3>
-                    <div class="w-full h-72"><canvas id="analyticsChart"></canvas></div>
+            <!-- KPI STAT CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 stat-card cursor-pointer" onclick="window.location.href='employees.html'">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Total Workforce</p>
+                            <h3 class="text-3xl font-black text-gray-800" id="statEmpCount">--</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500 text-xl"><i class="fas fa-users"></i></div>
+                    </div>
+                    <p class="text-xs font-medium text-emerald-500 mt-4"><i class="fas fa-arrow-up mr-1"></i> Live from DB</p>
                 </div>
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
-                    <h3 class="text-sm font-bold text-gray-900 mb-4"><i class="fas fa-bolt text-amber-500 mr-2"></i> Live Feed</h3>
-                    <div class="space-y-4">
-                        <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-emerald-500 mt-1"></div><p class="text-xs text-gray-800">System Ready for MIS Upload.</p></div>
-                        <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-indigo-500 mt-1"></div><p class="text-xs text-gray-800">Master Engine Synced successfully.</p></div>
+                
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 stat-card cursor-pointer" onclick="window.location.href='attendance.html'">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Today's Present</p>
+                            <h3 class="text-3xl font-black text-gray-800">84%</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-xl"><i class="fas fa-user-check"></i></div>
+                    </div>
+                    <p class="text-xs font-medium text-gray-500 mt-4">Active Roster</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 stat-card cursor-pointer" onclick="window.location.href='gatepass.html'">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Active Gate Pass</p>
+                            <h3 class="text-3xl font-black text-gray-800">03</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500 text-xl"><i class="fas fa-id-badge"></i></div>
+                    </div>
+                    <p class="text-xs font-medium text-amber-600 mt-4 animate-pulse"><i class="fas fa-circle text-[8px] mr-1"></i> Employees Outside</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 stat-card cursor-pointer" onclick="window.location.href='ledger.html'">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Advances / Loans</p>
+                            <h3 class="text-3xl font-black text-gray-800">₹45K</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-500 text-xl"><i class="fas fa-hand-holding-usd"></i></div>
+                    </div>
+                    <p class="text-xs font-medium text-gray-500 mt-4">Current Month Ledger</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- CHART SECTION -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold text-gray-900">Expense vs Attendance Trends</h3>
+                        <select class="text-xs font-bold text-gray-500 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 outline-none">
+                            <option>This Month</option>
+                            <option>Last Month</option>
+                        </select>
+                    </div>
+                    <div class="w-full h-[300px]">
+                        <canvas id="analyticsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- QUICK ACTIONS / SHORTCUTS -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-6">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <a href="employees.html" class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-indigo-200 hover:bg-indigo-50 transition group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center"><i class="fas fa-user-plus"></i></div>
+                                <div><p class="text-sm font-bold text-gray-800 group-hover:text-indigo-700">Add New Employee</p><p class="text-[10px] text-gray-500">Update MIS Master</p></div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-300 group-hover:text-indigo-500"></i>
+                        </a>
+                        
+                        <a href="gatepass.html" class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-amber-200 hover:bg-amber-50 transition group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center"><i class="fas fa-ticket-alt"></i></div>
+                                <div><p class="text-sm font-bold text-gray-800 group-hover:text-amber-700">Issue Gate Pass</p><p class="text-[10px] text-gray-500">Track out-time</p></div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-300 group-hover:text-amber-500"></i>
+                        </a>
+
+                        <a href="store.html" class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50 transition group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fas fa-box"></i></div>
+                                <div><p class="text-sm font-bold text-gray-800 group-hover:text-blue-700">Assign Asset</p><p class="text-[10px] text-gray-500">Update Store Inventory</p></div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-500"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
 
-    <!-- Modals -->
-    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 text-center relative overflow-hidden">
-            <button onclick="closeComingSoon()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-900"><i class="fas fa-times"></i></button>
-            <div class="w-16 h-16 rounded-full bg-amber-50 border-4 border-amber-100 flex items-center justify-center mx-auto mb-4"><i class="fas fa-hard-hat text-2xl text-amber-500"></i></div>
-            <h2 class="text-xl font-black text-gray-900 mb-2">Under Construction</h2>
-            <p class="text-sm text-gray-500 mb-6"><span id="constructionText" class="font-bold text-indigo-600">Module</span> is in Phase 2 development.</p>
         </div>
-    </div>
+    </main>
 
-    <script src="../assets/js/app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new Chart(document.getElementById('analyticsChart').getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    datasets: [
-                        { label: 'Attendance', data: [125, 130, 128, 132], type: 'line', borderColor: '#f59e0b', tension: 0.4, yAxisID: 'y1' },
-                        { label: 'Expense (₹)', data: [650000, 720000, 680000, 800000], backgroundColor: 'rgba(79, 70, 229, 0.85)', borderRadius: 4, yAxisID: 'y' }
-                    ]
+        // Tumhara Master Web App URL
+        const API_URL = "https://script.google.com/macros/s/AKfycbzVfo5SFaK6Mv7R3-1qv2nlroS05O9wruRUbB-e8Deez7euzKIz2T8sTlBm-lnna0eW/exec";
+
+        // Fetch Total Employee Count dynamically from Google Sheets
+        async function fetchDashboardData() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                // Set active employee count on the first card
+                if(data && data.length > 0) {
+                    const activeEmployees = data.filter(emp => (emp['ACTIVE/INACTIVE'] || '').toUpperCase() === 'ACTIVE').length;
+                    document.getElementById('statEmpCount').innerText = activeEmployees > 0 ? activeEmployees : data.length;
+                } else {
+                    document.getElementById('statEmpCount').innerText = "0";
+                }
+            } catch (error) {
+                console.error("Failed to load live stats", error);
+            }
+        }
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('analyticsChart').getContext('2d');
+        const analyticsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [
+                    {
+                        label: 'Advances (₹)',
+                        data: [12000, 19000, 3000, 5000],
+                        backgroundColor: '#7c3aed',
+                        borderRadius: 6,
+                        barThickness: 20
+                    },
+                    {
+                        label: 'Leaves Taken',
+                        data: [5, 12, 3, 8],
+                        backgroundColor: '#fbbf24',
+                        borderRadius: 6,
+                        barThickness: 20
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8, font: { family: 'Inter', size: 12 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                        titleFont: { family: 'Inter', size: 13 },
+                        bodyFont: { family: 'Inter', size: 13 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.dataset.label.includes('₹')) label += '₹' + context.parsed.y;
+                                else label += context.parsed.y + ' Days';
+                                return label;
+                            }
+                        }
+                    }
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, position: 'left' }, y1: { type: 'linear', position: 'right', grid: { display: false } } } }
-            });
+                scales: {
+                    y: { border: { display: false }, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter', size: 11 }, color: '#94a3b8' } },
+                    x: { border: { display: false }, grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 }, color: '#94a3b8' } }
+                }
+            }
         });
+
+        // Load data on start
+        window.onload = fetchDashboardData;
     </script>
 </body>
 </html>
