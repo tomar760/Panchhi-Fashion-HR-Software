@@ -1,58 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Settings - Panchhi HR</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Inter', sans-serif; background-color: #f8fafc; } </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Panchhi HR Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="flex h-screen overflow-hidden">
-    <!-- LIGHT SIDEBAR -->
-    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full">
-        <div class="h-20 flex items-center px-6 border-b border-gray-100">
-            <div class="w-10 h-10 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3">P</div>
-            <div><h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1></div>
-        </div>
-        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span></a>
-            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">System</p></div>
-            <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold"><i class="fas fa-cog w-5 text-center"></i> <span class="text-sm font-medium">Settings</span></a>
-            <a href="profile.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-user-circle w-5 text-center"></i> <span class="text-sm font-medium">Profile</span></a>
-            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">Back</p></div>
-            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-arrow-left w-5 text-center"></i> <span class="text-sm font-medium">Back to HR</span></a>
+<body>
+    <div class="app-wrapper">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon"><i class="fas fa-feather-pointed"></i></div>
+                <div class="brand-text">
+                    <h2 class="aditya-branding">Panchhi HR</h2>
+                    <span>by Aditya Tomar</span>
+                </div>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <a class="nav-link" href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">HR & Payroll</div>
+                    <a class="nav-link" href="employees.html"><i class="fas fa-users"></i> Employee Directory</a>
+                    <a class="nav-link" href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a>
+                    <a class="nav-link" href="gatepass.html"><i class="fas fa-door-open"></i> Gate Pass</a>
+                    <a class="nav-link" href="payroll.html"><i class="fas fa-money-bill-wave"></i> Payroll</a>
+                    <a class="nav-link" href="ledger.html"><i class="fas fa-book"></i> Ledger</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">System</div>
+                    <a class="nav-link" href="store.html"><i class="fas fa-boxes-stacked"></i> Store</a>
+                    <a class="nav-link active" href="settings.html"><i class="fas fa-sliders"></i> Settings</a>
+                    <a class="nav-link" href="profile.html"><i class="fas fa-user-circle"></i> Profile</a>
+                </div>
+            </div>
+            <div class="sidebar-user" onclick="window.location.href='profile.html'">
+                <div class="user-avatar">AT</div>
+                <div class="user-info"><h4>Aditya Tomar</h4><span><span class="online-dot"></span>Super Admin</span></div>
+            </div>
         </nav>
-    </aside>
 
-    <main class="flex-1 flex flex-col h-full overflow-hidden">
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
-            <div class="text-sm font-medium text-gray-500"><i class="fas fa-home text-indigo-600 mr-2"></i> / System / <span class="text-gray-800 ml-1">Settings</span></div>
-        </header>
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                    <div class="greeting"><h1 id="greetingText">Good Morning, Aditya! 👋</h1></div>
+                </div>
+                <div class="header-right">
+                    <div class="live-clock"><i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span></div>
+                    <div class="header-avatar">AT</div>
+                </div>
+            </header>
 
-        <div class="flex-1 overflow-y-auto p-8 max-w-4xl">
-            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
-                <div>
-                    <h3 class="text-xl font-bold text-gray-900 border-b border-gray-100 pb-2 mb-4"><i class="fas fa-sliders-h text-[#7c3aed] mr-2"></i> Statutory Rules & Compliance</h3>
-                    <p class="text-sm text-gray-500 mb-6">Enable these features when company policy updates. This directly affects the Payroll Engine.</p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
-                            <div><p class="font-bold text-gray-900">Enable PF Deduction (12%)</p><p class="text-xs text-gray-500">Deduct standard Provident Fund from basic salary.</p></div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer"><div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div></div>
+            <div class="page-content">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+                    <div class="form-card">
+                        <h3><i class="fas fa-scale-balanced" style="color:var(--primary)"></i> Statutory Rules & Toggles</h3>
+                        <div class="toggle-row">
+                            <div class="toggle-info"><h4>Enable PF Deduction (12%)</h4><p>Auto-deduct PF at 12% of Basic</p></div>
+                            <label class="toggle-switch"><input type="checkbox" checked onchange="showToast('success','Updated','PF setting toggled')"><span class="toggle-slider"></span></label>
                         </div>
-                        <div class="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
-                            <div><p class="font-bold text-gray-900">Enable ESIC Deduction (0.75%)</p><p class="text-xs text-gray-500">Deduct employee state insurance contribution.</p></div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer"><div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div></div>
+                        <div class="toggle-row">
+                            <div class="toggle-info"><h4>Enable ESIC Deduction (0.75%)</h4><p>Auto-deduct ESIC at 0.75% of Gross</p></div>
+                            <label class="toggle-switch"><input type="checkbox" checked onchange="showToast('success','Updated','ESIC setting toggled')"><span class="toggle-slider"></span></label>
                         </div>
-                        <div class="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
-                            <div><p class="font-bold text-gray-900">Enable Overtime (OT) Pay</p><p class="text-xs text-gray-500">Calculate single/double pay for extra hours logged.</p></div>
-                            <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer"><div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div></div>
+                        <div class="toggle-row">
+                            <div class="toggle-info"><h4>Enable Overtime (OT)</h4><p>Allow overtime tracking</p></div>
+                            <label class="toggle-switch"><input type="checkbox" checked onchange="showToast('success','Updated','OT setting toggled')"><span class="toggle-slider"></span></label>
                         </div>
+                    </div>
+
+                    <div class="form-card">
+                        <h3><i class="fas fa-sliders" style="color:var(--primary)"></i> Company Configuration</h3>
+                        <div class="form-group"><label>Company Name</label><input type="text" value="Panchhi HR Software"></div>
+                        <div class="form-group"><label>Default Working Hours</label><input type="number" value="8"></div>
+                        <div class="form-group"><label>Max Advance % of CTC</label><input type="number" value="50"></div>
+                        <button class="btn btn-primary ripple" style="width:100%;justify-content:center;margin-top:8px" onclick="processBtn(this,'Company settings saved successfully!')"><i class="fas fa-save"></i> Save Configuration</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+    <div class="toast" id="toast"><div class="toast-icon" id="toastIcon"></div><div class="toast-text"><h4 id="toastTitle"></h4><p id="toastMessage"></p></div></div>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>
