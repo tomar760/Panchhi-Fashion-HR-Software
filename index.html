@@ -1,75 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panchhi HR Enterprise Suite</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchhi HR Software | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-  <!-- Login Overlay -->
-  <div class="login-overlay" id="loginOverlay">
-    <div class="login-card">
-      <div class="login-logo">
-        <div class="logo-icon"><i class="fas fa-feather-pointed"></i></div>
-        <h1>Panchhi HR Enterprise</h1>
-        <p>System Login</p>
-      </div>
-      <div class="form-group"><label>Username</label><input type="text" id="loginUser" value="admin@panchhihr.com"></div>
-      <div class="form-group"><label>Password</label><input type="password" id="loginPass" value="••••••••"></div>
-      <button class="login-btn ripple" id="loginBtn" onclick="handleLogin()">Sign In</button>
-    </div>
-  </div>
-
-  <div class="app-wrapper" id="appWrapper">
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
-      <div class="sidebar-brand">
-        <div class="brand-icon"><i class="fas fa-feather-pointed"></i></div>
-        <div class="brand-text"><h2>Panchhi HR</h2><span>Enterprise v2.4</span></div>
-      </div>
-      <div class="sidebar-nav">
-        <div class="nav-section-title">Main</div>
-        <a class="nav-link active" onclick="loadModule('dashboard', this)"><i class="fas fa-th-large"></i> Dashboard</a>
-        <div class="nav-section-title">HR & Payroll</div>
-        <a class="nav-link" onclick="loadModule('employees', this)"><i class="fas fa-users"></i> Employees Directory</a>
-        <a class="nav-link" onclick="loadModule('gatepass', this)"><i class="fas fa-door-open"></i> Gate Pass</a>
-        <!-- Add other links similarly -->
-      </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <div class="main-content">
-      <header class="top-header">
-        <div class="header-left">
-          <h1 id="greetingText">Good Morning, Aditya! 👋</h1>
-          <p id="greetingDate">Loading date...</p>
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon"><i class="fas fa-feather-pointed"></i></div>
+                <h1 class="aditya-branding">Panchhi HR Software</h1>
+                <p>Designed & Managed by Aditya</p>
+            </div>
+            <div class="form-group">
+                <label>Username or Email</label>
+                <input type="text" id="loginUser" placeholder="admin@panchhihr.com" value="admin@panchhihr.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="Enter your password" value="••••••••">
+            </div>
+            <button class="login-btn ripple" id="loginBtn" onclick="handleLogin()">
+                <i class="fas fa-arrow-right"></i>&nbsp; Sign In to Dashboard
+            </button>
+            <div class="login-footer">
+                <p>© 2026 Panchhi HR Software by Aditya Tomar — v2.4.0</p>
+            </div>
         </div>
-        <div class="header-right">
-          <div class="live-clock"><i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span></div>
-        </div>
-      </header>
-
-      <!-- Modules will load inside this div automatically -->
-      <div class="page-content" id="module-container">
-         <!-- Content fetched by JS comes here -->
-      </div>
     </div>
-  </div>
-
-  <!-- Global Toast Notification -->
-  <div class="toast" id="toast">
-    <div class="toast-icon" id="toastIcon"><i class="fas fa-check"></i></div>
-    <div class="toast-text">
-      <h4 id="toastTitle">Success</h4>
-      <p id="toastMessage">Action completed</p>
+    
+    <!-- Toast Required For JS -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon"><i class="fas fa-check"></i></div>
+        <div class="toast-text"><h4 id="toastTitle"></h4><p id="toastMessage"></p></div>
     </div>
-  </div>
 
-  <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
