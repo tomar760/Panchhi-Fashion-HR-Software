@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - Panchhi HR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="bg-slate-50">
+
+    <!-- MASTER SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40 shadow-2xl">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
+            <div>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+            <a href="dashboard.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5 text-center text-lg"></i> <span class="text-sm font-bold">Analytics</span></a>
+            <div>
+                <button onclick="toggleMenu('hrMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-users-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">HR & Payroll</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="hrMenu-icon"></i>
+                </button>
+                <div id="hrMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-indigo-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="employees.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Employee Directory</a>
+                    <a href="attendance.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Attendance & Leaves</a>
+                    <a href="ledger.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Advance & Loan Ledger</a>
+                    <a href="payroll.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Salary Engine</a>
+                </div>
+            </div>
+            <div>
+                <button onclick="toggleMenu('coreMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-building w-5 text-center text-lg"></i> <span class="text-sm font-bold">Core Operations</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="coreMenu-icon"></i>
+                </button>
+                <div id="coreMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-emerald-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="gatepass.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Gate Pass Tracker</a>
+                    <a href="store.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Store & Inventory</a>
+                </div>
+            </div>
+            <a href="javascript:void(0)" onclick="showComingSoon('Sales Analytics')" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-line w-5 text-center text-lg"></i> <span class="text-sm font-bold">Sales Analytics</span></a>
+            <a href="settings.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">Settings</span></a>
+        </nav>
+        <div class="p-4 border-t border-white/10 bg-slate-800">
+            <a href="profile.html" class="flex items-center gap-3 p-2 rounded-xl group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-2 border-slate-700 flex items-center justify-center text-white font-bold shadow-md">AD</div>
+                <div class="flex-1"><p class="text-sm font-bold text-white transition">Aditya Tomar</p><p class="text-[10px] text-indigo-400">Editing Profile...</p></div>
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-area min-h-screen" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900 flex items-center"><i class="fas fa-user-circle text-indigo-500 mr-2"></i> Admin Profile</h2>
+                <p class="text-xs text-gray-500 font-medium mt-0.5">Manage your personal information and system security.</p>
+            </div>
+            <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> Dashboard</a>
+        </header>
+
+        <main class="p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                <div class="h-32 bg-gradient-to-r from-indigo-600 to-purple-600 relative"></div>
+                <div class="px-6 pb-6 text-center -mt-16 relative">
+                    <div class="w-32 h-32 rounded-full border-4 border-white bg-white mx-auto shadow-xl relative group">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center text-4xl font-black text-indigo-400 overflow-hidden">AD</div>
+                    </div>
+                    <h3 class="text-xl font-black text-gray-900 mt-4">Aditya Tomar</h3>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mt-1">Super Admin</p>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fas fa-envelope mr-1 text-gray-400"></i> admin@panchhihr.com</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-6">
+                <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
+                    <h4 class="text-lg font-bold text-gray-900 mb-6 border-b pb-2">Personal Information</h4>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">First Name</label><input type="text" value="Aditya" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">Last Name</label><input type="text" value="Tomar" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">Mobile Number</label><input type="text" value="+91 9876543210" class="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">Location</label><input type="text" value="Gujarat, India" class="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none"></div>
+                    </div>
+                    <div class="mt-6 flex justify-end"><button class="px-6 py-3 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg">Save Changes</button></div>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
+                    <h4 class="text-lg font-bold text-gray-900 mb-6 border-b pb-2 flex items-center gap-2"><i class="fas fa-shield-alt text-emerald-500"></i> Account Security</h4>
+                    <div class="space-y-4">
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">Current Password</label><input type="password" placeholder="••••••••" class="w-full md:w-1/2 p-3 border border-gray-200 rounded-xl text-sm outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-600 block mb-1">New Password</label><input type="password" placeholder="Enter new password" class="w-full md:w-1/2 p-3 border border-gray-200 rounded-xl text-sm outline-none"></div>
+                    </div>
+                    <div class="mt-6"><button class="px-6 py-3 bg-gray-900 text-white rounded-xl text-sm font-bold shadow-lg">Update Password</button></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Construction Modal -->
+    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <!-- Modal Same as other pages -->
+    </div>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>
