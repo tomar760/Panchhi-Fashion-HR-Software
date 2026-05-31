@@ -5,72 +5,51 @@
     <title>Payroll Engine - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f8fafc; } </style>
 </head>
-<body class="bg-slate-50">
-    <!-- MASTER SIDEBAR -->
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40 shadow-2xl">
-        <div class="p-6 border-b border-white/10 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
-            <div>
-                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
-                <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
-            </div>
+<body class="flex h-screen overflow-hidden">
+    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full">
+        <div class="h-20 flex items-center px-6 border-b border-gray-100">
+            <div class="w-10 h-10 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3">P</div>
+            <div><h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1></div>
         </div>
-        <nav class="flex-1 py-4 space-y-1 overflow-y-auto custom-scrollbar">
-            <a href="dashboard.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5 text-center text-lg"></i> <span class="text-sm font-bold">Analytics</span></a>
-            <div>
-                <button onclick="toggleMenu('hrMenu')" class="w-full nav-item bg-indigo-600/20 border-r-4 border-indigo-500 px-6 py-3 flex items-center justify-between text-white transition outline-none">
-                    <div class="flex items-center gap-4"><i class="fas fa-users-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">HR & Payroll</span></div>
-                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 rotate-180" id="hrMenu-icon"></i>
-                </button>
-                <div id="hrMenu" class="bg-slate-950/50 py-2 border-l-2 border-indigo-500 ml-6 mr-4 rounded-r-lg space-y-1">
-                    <a href="employees.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Employee Directory</a>
-                    <a href="attendance.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Attendance & Leaves</a>
-                    <a href="ledger.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Advance & Loan Ledger</a>
-                    <a href="payroll.html" class="block px-10 py-2 text-xs font-bold text-indigo-400">Salary Engine</a>
-                </div>
-            </div>
-            <div>
-                <button onclick="toggleMenu('coreMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
-                    <div class="flex items-center gap-4"><i class="fas fa-building w-5 text-center text-lg"></i> <span class="text-sm font-bold">Core Operations</span></div>
-                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="coreMenu-icon"></i>
-                </button>
-                <div id="coreMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-emerald-500 ml-6 mr-4 rounded-r-lg space-y-1">
-                    <a href="gatepass.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Gate Pass Tracker</a>
-                    <a href="store.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Store & Inventory</a>
-                </div>
-            </div>
-            <a href="javascript:void(0)" onclick="showComingSoon('Sales Analytics')" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-line w-5 text-center text-lg"></i> <span class="text-sm font-bold">Sales Analytics</span></a>
-            <a href="settings.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">Settings</span></a>
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span></a>
+            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">HR & Payroll</p></div>
+            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-users w-5 text-center"></i> <span class="text-sm font-medium">Employee Directory</span></a>
+            <a href="attendance.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-user-clock w-5 text-center"></i> <span class="text-sm font-medium">Attendance & Leaves</span></a>
+            <a href="gatepass.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-id-badge w-5 text-center"></i> <span class="text-sm font-medium">Gate Pass</span></a>
+            <a href="payroll.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold"><i class="fas fa-file-invoice-dollar w-5 text-center"></i> <span class="text-sm">Payroll Engine</span></a>
         </nav>
-        <div class="p-4 border-t border-white/10 bg-slate-900/50">
-            <a href="profile.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/10 transition group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-2 border-slate-700 flex items-center justify-center text-white font-bold shadow-md">AD</div>
-                <div class="flex-1"><p class="text-sm font-bold text-white group-hover:text-indigo-300 transition">Aditya Tomar</p></div>
-            </a>
-        </div>
     </aside>
 
-    <div class="main-area min-h-screen" style="margin-left: 260px;">
-        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-            <div><h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2></div>
-            <div class="flex items-center gap-3 bg-slate-50 border px-4 py-2 rounded-xl"><div class="text-indigo-600"><span id="liveDate" class="text-xs font-bold uppercase">--</span></div><span class="text-gray-300">|</span><div class="text-amber-600"><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div></div>
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center px-8 shrink-0">
+            <div class="text-sm font-medium text-gray-500"><i class="fas fa-home text-indigo-600 mr-2"></i> / HR / <span class="text-gray-800 ml-1">Payroll Engine</span></div>
         </header>
-        <main class="p-8 space-y-6">
-            <div class="flex justify-between items-center bg-white p-6 rounded-2xl border shadow-sm">
-                <div><h3 class="font-bold text-xl text-gray-900"><i class="fas fa-file-invoice-dollar text-indigo-500 mr-2"></i> Payroll Master Engine</h3></div>
-                <div class="flex gap-3"><button class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg"><i class="fas fa-play mr-2"></i> Run Auto-Calculations</button><button class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg"><i class="fas fa-file-excel mr-2"></i> Export Bank Sheet</button></div>
+
+        <div class="flex-1 p-8">
+            <div class="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6">
+                <div>
+                    <h3 class="font-bold text-gray-900 text-xl">Auto-Calculation Engine</h3>
+                    <p class="text-xs text-gray-500 mt-1">Connects to Attendance, Ledger, and VIP Flags automatically.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button class="px-5 py-2.5 bg-[#7c3aed] text-white rounded-lg text-sm font-bold shadow-md hover:bg-purple-700"><i class="fas fa-play mr-2"></i> Run Auto-Calculations</button>
+                    <button class="px-5 py-2.5 bg-gray-900 text-white rounded-lg text-sm font-bold shadow-md hover:bg-black"><i class="fas fa-file-excel mr-2"></i> Export Bank Sheet</button>
+                </div>
             </div>
-            <div class="bg-white rounded-2xl border shadow-sm overflow-hidden">
-                <table class="w-full">
-                    <thead><tr><th>E-Code</th><th>Name</th><th>Base CTC</th><th>Working Days</th><th>Deductions</th><th>Net Salary Pay</th></tr></thead>
-                    <tbody><tr><td colspan="6" class="text-center py-6 text-gray-500 font-bold">Engine ready. Click 'Run Auto-Calculations' to fetch data from Attendance & Ledger.</td></tr></tbody>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">E-Code & Name</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Base CTC</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Working Days</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Deductions (Adv)</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Net Salary Pay</th></tr>
+                    </thead>
+                    <tbody><tr><td colspan="5" class="text-center py-8 text-gray-400">Engine idle. Click 'Run Auto-Calculations' to fetch data.</td></tr></tbody>
                 </table>
             </div>
-        </main>
-    </div>
-    <!-- Construction Modal Here (Same as others) -->
-    <script src="../assets/js/app.js"></script>
+        </div>
+    </main>
 </body>
 </html>
