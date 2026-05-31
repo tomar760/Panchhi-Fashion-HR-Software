@@ -1,117 +1,93 @@
-<div class="stat-cards">
-  <div class="stat-card">
-    <div class="stat-icon purple"><i class="fas fa-users"></i></div>
-    <div class="stat-number">248</div>
-    <div class="stat-label">Total Employees</div>
-    <div class="stat-badge up">↑ Active</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon green"><i class="fas fa-user-check"></i></div>
-    <div class="stat-number">218</div>
-    <div class="stat-label">Present Today</div>
-    <div class="stat-badge up">88%</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon amber"><i class="fas fa-door-open"></i></div>
-    <div class="stat-number">8</div>
-    <div class="stat-label">On Gate Pass</div>
-    <div class="stat-badge">Live</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon blue"><i class="fas fa-money-bill-wave"></i></div>
-    <div class="stat-number">₹14.2L</div>
-    <div class="stat-label">Payroll (Last Month)</div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Panchhi HR Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-<h3 style="font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:16px;">
-  <i class="fas fa-bolt" style="color:var(--warning); margin-right:8px;"></i> Quick Actions (HR & Payroll)
-</h3>
-<div class="quick-actions">
-  <div class="quick-action-btn" onclick="loadModule('employees')">
-    <i class="fas fa-user-plus"></i>
-    <span>1. Employee Master</span>
-  </div>
-  <div class="quick-action-btn" onclick="loadModule('attendance')">
-    <i class="fas fa-clipboard-check"></i>
-    <span>2. Attendance</span>
-  </div>
-  <div class="quick-action-btn" onclick="loadModule('gatepass')">
-    <i class="fas fa-passport"></i>
-    <span>3. Gate Pass</span>
-  </div>
-  <div class="quick-action-btn" onclick="loadModule('payroll')">
-    <i class="fas fa-calculator"></i>
-    <span>4. Run Payroll</span>
-  </div>
-</div>
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon"><i class="fas fa-feather-pointed"></i></div>
+                <div class="brand-text">
+                    <h2 class="aditya-branding">Panchhi HR</h2>
+                    <span>by Aditya Tomar</span>
+                </div>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a class="nav-link active" href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">HR & Payroll</div>
+                    <a class="nav-link" href="employees.html"><i class="fas fa-users"></i> Employee Directory</a>
+                    <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> Attendance (Demo)</a>
+                    <a class="nav-link" href="#"><i class="fas fa-door-open"></i> Gate Pass (Demo)</a>
+                </div>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar">AT</div>
+                <div class="user-info">
+                    <h4>Aditya Tomar</h4>
+                    <span><span class="online-dot"></span>Super Admin</span>
+                </div>
+            </div>
+        </nav>
 
-<div style="display:grid; grid-template-columns:1.6fr 1fr; gap:24px;">
-  <div class="chart-placeholder">
-    <h3><i class="fas fa-chart-bar" style="color:var(--primary); margin-right:8px;"></i> Monthly Attendance Trend</h3>
-    <div class="chart-bar-group" id="attendanceChart">
-      <div class="chart-bar" style="background:var(--primary); height:85%;"><span class="bar-value">85%</span><span class="bar-label">Mon</span></div>
-      <div class="chart-bar" style="background:var(--primary); height:92%;"><span class="bar-value">92%</span><span class="bar-label">Tue</span></div>
-      <div class="chart-bar" style="background:var(--primary); height:88%;"><span class="bar-value">88%</span><span class="bar-label">Wed</span></div>
-      <div class="chart-bar" style="background:var(--primary); height:95%;"><span class="bar-value">95%</span><span class="bar-label">Thu</span></div>
-      <div class="chart-bar" style="background:var(--primary); height:90%;"><span class="bar-value">90%</span><span class="bar-label">Fri</span></div>
-      <div class="chart-bar" style="background:var(--primary-light); height:40%;"><span class="bar-value">40%</span><span class="bar-label">Sat</span></div>
-    </div>
-  </div>
+        <div class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                    <div class="greeting">
+                        <h1 id="greetingText">Good Morning, Aditya! 👋</h1>
+                        <p id="greetingDate">Loading date...</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="live-clock"><i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span></div>
+                    <div class="header-avatar">AT</div>
+                </div>
+            </header>
 
-  <div class="chart-placeholder" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-    <h3 style="width:100%; text-align:left;"><i class="fas fa-chart-pie" style="color:var(--success); margin-right:8px;"></i> Department Split</h3>
-    <div style="display:flex; align-items:center; gap:24px; margin-top:16px;">
-      <div class="donut-chart" style="background:conic-gradient(var(--primary) 0% 35%, var(--success) 35% 55%, var(--warning) 55% 75%, #3b82f6 75% 90%, var(--gray-300) 90% 100%);">
-        <div class="donut-center">
-          <div class="donut-num">248</div>
-          <div class="donut-label">TOTAL</div>
+            <!-- Dashboard Content -->
+            <div class="page-content">
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+                        <div class="stat-number">248</div>
+                        <div class="stat-label">Total Employees</div>
+                        <div class="stat-badge up">↑ 12%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-user-check"></i></div>
+                        <div class="stat-number">231</div>
+                        <div class="stat-label">Active Employees</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="stat-number">₹14.2L</div>
+                        <div class="stat-label">Payroll This Month</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size:16px;font-weight:700;margin-bottom:16px">Quick Actions</h3>
+                <div class="quick-actions">
+                    <a href="employees.html" class="quick-action-btn"><i class="fas fa-user-plus"></i><span>Add Employee</span></a>
+                    <a href="#" class="quick-action-btn"><i class="fas fa-clipboard-check"></i><span>Mark Attendance</span></a>
+                    <a href="#" class="quick-action-btn"><i class="fas fa-calculator"></i><span>Run Payroll</span></a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div style="font-size:12px;">
-        <div style="margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--primary); display:inline-block;"></span> Operations (35%)</div>
-        <div style="margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--success); display:inline-block;"></span> Production (20%)</div>
-        <div style="margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--warning); display:inline-block;"></span> Admin (20%)</div>
-        <div style="margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; border-radius:3px; background:#3b82f6; display:inline-block;"></span> Sales (15%)</div>
-      </div>
     </div>
-  </div>
-</div>
-
-<div class="table-card">
-  <div class="table-header">
-    <h3><i class="fas fa-bell" style="color:var(--warning); margin-right:8px;"></i> Recent Activity</h3>
-  </div>
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Activity</th>
-          <th>User</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>10 min ago</td>
-          <td>Gate Pass issued — Official Work</td>
-          <td>Rajesh Kumar (E-101)</td>
-          <td><span class="badge badge-yellow"><i class="fas fa-circle" style="font-size:6px; margin-right:4px;"></i>OUTSIDE</span></td>
-        </tr>
-        <tr>
-          <td>1 hr ago</td>
-          <td>New Employee Added (MIS)</td>
-          <td>Admin</td>
-          <td><span class="badge badge-green"><i class="fas fa-check-circle" style="margin-right:4px;"></i>Saved to Sheet</span></td>
-        </tr>
-        <tr>
-          <td>3 hrs ago</td>
-          <td>Asset Issued — Laptop (HP ProBook)</td>
-          <td>Priya Patel (E-105)</td>
-          <td><span class="badge badge-purple"><i class="fas fa-box" style="margin-right:4px;"></i>Issued</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>
