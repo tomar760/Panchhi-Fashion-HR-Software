@@ -1,36 +1,100 @@
-<div class="stat-cards">
-  <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-door-open"></i></div><div class="stat-number">Live</div><div class="stat-label">Gate Pass Module</div></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate Pass | Panchhi HR Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon"><i class="fas fa-feather-pointed"></i></div>
+                <div class="brand-text">
+                    <h2 class="aditya-branding">Panchhi HR</h2>
+                    <span>by Aditya Tomar</span>
+                </div>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <a class="nav-link" href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">HR & Payroll</div>
+                    <a class="nav-link" href="employees.html"><i class="fas fa-users"></i> Employee Directory</a>
+                    <a class="nav-link" href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a>
+                    <a class="nav-link active" href="gatepass.html"><i class="fas fa-door-open"></i> Gate Pass</a>
+                    <a class="nav-link" href="payroll.html"><i class="fas fa-money-bill-wave"></i> Payroll</a>
+                    <a class="nav-link" href="ledger.html"><i class="fas fa-book"></i> Ledger</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">System</div>
+                    <a class="nav-link" href="store.html"><i class="fas fa-boxes-stacked"></i> Store</a>
+                    <a class="nav-link" href="settings.html"><i class="fas fa-sliders"></i> Settings</a>
+                    <a class="nav-link" href="profile.html"><i class="fas fa-user-circle"></i> Profile</a>
+                </div>
+            </div>
+            <div class="sidebar-user" onclick="window.location.href='profile.html'">
+                <div class="user-avatar">AT</div>
+                <div class="user-info"><h4>Aditya Tomar</h4><span><span class="online-dot"></span>Super Admin</span></div>
+            </div>
+        </nav>
 
-<div style="display:grid;grid-template-columns:1fr 1.5fr;gap:24px">
-  <div class="form-card">
-    <h3><i class="fas fa-plus-circle" style="color:var(--primary)"></i> Issue New Gate Pass</h3>
-    <div class="form-group">
-      <label>Employee Name & Dept</label>
-      <select id="gpEmpName">
-        <option value="">Select Employee...</option>
-        <option value="Rajesh Kumar - Operations">E-101 — Rajesh Kumar (Operations)</option>
-        <option value="Priya Patel - HR">E-105 — Priya Patel (HR)</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Reason for Exit</label>
-      <textarea id="gpPurpose" placeholder="Official work, medical..."></textarea>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="form-group"><label>Out Time</label><input type="time" id="gpOutTime" value="10:00"></div>
-      <div class="form-group"><label>Expected In</label><input type="time" id="gpInTime"></div>
-    </div>
-    <button class="btn btn-primary ripple" style="width:100%;justify-content:center" onclick="submitGatePass(this)">
-      <i class="fas fa-paper-plane"></i> Save to Google Sheet
-    </button>
-  </div>
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                    <div class="greeting"><h1 id="greetingText">Good Morning, Aditya! 👋</h1><p id="greetingDate"></p></div>
+                </div>
+                <div class="header-right">
+                    <div class="live-clock"><i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span></div>
+                    <div class="header-avatar">AT</div>
+                </div>
+            </header>
 
-  <div class="table-card">
-    <div class="table-header"><h3><i class="fas fa-location-dot" style="color:var(--warning)"></i> Status</h3></div>
-    <div class="table-wrapper">
-      <!-- Baad me is table ko bhi Google sheet se reverse-sync kar lenge -->
-      <div style="padding:20px; color:var(--gray-500); text-align:center;">Data will sync here from sheet soon.</div>
+            <div class="page-content">
+                <div class="stat-cards">
+                    <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-door-open"></i></div><div class="stat-number">8</div><div class="stat-label">Currently Outside</div></div>
+                    <div class="stat-card"><div class="stat-icon green"><i class="fas fa-door-closed"></i></div><div class="stat-number">42</div><div class="stat-label">Returned Today</div></div>
+                    <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-passport"></i></div><div class="stat-number">50</div><div class="stat-label">Total Passes Today</div></div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:24px">
+                    <div class="form-card">
+                        <h3><i class="fas fa-plus-circle" style="color:var(--primary)"></i> Issue New Gate Pass</h3>
+                        <div class="form-group"><label>Employee E-Code</label><select><option>Select Employee...</option><option>E-101 — Rajesh Kumar</option><option>E-105 — Priya Patel</option></select></div>
+                        <div class="form-group"><label>Reason for Exit</label><textarea placeholder="e.g., Medical appointment, Personal work..."></textarea></div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                            <div class="form-group"><label>Out Time</label><input type="time" value="10:30"></div>
+                            <div class="form-group"><label>Expected Return</label><input type="time" value="14:00"></div>
+                        </div>
+                        <button class="btn btn-primary ripple" style="width:100%;justify-content:center" onclick="processBtn(this,'Gate Pass Issued Successfully!')"><i class="fas fa-paper-plane"></i> Issue Pass</button>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3><i class="fas fa-location-dot" style="color:var(--warning);margin-right:8px"></i> Live Tracking</h3>
+                            <span class="badge badge-yellow"><i class="fas fa-circle" style="font-size:5px;margin-right:4px;"></i> Live</span>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead><tr><th>E-Code</th><th>Name</th><th>Out Time</th><th>Expected</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>E-102</strong></td><td>Rahul Sharma</td><td>10:15 AM</td><td>12:00 PM</td><td><span class="badge badge-yellow"><i class="fas fa-circle" style="font-size:5px;margin-right:4px"></i>OUTSIDE</span></td></tr>
+                                    <tr><td><strong>E-101</strong></td><td>Rajesh Kumar</td><td>08:30 AM</td><td>09:00 AM</td><td><span class="badge badge-green"><i class="fas fa-check-circle" style="margin-right:4px"></i>RETURNED</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <div class="toast" id="toast"><div class="toast-icon" id="toastIcon"></div><div class="toast-text"><h4 id="toastTitle"></h4><p id="toastMessage"></p></div></div>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>
