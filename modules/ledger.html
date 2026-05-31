@@ -2,212 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advance & Ledger - Panchhi HR</title>
+    <title>Ledger - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow: hidden; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    </style>
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f8fafc; } </style>
 </head>
-<body class="flex h-screen">
-
-    <!-- SIDEBAR -->
-    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full shrink-0">
+<body class="flex h-screen overflow-hidden">
+    <!-- Same Light Sidebar code... paste from above if needed -->
+    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full">
         <div class="h-20 flex items-center px-6 border-b border-gray-100">
             <div class="w-10 h-10 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3">P</div>
-            <div>
-                <h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1>
-                <p class="text-gray-400 text-[10px] tracking-widest uppercase">Enterprise Suite</p>
-            </div>
+            <div><h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1></div>
         </div>
-        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1 custom-scrollbar">
-            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span>
-            </a>
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span></a>
             <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">HR & Payroll</p></div>
-            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-users w-5 text-center"></i> <span class="text-sm font-medium">Employee Directory</span>
-            </a>
-            <a href="attendance.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-user-clock w-5 text-center"></i> <span class="text-sm font-medium">Attendance & Leaves</span>
-            </a>
-            <a href="gatepass.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-id-badge w-5 text-center"></i> <span class="text-sm font-medium">Gate Pass Tracker</span>
-            </a>
-            <a href="ledger.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold">
-                <i class="fas fa-file-invoice-dollar w-5 text-center"></i> <span class="text-sm">Advance & Ledger</span>
-            </a>
-            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">Operations</p></div>
-            <a href="store.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-boxes w-5 text-center"></i> <span class="text-sm font-medium">Store & Inventory</span>
-            </a>
+            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-users w-5 text-center"></i> <span class="text-sm font-medium">Employee Directory</span></a>
+            <a href="attendance.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-user-clock w-5 text-center"></i> <span class="text-sm font-medium">Attendance & Leaves</span></a>
+            <a href="ledger.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold"><i class="fas fa-hand-holding-usd w-5 text-center"></i> <span class="text-sm">Advance & Loan Ledger</span></a>
+            <a href="payroll.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-file-invoice-dollar w-5 text-center"></i> <span class="text-sm font-medium">Payroll Engine</span></a>
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 flex flex-col h-full relative">
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
-            <div class="flex items-center text-sm font-medium text-gray-500">
-                <i class="fas fa-home text-indigo-600 mr-2"></i> / HR / <span class="text-gray-800 ml-1">Advance & Ledger</span>
-            </div>
-            <div class="flex gap-3">
-                <button class="px-4 py-2 bg-[#7c3aed] text-white rounded-lg text-sm font-bold flex items-center gap-2 shadow-md hover:bg-purple-700 transition">
-                    <i class="fas fa-download"></i> Download Monthly Report
-                </button>
-            </div>
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center px-8 shrink-0">
+            <div class="text-sm font-medium text-gray-500"><i class="fas fa-home text-indigo-600 mr-2"></i> / HR / <span class="text-gray-800 ml-1">Advance & Loan Ledger</span></div>
         </header>
-
-        <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-                
-                <!-- ISSUE ADVANCE FORM -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-fit">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-3"><i class="fas fa-hand-holding-usd text-emerald-500 mr-2"></i> Issue Salary Advance / Loan</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">E-Code *</label>
-                            <input type="text" id="ledgEcode" placeholder="e.g. PF/ADM/001" class="w-full p-3 border border-gray-200 rounded-xl text-sm font-mono font-bold mt-1 outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">Transaction Type *</label>
-                            <select id="ledgType" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500 bg-white">
-                                <option value="Salary Advance">Salary Advance</option>
-                                <option value="Company Loan">Company Loan</option>
-                                <option value="Expense Reimbursement">Expense Reimbursement</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">Amount (₹) *</label>
-                            <input type="number" id="ledgAmount" placeholder="e.g. 5000" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500 font-bold text-gray-800">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">Admin Override / Remarks (Optional)</label>
-                            <textarea id="ledgOverride" rows="2" placeholder="Any special approval notes..." class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none resize-none focus:border-indigo-500"></textarea>
-                        </div>
-                        <button id="submitBtn" onclick="submitLedgerEntry()" class="w-full py-3.5 bg-emerald-500 text-white rounded-xl text-sm font-bold shadow-md hover:bg-emerald-600 transition">
-                            <i class="fas fa-check-circle mr-2"></i> Approve & Sync Entry
-                        </button>
-                    </div>
+        
+        <div class="flex-1 p-8">
+            <div class="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6">
+                <div>
+                    <h3 class="font-bold text-gray-900 text-xl">Credit Management</h3>
+                    <p class="text-xs text-rose-500 mt-1 font-medium"><i class="fas fa-shield-alt"></i> 50% CTC limit rule is active.</p>
                 </div>
-
-                <!-- RECENT TRANSACTIONS TABLE -->
-                <div class="xl:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
-                    <div class="p-5 border-b border-gray-100 bg-white flex justify-between items-center">
-                        <h3 class="font-bold text-gray-900 text-sm uppercase">Recent Ledger Entries</h3>
-                        <span class="bg-indigo-50 border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center">
-                            Synced with Master DB
-                        </span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="bg-gray-50 border-b border-gray-100">
-                                <tr>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">E-Code</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Type</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Amount</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ledgerTable" class="divide-y divide-gray-50">
-                                <tr><td colspan="4" class="text-center py-6 text-gray-400 font-medium text-sm">No recent entries right now.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
+                <button onclick="document.getElementById('ledgerModal').classList.replace('hidden', 'flex')" class="px-5 py-2.5 bg-[#7c3aed] text-white rounded-lg text-sm font-bold shadow-md hover:bg-purple-700">Issue New Credit</button>
+            </div>
+            
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">E-Code</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Credit Type</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Amount</th><th class="py-3 px-6 text-xs font-bold text-gray-500 uppercase">Status</th></tr>
+                    </thead>
+                    <tbody><tr><td colspan="4" class="text-center py-8 text-gray-400">No active loans or advances.</td></tr></tbody>
+                </table>
             </div>
         </div>
     </main>
 
-    <script>
-        // Tumhara Naya Master Web App URL
-        const API_URL = "https://script.google.com/macros/s/AKfycbzVfo5SFaK6Mv7R3-1qv2nlroS05O9wruRUbB-e8Deez7euzKIz2T8sTlBm-lnna0eW/exec";
-
-        async function submitLedgerEntry() {
-            const eCode = document.getElementById('ledgEcode').value.trim();
-            const type = document.getElementById('ledgType').value;
-            const amount = document.getElementById('ledgAmount').value.trim();
-            const override = document.getElementById('ledgOverride').value.trim() || 'N/A';
-            const btn = document.getElementById('submitBtn');
-
-            if (!eCode || !amount) {
-                alert("Please fill E-Code and Amount!");
-                return;
-            }
-
-            // UI Button Loading State
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Syncing...`;
-            btn.disabled = true;
-            btn.classList.add("opacity-70", "cursor-not-allowed");
-
-            const payload = {
-                action: "saveLedger",
-                eCode: eCode,
-                type: type,
-                amount: amount,
-                override: override
-            };
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    updateLedgerTable(eCode, type, amount, override);
-                    
-                    // Reset Form
-                    document.getElementById('ledgEcode').value = '';
-                    document.getElementById('ledgAmount').value = '';
-                    document.getElementById('ledgOverride').value = '';
-                    
-                    btn.innerHTML = `<i class="fas fa-check-double mr-2"></i> Synced!`;
-                } else {
-                    alert("Error: " + result.message);
-                    btn.innerHTML = originalText;
-                }
-            } catch (error) {
-                alert("Network Error: Could not connect to Google Sheets.");
-                btn.innerHTML = originalText;
-            }
-
-            // Reset button state
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                btn.classList.remove("opacity-70", "cursor-not-allowed");
-            }, 2000);
-        }
-
-        function updateLedgerTable(eCode, type, amount, override) {
-            const tbody = document.getElementById('ledgerTable');
-            if (tbody.innerText.includes("No recent")) tbody.innerHTML = "";
-
-            const typeClass = type === "Expense Reimbursement" ? "bg-blue-50 text-blue-600 border-blue-200" : "bg-emerald-50 text-emerald-600 border-emerald-200";
-
-            const tr = document.createElement('tr');
-            tr.className = "hover:bg-gray-50/50 transition";
-            tr.innerHTML = `
-                <td class="py-3 px-4 text-sm font-bold text-indigo-600">${eCode}</td>
-                <td class="py-3 px-4">
-                    <span class="inline-flex items-center px-2.5 py-1 rounded-md border text-[10px] font-bold ${typeClass}">
-                        ${type}
-                    </span>
-                </td>
-                <td class="py-3 px-4 text-sm font-bold text-gray-800">₹ ${amount}</td>
-                <td class="py-3 px-4 text-xs text-gray-500">${override}</td>
-            `;
-            tbody.prepend(tr); 
-        }
-    </script>
+    <!-- Modal Form for Ledger -->
+    <div id="ledgerModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 relative">
+            <div class="flex justify-between items-center mb-4"><h2 class="text-lg font-bold">Issue Credit</h2><button onclick="document.getElementById('ledgerModal').classList.replace('flex', 'hidden')" class="text-gray-400"><i class="fas fa-times"></i></button></div>
+            <div class="space-y-4">
+                <div><label class="text-xs font-bold text-gray-500 block mb-1">Employee E-Code *</label><input type="text" class="w-full p-2.5 border rounded-lg text-sm"></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="text-xs font-bold text-gray-500 block mb-1">Amount (₹) *</label><input type="number" class="w-full p-2.5 border rounded-lg text-sm"></div>
+                    <div><label class="text-xs font-bold text-gray-500 block mb-1">Type *</label><select class="w-full p-2.5 border rounded-lg text-sm"><option>Advance</option><option>Loan</option></select></div>
+                </div>
+                <div class="p-3 bg-rose-50 border border-rose-100 rounded-lg flex items-start gap-2 mt-2">
+                    <input type="checkbox" class="mt-0.5 rounded text-rose-600">
+                    <div>
+                        <p class="text-xs font-bold text-rose-700">Admin Override (Bypass 50% Limit)</p>
+                        <p class="text-[10px] text-rose-500 leading-tight">Check this only if authorized by Management to exceed the 50% CTC advance limit.</p>
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-emerald-600 text-white rounded-lg font-bold shadow-md hover:bg-emerald-700">Record in Ledger</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
