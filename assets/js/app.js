@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzBYMRJEYAw_TlIIlP2qF49zxYZndpI6MnEkz-R2PChuBuE_tfFC_L10kCwFzXtObbe/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx7TCT2M-fZmuIqFrsafRWb29RFnBHxbIofV5R8t_jU-UWN8P7f39faFtGlWinY1AcM/exec";
 
 function updateGreeting() {
     const el = document.getElementById('dynamicGreeting');
