@@ -1,78 +1,119 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbx7TCT2M-fZmuIqFrsafRWb29RFnBHxbIofV5R8t_jU-UWN8P7f39faFtGlWinY1AcM/exec";
+// TUMHARA GOOGLE SHEET URL YAHAN HAI
+const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbz5-vHxNTcjeki1WNOhseDHHah6vqjrvWskkt98VZuz12ihZY5mPH5YdFTL8lSW6Edlgw/exec';
 
-function updateGreeting() {
-    const el = document.getElementById('dynamicGreeting');
-    if(!el) return;
-    const hour = new Date().getHours();
-    let g = hour < 12 ? 'Good Morning' : (hour < 17 ? 'Good Afternoon' : 'Good Evening');
-    let icon = hour < 12 ? 'fa-sun text-amber-400' : (hour < 17 ? 'fa-cloud-sun text-orange-400' : 'fa-moon text-indigo-200');
-    el.innerHTML = `<i class="fas ${icon} mr-2"></i> ${g}, Aditya!`;
+// --- System Init ---
+function handleLogin() {
+  document.getElementById('loginBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+  setTimeout(() => {
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.getElementById('appWrapper').classList.add('active');
+    loadModule('dashboard'); // Default load
+  }, 1000);
 }
 
-function updateClock() {
-    const d = document.getElementById('liveDate');
-    const t = document.getElementById('liveTime');
-    if(!d || !t) return;
-    const now = new Date();
-    d.innerText = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    t.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+// --- Module Router (AJAX) ---
+async function loadModule(moduleName, linkElement) {
+  if(linkElement) {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    linkElement.classList.add('active');
+  }
+  
+  const container = document.getElementById('module-container');
+  container.innerHTML = '<div style="text-align:center; padding:50px;"><i class="fas fa-spinner fa-spin fa-2x" style="color:var(--primary)"></i><p>Loading Module...</p></div>';
+
+  try {
+    const response = await fetch(`modules/${moduleName}.html`);
+    if(!response.ok) throw new Error("File not found");
+    const html = await response.text();
+    container.innerHTML = html;
+  } catch (error) {
+    container.innerHTML = `<div class="warning-box">Error loading module: Please run via Live Server (CORS issue).</div>`;
+  }
 }
 
-function showComingSoon(mod) {
-    const textEl = document.getElementById('constructionText');
-    const modal = document.getElementById('constructionModal');
-    if(textEl && modal) {
-        textEl.innerText = mod;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
-}
-function closeComingSoon() { 
-    const modal = document.getElementById('constructionModal');
-    if(modal) {
-        modal.classList.add('hidden'); 
-        modal.classList.remove('flex');
-    }
+// --- GATE PASS LOGIC ---
+function submitGatePass(btn) {
+  const empSelect = document.getElementById('gpEmpName').value;
+  const purpose = document.getElementById('gpPurpose').value;
+  if (!empSelect || !purpose) return showToast('error', 'Error', 'Fill required fields!');
+
+  const [empName, department] = empSelect.split(' - ');
+  const payload = {
+    action: "addGatePass",
+    empName: empName,
+    department: department || "N/A",
+    outTime: document.getElementById('gpOutTime').value,
+    inTime: document.getElementById('gpInTime').value,
+    purpose: purpose
+  };
+
+  processApiCall(btn, payload, 'Gate Pass Issued Successfully!');
 }
 
-// Sidebar Animation Logic
-function toggleMenu(menuId) {
-    const menu = document.getElementById(menuId);
-    const icon = document.getElementById(menuId + '-icon');
-    if(menu && icon) {
-        if(menu.classList.contains('hidden')) {
-            menu.classList.remove('hidden');
-            icon.classList.add('rotate-180');
-        } else {
-            menu.classList.add('hidden');
-            icon.classList.remove('rotate-180');
-        }
-    }
+// --- MEGA EMPLOYEE LOGIC (MIS) ---
+function submitNewEmployee(btn) {
+  // Extracting key fields from the mega form
+  const payload = {
+    action: "addEmployee",
+    firstName: document.getElementById('empFirstName').value,
+    lastName: document.getElementById('empLastName').value,
+    fullName: document.getElementById('empFullName').value,
+    mobile: document.getElementById('empMobile').value,
+    email: document.getElementById('empPersEmail').value,
+    department: document.getElementById('empDept').value,
+    designation: document.getElementById('empDesig').value,
+    baseCtc: document.getElementById('empFixCtc').value,
+    aadharNo: document.getElementById('empAadhar').value,
+    panNo: document.getElementById('empPan').value,
+    // (Baki 49 fields isi pattern mein append ho jayenge)
+  };
+
+  if (!payload.firstName || !payload.mobile) return showToast('error', 'Error', 'Name & Mobile mandatory!');
+
+  processApiCall(btn, payload, 'Employee Saved to Master Sheet!');
 }
 
-async function syncToCloud(payload, btn) {
-    const originalText = btn.innerHTML;
-    btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Syncing...`;
-    btn.classList.add("opacity-50", "cursor-not-allowed"); btn.disabled = true;
-    try {
-        const response = await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
-        const result = await response.json();
-        btn.innerHTML = `<i class="fas fa-check-double mr-2"></i> Synced!`;
-        btn.classList.replace("from-indigo-600", "from-emerald-500");
-        setTimeout(() => { 
-            btn.innerHTML = originalText; 
-            btn.classList.remove("opacity-50", "cursor-not-allowed"); 
-            btn.classList.replace("from-emerald-500", "from-indigo-600"); 
-            btn.disabled = false; 
-        }, 3000);
-        if (result.status === "success") return true;
-        else { alert("❌ Server Error: " + result.message); return false; }
-    } catch (error) { 
-        btn.innerHTML = originalText; btn.disabled = false; alert("❌ Network Error!"); return false; 
-    }
+// --- API PROCESSOR ---
+function processApiCall(btn, payload, successMsg) {
+  const origHTML = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+  btn.disabled = true;
+
+  fetch(GOOGLE_SHEET_API_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    btn.innerHTML = '<i class="fas fa-check"></i> Done';
+    btn.style.background = '#10b981';
+    showToast('success', 'Success', successMsg);
+    setTimeout(() => {
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
+      btn.style.background = '';
+      closeModal('addEmployee');
+    }, 2000);
+  }).catch(err => {
+    showToast('error', 'Failed', 'Sheet update failed.');
+    btn.innerHTML = origHTML;
+    btn.disabled = false;
+  });
 }
 
-document.addEventListener('DOMContentLoaded', () => { 
-    updateGreeting(); updateClock(); 
-    setInterval(updateGreeting, 60000); setInterval(updateClock, 1000); 
-});
+// --- UI Helpers ---
+setInterval(() => {
+  const now = new Date();
+  document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US');
+  document.getElementById('greetingDate').textContent = now.toDateString();
+}, 1000);
+
+function showModal(id) { document.getElementById('modal-'+id).classList.add('show'); }
+function closeModal(id) { document.getElementById('modal-'+id).classList.remove('show'); }
+function showToast(type, title, msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMessage').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
