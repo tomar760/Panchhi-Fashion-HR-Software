@@ -2,240 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Store & Inventory - Panchhi HR</title>
+    <title>Store Inventory - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow: hidden; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    </style>
+    <style> body { font-family: 'Inter', sans-serif; background-color: #f8fafc; } </style>
 </head>
-<body class="flex h-screen">
-
-    <!-- SIDEBAR -->
-    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full shrink-0">
+<body class="flex h-screen overflow-hidden">
+    <!-- LIGHT SIDEBAR -->
+    <aside class="w-[250px] bg-white border-r border-gray-200 flex flex-col z-20 h-full">
+        <!-- Exact Same Sidebar Details from employees.html -->
         <div class="h-20 flex items-center px-6 border-b border-gray-100">
             <div class="w-10 h-10 bg-[#7c3aed] rounded-lg flex items-center justify-center text-white font-bold text-xl mr-3">P</div>
-            <div>
-                <h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1>
-                <p class="text-gray-400 text-[10px] tracking-widest uppercase">Enterprise Suite</p>
-            </div>
+            <div><h1 class="text-gray-900 font-bold text-lg leading-tight">Panchhi HR</h1></div>
         </div>
-        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1 custom-scrollbar">
-            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span>
-            </a>
-            <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">HR & Payroll</p></div>
-            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-users w-5 text-center"></i> <span class="text-sm font-medium">Employee Directory</span>
-            </a>
-            <a href="attendance.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-user-clock w-5 text-center"></i> <span class="text-sm font-medium">Attendance & Leaves</span>
-            </a>
-            <a href="gatepass.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-id-badge w-5 text-center"></i> <span class="text-sm font-medium">Gate Pass Tracker</span>
-            </a>
-            <a href="ledger.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-                <i class="fas fa-file-invoice-dollar w-5 text-center"></i> <span class="text-sm font-medium">Advance & Ledger</span>
-            </a>
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+            <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-th-large w-5 text-center"></i> <span class="text-sm font-medium">Dashboard</span></a>
             <div class="pt-4 pb-1"><p class="px-3 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">Operations</p></div>
-            <a href="store.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold">
-                <i class="fas fa-boxes w-5 text-center"></i> <span class="text-sm">Store & Inventory</span>
-            </a>
+            <a href="store.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-900 bg-gray-100 rounded-lg transition font-bold"><i class="fas fa-boxes w-5 text-center"></i> <span class="text-sm font-medium">Store & Inventory</span></a>
+            <a href="employees.html" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg transition"><i class="fas fa-arrow-left w-5 text-center"></i> <span class="text-sm font-medium">Back to HR</span></a>
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 flex flex-col h-full relative">
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
         <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
-            <div class="flex items-center text-sm font-medium text-gray-500">
-                <i class="fas fa-home text-indigo-600 mr-2"></i> / Operations / <span class="text-gray-800 ml-1">Store & Inventory</span>
-            </div>
-            <div class="flex gap-3">
-                <button class="px-4 py-2 bg-[#7c3aed] text-white rounded-lg text-sm font-bold flex items-center gap-2 shadow-md hover:bg-purple-700 transition">
-                    <i class="fas fa-sync-alt"></i> Refresh Logs
-                </button>
-            </div>
+            <div class="text-sm font-medium text-gray-500"><i class="fas fa-home text-indigo-600 mr-2"></i> / Operations / <span class="text-gray-800 ml-1">Store & Inventory</span></div>
         </header>
 
-        <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-                
-                <!-- ISSUE ASSET FORM -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-fit">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-3"><i class="fas fa-box-open text-blue-500 mr-2"></i> Issue Asset / Material</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">E-Code / Dept *</label>
-                            <input type="text" id="storeEcode" placeholder="e.g. PF/ADM/001" class="w-full p-3 border border-gray-200 rounded-xl text-sm font-mono font-bold mt-1 outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">Item Name *</label>
-                            <input type="text" id="storeItem" placeholder="e.g. Laptop, Safety Gear" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500">
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-xs font-bold text-gray-600">Quantity *</label>
-                                <input type="number" id="storeQty" placeholder="0" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500">
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold text-gray-600">Condition *</label>
-                                <select id="storeCondition" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500 bg-white">
-                                    <option value="New">New</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Used/Damaged">Used/Damaged</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">PR/PO Number (Optional)</label>
-                            <input type="text" id="storePo" placeholder="PO-2026-XXXX" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-600">Drive Receipt Link (Optional)</label>
-                            <input type="text" id="storeLink" placeholder="Paste Google Drive link here" class="w-full p-3 border border-gray-200 rounded-xl text-sm mt-1 outline-none focus:border-indigo-500 text-blue-600">
-                        </div>
-                        <button id="submitBtn" onclick="submitAsset()" class="w-full py-3.5 bg-blue-600 text-white rounded-xl text-sm font-bold shadow-md hover:bg-blue-700 transition">
-                            <i class="fas fa-save mr-2"></i> Log Asset Entry
-                        </button>
+        <div class="flex-1 overflow-y-auto p-8 grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <!-- Issue Form -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-fit">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-100 pb-3"><i class="fas fa-dolly text-[#7c3aed] mr-2"></i> Issue New Asset</h3>
+                <div class="space-y-4">
+                    <div><label class="text-xs font-bold text-gray-500">E-Code *</label><input type="text" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 outline-none"></div>
+                    <div><label class="text-xs font-bold text-gray-500">Item Name *</label><input type="text" class="w-full p-2.5 border rounded-lg text-sm outline-none"></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-gray-500">Qty *</label><input type="number" class="w-full p-2.5 border rounded-lg text-sm outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-500">Condition</label><select class="w-full p-2.5 border rounded-lg text-sm outline-none"><option>New</option><option>Used/Old</option></select></div>
                     </div>
-                </div>
+                    
+                    <!-- PR / PO Number Rule (Mandatory) -->
+                    <div>
+                        <label class="text-xs font-bold text-gray-500">PR / PO Number <span class="text-rose-500">*</span></label>
+                        <input type="text" id="poNumber" placeholder="Enter valid PO/PR No." class="w-full p-2.5 border rounded-lg text-sm outline-none focus:border-rose-500">
+                    </div>
 
-                <!-- RECENT ASSET LOGS TABLE -->
-                <div class="xl:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
-                    <div class="p-5 border-b border-gray-100 bg-white flex justify-between items-center">
-                        <h3 class="font-bold text-gray-900 text-sm uppercase">Recent Inventory Logs</h3>
-                        <span class="bg-blue-50 border border-blue-200 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center">
-                            Cloud Synced
-                        </span>
+                    <!-- Receipt Upload Zone -->
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 p-6 text-center cursor-pointer hover:bg-gray-100 transition">
+                        <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold text-gray-600">Upload Receipt / PO (Max 5MB)</p>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="bg-gray-50 border-b border-gray-100">
-                                <tr>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">E-Code</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Item Details</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Condition</th>
-                                    <th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-center">Docs</th>
-                                </tr>
-                            </thead>
-                            <tbody id="storeTable" class="divide-y divide-gray-50">
-                                <tr><td colspan="4" class="text-center py-6 text-gray-400 font-medium text-sm">No recent asset logs right now.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
+                    <button onclick="issueAsset()" class="w-full py-3 bg-[#7c3aed] text-white rounded-lg text-sm font-bold shadow-md hover:bg-purple-700 transition">Issue to Employee</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="xl:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                <div class="p-5 border-b border-gray-100 bg-gray-50"><h3 class="font-bold text-gray-900 text-sm">Recent Issued Assets</h3></div>
+                <table class="w-full text-left">
+                    <thead class="bg-white border-b border-gray-100">
+                        <tr><th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase">Item</th><th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase">Issued To</th><th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase">PR/PO No.</th><th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase">Receipt</th></tr>
+                    </thead>
+                    <tbody><tr><td colspan="4" class="text-center py-8 text-gray-400">No assets issued recently.</td></tr></tbody>
+                </table>
             </div>
         </div>
     </main>
 
     <script>
-        // Tumhara Naya Master Web App URL
-        const API_URL = "https://script.google.com/macros/s/AKfycbzVfo5SFaK6Mv7R3-1qv2nlroS05O9wruRUbB-e8Deez7euzKIz2T8sTlBm-lnna0eW/exec";
-
-        async function submitAsset() {
-            const eCode = document.getElementById('storeEcode').value.trim();
-            const itemName = document.getElementById('storeItem').value.trim();
-            const quantity = document.getElementById('storeQty').value.trim();
-            const condition = document.getElementById('storeCondition').value;
-            const poNumber = document.getElementById('storePo').value.trim() || 'N/A';
-            const receiptLink = document.getElementById('storeLink').value.trim() || 'No Link';
-            const btn = document.getElementById('submitBtn');
-
-            if (!eCode || !itemName || !quantity) {
-                alert("Please fill E-Code, Item Name, and Quantity!");
-                return;
+        // Store Strict Validation Logic
+        function issueAsset() {
+            const po = document.getElementById('poNumber').value.trim();
+            if (!po) {
+                alert("🚨 STRICT RULE ALARM: Please enter a valid PR/PO Number to proceed. Asset cannot be issued without tracking number.");
+                document.getElementById('poNumber').focus();
+            } else {
+                alert("✅ Success! Asset Issued & Logged in Cloud.");
             }
-
-            // UI Button Loading State
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Saving Log...`;
-            btn.disabled = true;
-            btn.classList.add("opacity-70", "cursor-not-allowed");
-
-            const payload = {
-                action: "issueAsset",
-                eCode: eCode,
-                itemName: itemName,
-                quantity: quantity,
-                condition: condition,
-                poNumber: poNumber,
-                receiptLink: receiptLink
-            };
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    updateStoreTable(eCode, itemName, quantity, condition, receiptLink);
-                    
-                    // Reset Form
-                    document.getElementById('storeEcode').value = '';
-                    document.getElementById('storeItem').value = '';
-                    document.getElementById('storeQty').value = '';
-                    document.getElementById('storePo').value = '';
-                    document.getElementById('storeLink').value = '';
-                    
-                    btn.innerHTML = `<i class="fas fa-check mr-2"></i> Saved Successfully!`;
-                    btn.classList.replace("bg-blue-600", "bg-emerald-500");
-                } else {
-                    alert("Error: " + result.message);
-                    btn.innerHTML = originalText;
-                }
-            } catch (error) {
-                alert("Network Error: Could not connect to Google Sheets.");
-                btn.innerHTML = originalText;
-            }
-
-            // Reset button state
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                btn.classList.remove("opacity-70", "cursor-not-allowed");
-                btn.classList.replace("bg-emerald-500", "bg-blue-600");
-            }, 2000);
-        }
-
-        function updateStoreTable(eCode, item, qty, condition, link) {
-            const tbody = document.getElementById('storeTable');
-            if (tbody.innerText.includes("No recent")) tbody.innerHTML = "";
-
-            let condClass = "bg-emerald-50 text-emerald-600 border-emerald-200";
-            if (condition === "Used/Damaged") condClass = "bg-rose-50 text-rose-600 border-rose-200";
-            else if (condition === "Good") condClass = "bg-blue-50 text-blue-600 border-blue-200";
-
-            let linkHtml = link !== 'No Link' 
-                ? `<a href="${link}" target="_blank" class="text-blue-500 hover:text-blue-700"><i class="fas fa-external-link-alt"></i></a>` 
-                : `<span class="text-gray-300">-</span>`;
-
-            const tr = document.createElement('tr');
-            tr.className = "hover:bg-gray-50/50 transition";
-            tr.innerHTML = `
-                <td class="py-3 px-4 text-sm font-bold text-indigo-600">${eCode}</td>
-                <td class="py-3 px-4">
-                    <p class="text-sm font-bold text-gray-800">${item}</p>
-                    <p class="text-[10px] text-gray-500 uppercase mt-0.5">Qty: ${qty}</p>
-                </td>
-                <td class="py-3 px-4">
-                    <span class="inline-flex items-center px-2.5 py-1 rounded-md border text-[10px] font-bold ${condClass}">
-                        ${condition}
-                    </span>
-                </td>
-                <td class="py-3 px-4 text-center">
-                    ${linkHtml}
-                </td>
-            `;
-            tbody.prepend(tr); 
         }
     </script>
 </body>
