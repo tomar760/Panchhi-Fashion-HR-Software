@@ -4,22 +4,92 @@
     <meta charset="UTF-8" />
     <title>Store Inventory - Panchhi HR</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
-<body class="bg-gray-50">
-    <div class="p-8">
-        <div class="flex justify-between items-center mb-6">
+<body class="bg-slate-50">
+
+    <!-- MASTER SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-[260px] flex flex-col bg-slate-900 border-r border-slate-800 z-40 shadow-2xl">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">P</div>
             <div>
-                <h2 class="text-xl font-bold text-gray-900">Store & Asset Management</h2>
-                <a href="dashboard.html" class="text-indigo-600 text-sm font-bold hover:underline">Back to Dashboard</a>
+                <h1 class="text-white text-xl font-bold tracking-tight">Panchhi HR</h1>
+                <p class="text-indigo-300/80 text-[10px] font-bold tracking-widest uppercase">Enterprise Suite</p>
             </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 class="text-lg font-bold mb-4">Issue New Asset</h3>
-            <input type="text" placeholder="E-Code" class="w-full p-3 border rounded-xl mb-3">
-            <input type="text" placeholder="Item Name" class="w-full p-3 border rounded-xl mb-3">
-            <button class="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold shadow-md">Issue Asset</button>
+        <nav class="flex-1 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+            <a href="dashboard.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-pie w-5 text-center text-lg"></i> <span class="text-sm font-bold">Analytics</span></a>
+            <div>
+                <button onclick="toggleMenu('hrMenu')" class="w-full nav-item px-6 py-3 flex items-center justify-between text-slate-400 hover:text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-users-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">HR & Payroll</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300" id="hrMenu-icon"></i>
+                </button>
+                <div id="hrMenu" class="hidden bg-slate-950/50 py-2 border-l-2 border-indigo-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="employees.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Employee Directory</a>
+                    <a href="attendance.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Attendance & Leaves</a>
+                    <a href="ledger.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Advance & Loan Ledger</a>
+                    <a href="payroll.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Salary Engine</a>
+                </div>
+            </div>
+            <div>
+                <button onclick="toggleMenu('coreMenu')" class="w-full nav-item bg-emerald-600/20 border-r-4 border-emerald-500 px-6 py-3 flex items-center justify-between text-white transition outline-none">
+                    <div class="flex items-center gap-4"><i class="fas fa-building w-5 text-center text-lg"></i> <span class="text-sm font-bold">Core Operations</span></div>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 rotate-180" id="coreMenu-icon"></i>
+                </button>
+                <div id="coreMenu" class="bg-slate-950/50 py-2 border-l-2 border-emerald-500 ml-6 mr-4 rounded-r-lg space-y-1">
+                    <a href="gatepass.html" class="block px-10 py-2 text-xs font-medium text-slate-400 hover:text-white transition">Gate Pass Tracker</a>
+                    <a href="store.html" class="block px-10 py-2 text-xs font-bold text-emerald-400">Store & Inventory</a>
+                </div>
+            </div>
+            <a href="javascript:void(0)" onclick="showComingSoon('Sales Analytics')" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-chart-line w-5 text-center text-lg"></i> <span class="text-sm font-bold">Sales Analytics</span></a>
+            <a href="settings.html" class="nav-item px-6 py-3 flex items-center gap-4 text-slate-400 hover:text-white transition"><i class="fas fa-cog w-5 text-center text-lg"></i> <span class="text-sm font-bold">Settings</span></a>
+        </nav>
+        <div class="p-4 border-t border-white/10 bg-slate-900/50">
+            <a href="profile.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/10 transition group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-2 border-slate-700 flex items-center justify-center text-white font-bold shadow-md">AD</div>
+                <div class="flex-1"><p class="text-sm font-bold text-white group-hover:text-indigo-300 transition">Aditya Tomar</p></div>
+            </a>
         </div>
+    </aside>
+
+    <div class="main-area min-h-screen" style="margin-left: 260px;">
+        <header class="bg-white/80 backdrop-blur-xl border-b border-gray-200 p-4 px-8 flex justify-between items-center sticky top-0 z-30 shadow-sm">
+            <div><h2 id="dynamicGreeting" class="text-xl font-bold text-gray-900 flex items-center">Loading...</h2></div>
+            <div class="flex items-center gap-3 bg-slate-50 border px-4 py-2 rounded-xl"><div class="text-indigo-600"><span id="liveDate" class="text-xs font-bold uppercase">--</span></div><span class="text-gray-300">|</span><div class="text-amber-600"><span id="liveTime" class="text-xs font-bold font-mono">--:--:--</span></div></div>
+        </header>
+
+        <main class="p-8 grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-fit">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-3"><i class="fas fa-boxes text-emerald-500 mr-2"></i> Issue New Asset</h3>
+                <div class="space-y-4">
+                    <input type="text" placeholder="E-Code (e.g. PF/STC/035)" class="w-full p-3 border rounded-xl text-sm font-bold outline-none">
+                    <input type="text" placeholder="Item Name (e.g. Scissor, Safety Gear)" class="w-full p-3 border rounded-xl text-sm outline-none">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" placeholder="Qty" class="w-full p-3 border rounded-xl text-sm outline-none">
+                        <select class="w-full p-3 border rounded-xl text-sm outline-none"><option>New Condition</option><option>Used/Old</option></select>
+                    </div>
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 p-4 text-center cursor-pointer hover:bg-gray-100 transition">
+                        <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
+                        <p class="text-xs font-bold text-gray-600">Upload Receipt / PO (Max 5MB)</p>
+                    </div>
+                    <button class="w-full py-3.5 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg hover:bg-emerald-700 transition">Issue to Employee</button>
+                </div>
+            </div>
+
+            <div class="xl:col-span-2 bg-white rounded-2xl border shadow-sm overflow-hidden h-fit">
+                <div class="p-5 border-b bg-gray-50"><h3 class="font-bold text-gray-900 text-sm uppercase">Recent Issued Assets</h3></div>
+                <table class="w-full">
+                    <thead><tr><th>Item</th><th>Issued To</th><th>Qty/Condition</th><th>Receipt</th></tr></thead>
+                    <tbody><tr><td colspan="4" class="text-center py-6 text-gray-500">No assets issued recently.</td></tr></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Construction Modal -->
+    <div id="constructionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <!-- Exact same modal as other pages -->
     </div>
     <script src="../assets/js/app.js"></script>
 </body>
