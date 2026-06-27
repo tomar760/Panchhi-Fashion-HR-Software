@@ -256,10 +256,59 @@ function logActivity(data) {
   return { success: true };
 }
 
-// Drive Upload Logic
-function uploadToDrive(data) {
-  const folder = DriveApp.getFolderById(CONFIG.DRIVE_FOLDER_ID);
-  const blob = Utilities.newBlob(Utilities.base64Decode(data.base64), data.mimeType, data.fileName);
-  const file = folder.createFile(blob);
-  return { success: true, url: file.getUrl(), id: file.getId() };
+// ===================== SETUP & HELPERS =====================
+function setupAll() {
+  const ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  
+  // Create sheets if they don't exist
+  Object.values(SHEETS).forEach(name => {
+    if (!ss.getSheetByName(name)) {
+      const sh = ss.insertSheet(name);
+      // Basic Header style
+      sh.appendRow(['Loading...']); // Temporary
+    }
+  });
+
+  createAdminIfMissing();
+  seedDepartments();
+  Logger.log('✅ Setup complete! Ab aap Deploy kar sakte hain.');
 }
+
+function createAdminIfMissing() {
+  const ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  const sheet = ss.getSheetByName(SHEETS.USERS);
+  if (sheet.getLastRow() < 2) {
+    // Basic Headers for Users
+    sheet.clear();
+    sheet.appendRow(['ID','Name','Email','Password','Role','Modules','Status','Photo','Phone','Last Login','Created By','Created At','OTP','OTP Expiry']);
+    
+    const id = 'USER_' + new Date().getTime();
+    sheet.appendRow([
+      id, CONFIG.DEFAULT_ADMIN.name, CONFIG.DEFAULT_ADMIN.email,
+      hashPassword(CONFIG.DEFAULT_ADMIN.password), 'Super Admin',
+      ALL_MODULES.join(','), 'ACTIVE', '', '', '', 'System',
+      Utilities.formatDate(new Date(), 'Asia/Kolkata', 'dd/MM/yyyy HH:mm'), '', ''
+    ]);
+    styleHeader(sheet);
+    Logger.log('✅ Admin Created: ' + CONFIG.DEFAULT_ADMIN.email);
+  }
+}
+
+function seedDepartments() {
+  const ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  const sheet = ss.getSheetByName(SHEETS.DEPARTMENTS);
+  if (sheet.getLastRow() < 2) {
+    sheet.clear();
+    sheet.appendRow(['Name','HOD','Count','Color']);
+    const depts = [['ADMIN','','0','#6c47ff'],['SALES','','0','#10b981'],['DESIGN','','0','#f59e0b']];
+    depts.forEach(d => sheet.appendRow(d));
+    styleHeader(sheet);
+  }
+}
+
+function styleHeader(sheet) {
+  const range = sheet.getRange(1, 1, 1, sheet.getLastColumn());
+  range.setBackground('#1e293b').setFontColor('#ffffff').setFontWeight('bold');
+  sheet.setFrozenRows(1);
+}
+
