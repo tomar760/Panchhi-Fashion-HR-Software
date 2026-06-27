@@ -13,10 +13,10 @@
 
 const CONFIG = {
   // ⬇️ Yaha apni Google Sheet ki ID dalein
-  SHEET_ID: '10qQe9hxaDB8rj8YThTXyMnSDUv_j6nbiLrGg0_LYP-4', 
+  SHEET_ID: '14J8wS97gRrJp4o67ww8-9aQIIiS5KYpPdKHevH4wzSc', 
   
   // ⬇️ Yaha apne Google Drive Folder ki ID dalein (Attachments ke liye)
-  DRIVE_FOLDER_ID: '1haM_kHc-gUpjOlZv8JXFENRMt5MdhkPv', 
+  DRIVE_FOLDER_ID: '1X3S9CuUv3JDhzv9u6jIS70-XLnk4mSSv', 
   
   DEFAULT_ADMIN: {
     name: 'Aditya Tomar',
