@@ -5,7 +5,7 @@
 
 const CONFIG = {
   // ⬇️ Paste your Web App URL here
-  WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbyyr1q3hGQZzOJoQp11zxoxdH1PHOACxIhatTAH9WWpH84GISYLqhyu2_0lruv_5gh5/exec',
+  WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbzRTcgZybrY-ezvu6EG0i4qmdYN22P0uBiQuTxBsVJHB4qZyqaYIey3mjkNPSDHFs72ug/exec',
   COMPANY: 'House of Panchhi',
   VERSION: 'v3.1.0'
 };
