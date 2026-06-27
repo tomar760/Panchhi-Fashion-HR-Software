@@ -20,8 +20,8 @@ const CONFIG = {
   
   DEFAULT_ADMIN: {
     name: 'Aditya Tomar',
-    email: 'aditya@houseofpanchhi.com',
-    password: 'admin123'
+    email: 'admin@houseofpanchhi.com',
+    password: 'admin12345'
   },
   COMPANY: 'House of Panchhi',
   MAX_USERS: 10
