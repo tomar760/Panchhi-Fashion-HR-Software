@@ -83,8 +83,10 @@ body {
   border-bottom: 1px solid var(--sidebar-border);
 }
 
-.brand-text h2 { font-size: 16px; font-weight: 800; color: var(--text-main); }
-.brand-text span { font-size: 10.5px; color: var(--text-muted); font-weight: 600; }
+.sidebar-logo-img { width: 42px; height: 42px; object-fit: contain; border-radius: 10px; }
+.brand-text h2 { font-size: 15px; font-weight: 800; color: var(--text-main); line-height: 1.1; }
+.brand-text span { font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
 
 .nav-link {
   display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: var(--radius-sm);
@@ -150,9 +152,67 @@ table tr:hover { background: var(--bg-body); }
 /* Search Box */
 .search-box input { background: var(--bg-body); border-color: var(--border-color); color: var(--text-main); }
 
-/* Login Fix */
-.login-page { background: #0f172a; }
-.login-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); }
+/* ===================== LOGIN PAGE FIX ===================== */
+.login-page {
+  position: fixed; inset: 0;
+  background: #0f172a; /* Dark background for login */
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; overflow: auto;
+  z-index: 9999;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.login-logo img {
+  width: 120px; /* Fixed size for logo */
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(108, 71, 255, 0.3));
+}
+
+.login-logo h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+.login-logo p { font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 30px; }
+
+.login-field { text-align: left; margin-bottom: 20px; }
+.login-field label { display: block; font-size: 11px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 8px; }
+
+.input-wrap { position: relative; }
+.input-wrap i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.3); }
+.input-wrap input {
+  width: 100%; padding: 12px 15px 12px 42px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px; color: #fff; font-size: 14px;
+}
+.input-wrap input:focus { border-color: var(--primary); outline: none; background: rgba(255, 255, 255, 0.08); }
+
+.login-btn {
+  width: 100%; padding: 14px; background: var(--primary); color: #fff;
+  border: none; border-radius: 12px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: 0.3s; margin-top: 10px;
+}
+.login-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+.login-options { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255, 255, 255, 0.5); margin-bottom: 20px; }
+.login-options a { color: var(--primary); cursor: pointer; font-weight: 600; }
+
+.login-error {
+  background: rgba(239, 68, 68, 0.1); color: #f87171; padding: 10px;
+  border-radius: 10px; border: 1px solid rgba(239, 68, 68, 0.2);
+  margin-bottom: 15px; font-size: 12px; display: none; align-items: center; gap: 8px;
+}
+
 
 /* Buttons */
 .btn-outline { border: 1.5px solid var(--border-color); color: var(--text-main); }
