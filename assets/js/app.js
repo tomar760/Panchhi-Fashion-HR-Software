@@ -139,13 +139,13 @@ async function handleLogin() {
   const email = document.getElementById('loginEmail')?.value.trim();
   const pass = document.getElementById('loginPass')?.value;
   const btn = document.getElementById('loginBtn');
-  const err = document.getElementById('loginError');
+  const errDiv = document.getElementById('loginError');
 
   if (!email || !pass) return;
   
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner spin"></i> Signing In...';
-  if (err) err.style.display = 'none';
+  if (errDiv) errDiv.style.display = 'none';
 
   try {
     const res = await GSheet.send('Auth', { email, password: pass }, 'LOGIN');
@@ -158,7 +158,10 @@ async function handleLogin() {
   } catch (e) {
     btn.disabled = false;
     btn.innerHTML = 'Sign In';
-    if (err) { err.textContent = e.message; err.style.display = 'flex'; }
+    if (errDiv) { 
+      errDiv.querySelector('span').textContent = e.message; 
+      errDiv.style.display = 'flex'; 
+    }
   }
 }
 
